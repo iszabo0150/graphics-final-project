@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>shaders/fullscreen.vert</file>
+        <file>shaders/particle.frag</file>
+        <file>shaders/particle.vert</file>
+        <file>shaders/post.frag</file>
+        <file>shaders/default.frag</file>
+        <file>shaders/default.vert</file>
+        <file>shaders/bloom_blur.frag</file>
+        <file>shaders/bloom_bright.frag</file>
+        <file>shaders/bloom_combine.frag</file>
+    </qresource>
+</RCC>

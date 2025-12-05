@@ -1,0 +1,33 @@
+{
+	"BUILD_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug/projects_gearup_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project",
+	"CMAKE_SOURCE_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Unix Makefiles",
+	"INCLUDE_DIR" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug/projects_gearup_autogen/include",
+	"INPUTS" : 
+	[
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_combine.frag",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_bright.frag",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/particle.frag",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_blur.frag",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/default.vert",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/particle.vert",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/default.frag",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/fullscreen.vert",
+		"/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/post.frag"
+	],
+	"LOCK_FILE" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug/CMakeFiles/projects_gearup_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "/Users/macdeal/Qt/6.9.2/macos/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-projects_gearup-Qt_6_9_2_macos_5f4fc2-Debug/CMakeFiles/projects_gearup_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
