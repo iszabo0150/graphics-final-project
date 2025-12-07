@@ -1,0 +1,74 @@
+{
+  "name": "one_iteration_test",
+  "globalData": {
+    "ambientCoeff": 0.2,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+
+  "cameraData": {
+    "position": [-3, -3, -6],
+    "up": [0, 1, 0],
+    "heightAngle": 30,
+    "focus": [0, 0, 0]
+  },
+
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.0, 1.0, 1.0],
+          "direction": [-2.0, -4.0, -6.0]
+        }
+      ]
+    },
+    {
+      "translate": [9.0, -3.0, 1.0],
+      "lights": [
+        {
+          "type": "point",
+          "color": [0.5, 0.5, 0.5],
+          "attenuationCoeff": [1, 0, 0]
+        }
+      ]
+    },
+    {
+      "translate": [-9.0, -3.0, 1.0],
+      "lights": [
+        {
+          "type": "point",
+          "color": [0.5, 0.5, 0.5],
+          "attenuationCoeff": [1, 0, 0]
+        }
+      ]
+    },
+    {
+      "lsystem": {
+        "axiom": "F",
+        "iterations": 0,
+        "angle": 25,
+        "stemPrimitive": "cylinder",
+        "leafPrimitive": "cone",
+        "stemMaterial": {
+          "ambient": [0.25, 0.05, 0.05],
+          "diffuse": [0.8, 0.2, 0.2],
+          "specular": [0.2, 0.2, 0.2],
+          "shininess": 7.0
+        },
+        "leafMaterial": {
+          "ambient": [0.05, 0.25, 0.25],
+          "diffuse": [0.2, 0.8, 0.8],
+          "specular": [0.2, 0.2, 0.2],
+          "shininess": 18.0
+        },
+        "rules": [
+          {
+            "input": "F",
+            "output": "F"
+          }
+        ]
+      }
+    }
+  ]
+}
