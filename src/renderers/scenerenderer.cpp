@@ -1,6 +1,7 @@
 #include "scenerenderer.h"
 #include "utils/shaderloader.h"
 #include "utils/textureutils.h"
+#include "renderers/lightrenderer.h"
 
 #include <QImage>
 #include <QString>
@@ -25,9 +26,16 @@ void SceneRenderer::cleanup() {
  * @param camera
  * @param shapeRenderer
  */
-void SceneRenderer::render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer) {
+void SceneRenderer::render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow) {
 
     glm::vec3 cameraPos = camera.getPos();
+
+    glUseProgram(m_shader);
+    setupCameraUniforms(camera, cameraPos);
+    setupLightUniforms(renderData.lights, renderData.globalData);
+    // sends over shadow map (2D texture)
+    setupShadowUniform(shadow);
+
 
     for (const auto& shape : renderData.shapes) {
         glUseProgram(m_shader);
@@ -37,9 +45,9 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         glBindVertexArray(primitiveData.vao);
 
         // set up all uniforms :P
-        setupCameraUniforms(camera, cameraPos);
+        // setupCameraUniforms(camera, cameraPos);
         setupShapeUniforms(shape, shape.material);
-        setupLightUniforms(renderData.lights, renderData.globalData);
+        // setupLightUniforms(renderData.lights, renderData.globalData);
         setupTextureUniforms(shape.material);
 
         // drawwwwwww and unbind after it done !
@@ -51,6 +59,14 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 }
 
 //the felow functions are helper functions for all of the uniforms in the shaders !
+
+void SceneRenderer::setupShadowUniform(const Shadow& shadow) {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, shadow.depth_map);
+
+    GLuint locMap = glGetUniformLocation(m_shader, "shadowTexture");
+    glUniform1i(locMap, 0);
+}
 
 void SceneRenderer::setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos) {
     //passing matrices from camera !
@@ -77,8 +93,8 @@ void SceneRenderer::setupShapeUniforms(const RenderShapeData& shape, const Scene
 }
 
 void SceneRenderer::setupLightUniforms(const std::vector<SceneLightData>& lights, SceneGlobalData globalData) {
-    glUniform1i(glGetUniformLocation(m_shader, "lightCount"), lights.size());
-
+   // glUniform1i(glGetUniformLocation(m_shader, "lightCount"), lights.size());
+    glUniform1i(glGetUniformLocation(m_shader, "lightCount"), 1);
     // std::cout << "Light count: " << lights.size() << std::endl;
 
     for (int i = 0; i < lights.size(); i++) {
@@ -94,6 +110,10 @@ void SceneRenderer::setupLightUniforms(const std::vector<SceneLightData>& lights
         glUniform1f(glGetUniformLocation(m_shader, (base + "penumbra").c_str()), light.penumbra);
         glUniform1f(glGetUniformLocation(m_shader, (base + "angle").c_str()), light.angle);
     }
+
+    // send light matrix (for light 0/the sun) for shadow mapping
+    GLuint lightMatLoc = glGetUniformLocation(m_shader, "lightMatrix");
+    glUniformMatrix4fv(lightMatLoc, 1, GL_FALSE, &lights[0].matrix[0][0]);
 
     //passing the gloabl coefecients for light calculations
     glUniform1f(glGetUniformLocation(m_shader, "ka"), globalData.ka);
@@ -119,28 +139,27 @@ void SceneRenderer::setupTextureUniforms(const SceneMaterial& material) {
     glUniform1f(glGetUniformLocation(m_shader, "normalMapInfo.strength"), material.normalMap.strength);
 
     // always set the sampler uniforms, even if not used so opengl doesnt get mad at me
-    glUniform1i(glGetUniformLocation(m_shader, "textureSampler"), 0);
-    glUniform1i(glGetUniformLocation(m_shader, "normTextureSampler"), 1);
-    glUniform1i(glGetUniformLocation(m_shader, "bumpTextureSampler"), 2);
+    glUniform1i(glGetUniformLocation(m_shader, "textureSampler"), 1);
+    glUniform1i(glGetUniformLocation(m_shader, "normTextureSampler"), 2);
+    glUniform1i(glGetUniformLocation(m_shader, "bumpTextureSampler"), 3);
 
     if (material.textureMap.isUsed) {
         // load texture if not already cached and bindd
-        GLuint textureID = loadTexture(material.textureMap.filename);
-
-        glActiveTexture(GL_TEXTURE0);
+        GLuint textureID = loadTexture(material.textureMap.filename, false, 1);
+        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, textureID);
     }
 
 
     if (material.normalMap.isUsed) {
-        GLuint normTextureID = loadTexture(material.normalMap.filename, false);
-        glActiveTexture(GL_TEXTURE1);
+        GLuint normTextureID = loadTexture(material.normalMap.filename, false, 2);
+        glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, normTextureID);
     }
 
     if (material.bumpMap.isUsed) {
-        GLuint bumpTextureID = loadTexture(material.bumpMap.filename, true);
-        glActiveTexture(GL_TEXTURE2);
+        GLuint bumpTextureID = loadTexture(material.bumpMap.filename, true, 3);
+        glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, bumpTextureID);
     }
 
@@ -149,7 +168,7 @@ void SceneRenderer::setupTextureUniforms(const SceneMaterial& material) {
 
 }
 
-GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump) {
+GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump, GLuint slot) {
     // check if texture is already loaded
     if (m_textureCache.find(filename) != m_textureCache.end()) {
         return m_textureCache[filename];
@@ -170,7 +189,7 @@ GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump) {
     // generate and configure texture !!!
     GLuint textureID;
     glGenTextures(1, &textureID);
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, textureID);
 
     // upload texture data

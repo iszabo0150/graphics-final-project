@@ -57,6 +57,8 @@ struct SceneLight {
     float angle;    // Only applicable to spot lights, in RADIANS
 
     float width, height; // No longer supported (area lights)
+
+    glm::mat4 matrix; // Used for shadow mapping
 };
 
 // Struct which contains data for a single light with CTM applied
@@ -74,6 +76,9 @@ struct SceneLightData {
     float angle;    // Only applicable to spot lights, in RADIANS
 
     float width, height; // No longer supported (area lights)
+
+    glm::mat4 matrix; // Used for shadow mapping
+
 };
 
 // Struct which contains data for the camera of a scene

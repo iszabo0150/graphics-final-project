@@ -2,17 +2,13 @@
 
 struct Light {
     int type; //0 is a pointlight, 1 is a directional, 2 is a spotlight
-
     vec3 color;
     vec3 function;// attenuation functoin
-
     vec3 pos; // position in world space
     vec3 dir; // Direction with CTM applied (Not applicable to point lights)
-
     float penumbra; // Only applicable to spot lights, in RADIANS
     float angle;    // Only applicable to spot lights, in RADIANS
 };
-
 
 struct Material {
     vec3 cAmbient;  // Ambient term
@@ -46,12 +42,11 @@ uniform sampler2D normTextureSampler;
 
 in vec3 posWorldSpace;
 in vec3 normalWorldSpace;
+in vec4 lightSpacePosition;
 in vec2 fragUV;
 
 in vec3 tangentWorldSpace;
 in vec3 bitangentWorldSpace;
-
-
 
 out vec4 fragColor;
 
@@ -63,6 +58,43 @@ uniform vec3 cameraPos;
 uniform float kd;
 uniform float ks;
 uniform float ka;
+
+uniform sampler2D shadowTexture;
+
+float calculateShadow(vec4 lightPosition, vec3 lightDir) {
+    // [-w, w] coords to [-1, 1] coords
+    vec3 projectionCoords = lightPosition.xyz / lightPosition.w;
+    // depth map range is [0, 1], projectionCoords are [-1, 1]
+    projectionCoords = projectionCoords * 0.5 + 0.5;
+
+    float xOffset = 1.0/1024.0f;
+    float yOffset = 1.0/1024.0f;
+
+
+    float dot = dot(normalize(normalWorldSpace), lightDir);
+    dot = clamp(dot, 0.0f, 1.0f);
+    float bias = max(0.05 * (1.0 - dot), 0.005);
+
+    float sum = 0.0f;
+    // samples 25 texels
+    for (int y = -2; y <= 2; ++y) {
+        for (int x = -2; x <=2; ++x) {
+            vec2 offsets = vec2(x * xOffset, y * yOffset);
+            // add 0.001 to avoid z-fighting
+            vec2 coords = projectionCoords.xy + offsets;
+
+
+            float closestDepth = texture(shadowTexture, coords).r;
+            float currDepth = projectionCoords.z - bias;
+
+            if (currDepth > closestDepth) {
+                sum += 1.0f;
+            }
+        }
+    }
+
+    return sum / 25.0f;
+}
 
 
 vec3 getNormal() {
@@ -101,9 +133,12 @@ vec3 getNormal() {
 
 
 // calculates the phong model for directional lights!
-vec3 phongDirectional(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormalized, vec3 normNormalized, vec3 camDirNormalized ){
+vec3 phongDirectional(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormalized, vec3 normNormalized, vec3 camDirNormalized, vec3 lightDir){
+    // calculate shadow
+    float shadow = calculateShadow(lightSpacePosition, normalize(lightDir));
+
     // diffusion !!
-    vec3 diffuse = lightColor * matDiff * NdotL;
+    vec3 diffuse = (1.0f - shadow) * lightColor * matDiff * NdotL;
 
     // specular !!
     vec3 reflectDir = normalize(reflect(-lightDirNormalized, normNormalized));
@@ -114,9 +149,9 @@ vec3 phongDirectional(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirN
     // if (RdotV > 0.0f){
     if (material.shininess != 0){
         float specFactor = pow(RdotV, material.shininess);
-        specular = ks * lightColor * vec3(material.cSpecular) * specFactor;
+        specular = (1.0f - shadow) * ks * lightColor * vec3(material.cSpecular) * specFactor;
     } else {
-        specular = ks * lightColor * vec3(material.cSpecular);
+        specular = (1.0f - shadow) * ks * lightColor * vec3(material.cSpecular);
     }
 
     return diffuse + specular;
@@ -181,6 +216,8 @@ vec3 phongSpot(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormaliz
     vec3 dirFomLightToObject = normalize(posWorldSpace - lightPos);
     vec3 dirToLight = normalize(lightPos - posWorldSpace);
 
+    float shadow = calculateShadow(lightSpacePosition, lightDirNormalized);
+
     //the angle between the current direction from the the hit point to the light and the direction of the spotlight itself
     float x = acos(dot(lightDirNormalized, dirFomLightToObject));
     //calculating the intensity of the light depending on where in the cone we are !!
@@ -191,7 +228,7 @@ vec3 phongSpot(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormaliz
                                                (distanceFromLight * distanceFromLight) * att_coeffs[2]));
 
     // diffusion !!
-    vec3 diffuse = lightIntensity * attenuation * matDiff * NdotL;
+    vec3 diffuse = (1.0f - shadow) * lightIntensity * attenuation * matDiff * NdotL;
 
     // specular !!
     vec3 reflectDir = reflect(-dirToLight, normNormalized);
@@ -209,9 +246,9 @@ vec3 phongSpot(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormaliz
 
     if (material.shininess != 0){
         float specFactor = pow(RdotV, material.shininess);
-        specular = attenuation * ks * lightColor * vec3(material.cSpecular) * specFactor;
+        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(material.cSpecular) * specFactor;
     } else {
-        specular = attenuation * ks * lightColor * vec3(material.cSpecular);
+        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(material.cSpecular);
     }
     return diffuse + specular;
 }
@@ -253,7 +290,7 @@ void main() {
 
             case 1: // direction light
                 NdotL = clamp(dot(normNormalized, lightDirNormalized), 0, 1);
-                color += phongDirectional(matDiff, lights[i].color, NdotL, lightDirNormalized, normNormalized, surfToCam);
+                color += phongDirectional(matDiff, lights[i].color, NdotL, lightDirNormalized, normNormalized, surfToCam, lights[i].dir);
                 break;
 
             case 2: // spotlight

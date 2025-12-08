@@ -1,6 +1,7 @@
 #include "sceneparser.h"
 #include "scenefilereader.h"
 #include "lsystem/lsystem.h"
+#include "renderers/lightrenderer.h"
 #include <glm/gtx/transform.hpp>
 
 #include <chrono>
@@ -186,6 +187,8 @@ SceneLightData SceneParser::getSceneLightData(SceneLight &light, glm::mat4 ctm){
         dir = glm::normalize(ctm * glm::vec4(light.dir));
     }
 
-    return SceneLightData{light.id, light.type, light.color, light.function, pos, dir, light.penumbra, light.angle};
+    glm::mat4 lightSpaceMat = LightRenderer::calculateLightMatrix(&light, glm::vec3(pos), glm::vec3(dir));
+    return SceneLightData{light.id, light.type, light.color, light.function, pos, dir, light.penumbra,
+                          light.angle, 0.0f, 0.0f, lightSpaceMat};
 
 }

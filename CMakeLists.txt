@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Sets project name
-project(project_six LANGUAGES CXX C)
+project(final_proj LANGUAGES CXX C)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -54,6 +54,7 @@ add_executable(${PROJECT_NAME}
     src/renderers/scenerenderer.h src/renderers/scenerenderer.cpp
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
+    src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
 
 
 )
@@ -82,6 +83,10 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
     FILES
         resources/shaders/default.frag
         resources/shaders/default.vert
+        resources/shaders/depth.frag
+        resources/shaders/depth.vert
+        resources/shaders/texture.frag
+        resources/shaders/texture.vert
 )
 
 # GLEW: this provides support for Windows (including 64-bit)
