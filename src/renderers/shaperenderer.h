@@ -13,9 +13,12 @@
 #include "utils/math_utils.h"
 
 struct GLPrimitiveData {
+
     GLuint vao;
     GLuint vbo;
+    GLuint instanceVBO; 
     int vertexCount;
+
 };
 
 class ShapeRenderer {
