@@ -16,21 +16,21 @@
 LSymbol LSystem::parseLSymbol(const std::string &tokenString) {
     LSymbol symbol;
 
-    // Match: Letter optionally followed by (params)
+    // match letter for rule optionally followed by parameterrs
     std::regex symbolRegex(R"(([A-Za-z+\-\[\]&\^\\\/])(?:\(([^)]*)\))?)");
     std::smatch match;
 
     if (std::regex_match(tokenString, match, symbolRegex)) {
         symbol.name = match[1].str();
 
-        // Parse parameters if present
+        // parse parameters if present
         if (match[2].matched && !match[2].str().empty()) {
             std::string paramStr = match[2].str();
             std::stringstream ss(paramStr);
             std::string param;
 
             while (std::getline(ss, param, ',')) {
-                // Trim whitespace
+                // trim whitespace
                 param.erase(0, param.find_first_not_of(" \t"));
                 param.erase(param.find_last_not_of(" \t") + 1);
                 try {
@@ -55,7 +55,7 @@ LSymbol LSystem::parseLSymbol(const std::string &tokenString) {
 std::vector<LSymbol> LSystem::tokenize(const std::string &string) {
     std::vector<LSymbol> tokenizedResult;
 
-    // Match symbols with optional parameters OR single operators
+    // match symbols (+, -, / etc etc) with optional parameters
     std::regex tokenRegex(R"([A-Za-z+\-\[\]&\^\\\/](?:\([^)]*\))?)");
 
     for (auto match = std::sregex_iterator(string.begin(), string.end(), tokenRegex);
@@ -70,12 +70,12 @@ bool LSystem::evaluateCondition(const std::string &condition,
                                 const std::map<std::string, float> &paramValues) {
     if (condition.empty()) return true;
 
-    // Replace parameter names with values
+    // replace parameter names with values
     std::string expr = condition;
     for (const auto &[name, value] : paramValues) {
         size_t pos = 0;
         while ((pos = expr.find(name, pos)) != std::string::npos) {
-            // Make sure it's a whole word (not part of another variable)
+            // make sure it's a whole word (not part of another variable)
             if ((pos == 0 || !isalnum(expr[pos-1])) &&
                 (pos + name.length() >= expr.length() || !isalnum(expr[pos + name.length()]))) {
                 expr.replace(pos, name.length(), std::to_string(value));
@@ -84,8 +84,7 @@ bool LSystem::evaluateCondition(const std::string &condition,
         }
     }
 
-    // Simple evaluation for comparison operators
-    // Supports: >, <, >=, <=, ==, !=
+
     std::regex compRegex(R"(([\d.]+)\s*(>=|<=|>|<|==|!=)\s*([\d.]+))");
     std::smatch match;
 
@@ -102,7 +101,7 @@ bool LSystem::evaluateCondition(const std::string &condition,
         if (op == "!=") return std::abs(left - right) >= 1e-6f;
     }
 
-    return true; // Default to true if can't parse
+    return true; // default to true if can't parse
 }
 
 std::string LSystem::substituteParams(const std::string &output,
@@ -111,12 +110,12 @@ std::string LSystem::substituteParams(const std::string &output,
     size_t i = 0;
 
     while (i < output.length()) {
-        // Check if we're at an opening parenthesis - this starts a parameter list
+        // check if we're at an opening parenthesis which starts a parameter list
         if (output[i] == '(') {
             result += '(';
             i++;
 
-            // Find the matching closing parenthesis
+            // find the matching closing parenthesis
             size_t start = i;
             int depth = 1;
             size_t end = i;
@@ -128,10 +127,10 @@ std::string LSystem::substituteParams(const std::string &output,
             }
 
             if (depth == 0) {
-                // Extract everything inside parentheses
+                // extract everything inside parentheses
                 std::string paramList = output.substr(start, end - start);
 
-                // Split by commas (but not commas inside nested parentheses)
+                // split by commas (but not commas inside nested parentheses)
                 std::vector<std::string> params;
                 std::string currentParam;
                 int parenDepth = 0;
@@ -150,13 +149,13 @@ std::string LSystem::substituteParams(const std::string &output,
                     params.push_back(currentParam);
                 }
 
-                // Process each parameter
+                // proccewss each parameter
                 for (size_t p = 0; p < params.size(); p++) {
                     if (p > 0) result += ",";
 
                     std::string expr = params[p];
 
-                    // Replace all parameters in this expression
+                    // replace all parameters in this expression
                     for (const auto &[name, value] : paramValues) {
                         size_t pos = 0;
                         while ((pos = expr.find(name, pos)) != std::string::npos) {
@@ -170,7 +169,7 @@ std::string LSystem::substituteParams(const std::string &output,
                         }
                     }
 
-                    // Evaluate the expression
+                    // evaluate the expression
                     float val = evaluateArithmetic(expr);
                     result += std::to_string(val);
                 }
@@ -187,18 +186,18 @@ std::string LSystem::substituteParams(const std::string &output,
 
     return result;
 }
-// Helper function to evaluate arithmetic expressions
+// helper function to evaluate arithmetic expressions
 float LSystem::evaluateArithmetic(const std::string &expr) {
-    // Handle multiplication and division first (higher precedence)
+
+    // handler multiplication and division first (PEMDAS yasss)
     for (size_t i = 0; i < expr.length(); i++) {
         if (expr[i] == '*' || expr[i] == '/') {
-            // Find left operand
+
             size_t leftStart = i;
             while (leftStart > 0 && (isdigit(expr[leftStart-1]) || expr[leftStart-1] == '.')) {
                 leftStart--;
             }
 
-            // Find right operand
             size_t rightEnd = i + 1;
             while (rightEnd < expr.length() && (isdigit(expr[rightEnd]) || expr[rightEnd] == '.')) {
                 rightEnd++;
@@ -215,8 +214,8 @@ float LSystem::evaluateArithmetic(const std::string &expr) {
         }
     }
 
-    // Handle addition and subtraction (lower precedence)
-    for (size_t i = 1; i < expr.length(); i++) { // Start at 1 to handle negative numbers
+    // handle addition and subtraction
+    for (size_t i = 1; i < expr.length(); i++) { // start at 1 to handle negative numbers
         if (expr[i] == '+' || expr[i] == '-') {
             float left = evaluateArithmetic(expr.substr(0, i));
             float right = evaluateArithmetic(expr.substr(i + 1));
@@ -224,7 +223,7 @@ float LSystem::evaluateArithmetic(const std::string &expr) {
         }
     }
 
-    // Base case: just a number
+    // base case: just a number
     return std::stof(expr);
 }
 
@@ -259,24 +258,24 @@ std::string LSystem::applyRule(const LSymbol &symbol, const LSystemData &data) {
 
     std::vector<Candidate> candidates;
 
-    // 1. Collect all valid rules
+    // collect all valid rules
     for (const auto &rule : data.rules) {
         if (rule.input != symbol.name) continue;
         if (rule.params.size() != symbol.params.size()) continue;
 
-        // Map parameter values
+        // map parameter values
         std::map<std::string, float> paramValues;
         for (size_t i = 0; i < rule.params.size(); i++) {
             paramValues[rule.params[i]] = symbol.params[i];
         }
 
-        // Condition check
+        // condition check !!
         if (!evaluateCondition(rule.condition, paramValues)) continue;
 
         candidates.push_back({ &rule, paramValues });
     }
 
-    // 2. No rules matched → return symbol unchanged
+    // norules matched --> return symbol unchanged
     if (candidates.empty()) {
         std::string result = symbol.name;
         if (!symbol.params.empty()) {
@@ -290,26 +289,26 @@ std::string LSystem::applyRule(const LSymbol &symbol, const LSystemData &data) {
         return result;
     }
 
-    // 3. Compute total probability weight
+    // compute total probability weight
     float totalWeight = 0.0f;
     for (auto &c : candidates) {
         totalWeight += c.rule->probability;
     }
 
-    // 4. Pick random threshold in [0, totalWeight]
+    // pick random threshold in [0, totalWeight]
     float r = (float(rand()) / RAND_MAX) * totalWeight;
 
-    // 5. Select rule by cumulative probability
+    // select rule by cumulative probability
     float accum = 0.0f;
     for (auto &c : candidates) {
         accum += c.rule->probability;
         if (r <= accum) {
-            // Apply this rule
+            // apple the rule !!!
             return substituteParams(c.rule->output, c.paramValues);
         }
     }
 
-    // Safety fallback (should never hit)
+    // safetly fallback (should never hit)
     return substituteParams(candidates.back().rule->output, candidates.back().paramValues);
 }
 
@@ -358,7 +357,9 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
         else if (sym.name == "L") {
             float scaleVal = sym.params.empty() ? 1.0f : sym.params[0];
 
-            // radius based on last F (you can store this in turtle state)
+            // (leaf stem) length - pushes leaf away from branch
+            float petioleLength = 0.3f * scaleVal;
+
             float radius = turtle.lastThickness * 0.5f;
 
             // random angle for leaf placement around branch
@@ -367,11 +368,17 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
             glm::vec3 outward =
                 glm::normalize(cos(theta) * turtle.left + sin(theta) * turtle.up);
 
-            glm::vec3 leafPos = turtle.pos + outward * radius;
+            // offset outward from branch surface + along heading direction
+            glm::vec3 leafPos = turtle.pos
+                                + outward * (radius + petioleLength)
+                                + turtle.heading * (petioleLength * 0.3f);  // slight forward offset
 
-            // Build leaf coordinate frame:
-            glm::vec3 normal = outward;
+            // build leaf coordinate frame pointing outward
+            glm::vec3 normal = glm::normalize(outward + turtle.heading * 0.3f);
             glm::vec3 tangent = glm::normalize(glm::cross(normal, turtle.heading));
+            if (glm::length(tangent) < 0.001f) {
+                tangent = turtle.left;
+            }
             glm::vec3 bitangent = glm::cross(tangent, normal);
 
             glm::mat4 rot(1.0f);
@@ -379,7 +386,7 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
             rot[1] = glm::vec4(normal,    0);
             rot[2] = glm::vec4(bitangent, 0);
 
-            // Random twist of the leaf
+            // random twist of the leaf
             float twist = ((rand() % 10000) / 10000.f) * 2.f * M_PI;
             rot = glm::rotate(rot, twist, normal);
 
@@ -392,13 +399,13 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
         } else if (sym.name == "W") {  // W for wildflower/flower
             float scaleVal = sym.params.empty() ? 0.15f : sym.params[0];
 
-            // Position flower at current turtle position
+            // position flower at current turtle position
             glm::vec3 flowerPos = turtle.pos;
 
-            // Build flower orientation from turtle state
+            // build flower orientation from turtle state
             glm::mat4 rot(1.0f);
             rot[0] = glm::vec4(turtle.left,    0);
-            rot[1] = glm::vec4(turtle.heading, 0);  // Flower points along heading
+            rot[1] = glm::vec4(turtle.heading, 0);  // flower points along heading
             rot[2] = glm::vec4(turtle.up,      0);
 
             glm::mat4 flower = glm::translate(glm::mat4(1.0f), flowerPos);

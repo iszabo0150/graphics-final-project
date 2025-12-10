@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 17.0.1, 2025-12-10T14:19:51. -->
+<!-- Written by QtCreator 17.0.1, 2025-12-10T13:34:50. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{f79aeaf0-9fed-4aba-9e27-417e66da9dd0}</value>
+  <value type="QByteArray">{d5e1dc04-927b-4e76-8d1d-31bd20021060}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -86,10 +86,13 @@
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
     <value type="bool" key="ClangTools.UseGlobalSettings">true</value>
    </valuemap>
+<<<<<<< HEAD
+=======
    <valuemap type="QVariantMap" key="ClangdSettings">
     <value type="bool" key="blockIndexing">false</value>
     <value type="bool" key="useGlobalSettings">true</value>
    </valuemap>
+>>>>>>> main
   </valuemap>
  </data>
  <data>
@@ -108,6 +111,20 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
+<<<<<<< HEAD
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_BUILD_TYPE:STRING=Debug
+-DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}
+-DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
+-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
+-DQT_MAINTENANCE_TOOL:FILEPATH=/Users/aisosaidahosa/Qt/MaintenanceTool.app/Contents/MacOS/MaintenanceTool
+-DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
+-DCMAKE_GENERATOR:STRING=Ninja
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
+-DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
+-DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}</value>
+    <value type="int" key="EnableQmlDebugging">0</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Debug</value>
+=======
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
@@ -120,6 +137,7 @@
 -DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}</value>
     <value type="int" key="EnableQmlDebugging">0</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug</value>
+>>>>>>> main
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
@@ -223,11 +241,16 @@
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">final_proj</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
      <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">final_proj</value>
-     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
      <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
      <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
      <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+<<<<<<< HEAD
+     <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project</value>
+     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Debug</value>
+=======
      <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug</value>
+>>>>>>> main
     </valuemap>
     <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
    </valuemap>
@@ -236,6 +259,19 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
+<<<<<<< HEAD
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_BUILD_TYPE:STRING=Release
+-DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}
+-DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
+-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
+-DQT_MAINTENANCE_TOOL:FILEPATH=/Users/aisosaidahosa/Qt/MaintenanceTool.app/Contents/MacOS/MaintenanceTool
+-DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
+-DCMAKE_GENERATOR:STRING=Ninja
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
+-DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
+-DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release</value>
+=======
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
@@ -247,6 +283,7 @@
 -DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
 -DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Release</value>
+>>>>>>> main
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
@@ -354,8 +391,13 @@
      <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
      <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
      <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+<<<<<<< HEAD
+     <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project</value>
+     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release</value>
+=======
      <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Release</value>
      <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Release</value>
+>>>>>>> main
     </valuemap>
     <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
    </valuemap>
@@ -424,8 +466,13 @@
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+<<<<<<< HEAD
+    <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release</value>
+=======
     <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Release</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Release</value>
+>>>>>>> main
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
