@@ -119,12 +119,13 @@ float interpolate(float A, float B, float alpha) {
 // Returns a height value, z, by sampling a noise function
 float TerrainGenerator::getHeight(float x, float y) {
 
-    // float z = 5 * computePerlin(x * 0.5, y * 0.5) / 2;
-    float z1 = 0.1 * computePerlin(x * 20, y * 20);
-    float z2 = 0.2 * computePerlin(x * 10, y * 10);
-    float z3 = 0.1 * computePerlin(x * 10, y * 10);
-    float z4 = 0.2 * computePerlin(x * 2, y * 2);
-
+    // Fractal Brownian Motion (FBM) with multiple octaves for mountain terrain
+    // Higher amplitudes = taller peaks, lower frequencies = larger features
+    
+    float z1 = 0.4 * computePerlin(x * 3, y * 3);      // large mountains
+    float z2 = 0.3 * computePerlin(x * 8, y * 8);      // medium ridges
+    float z3 = 0.2 * computePerlin(x * 16, y * 16);    // small rocky details
+    float z4 = 0.1 * computePerlin(x * 32, y * 32);    // fine texture
 
     /*
      * multiply inputs by a larger number - frequency greatly increases and peaks
@@ -134,8 +135,8 @@ float TerrainGenerator::getHeight(float x, float y) {
      * though), seems like one singular curved plane
      */
 
-    // Return 0 as placeholder
-    return z3 + z4;
+    // Return combined octaves for mountain-like terrain (all octaves contribute)
+    return z1 + z2 + z3 + z4;
 }
 
 // Computes the normal of a vertex by averaging neighbors

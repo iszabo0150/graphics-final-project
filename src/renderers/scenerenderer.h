@@ -28,6 +28,8 @@ public:
 
 private:
     
+    void paintTerrainInternal(const Camera& camera);
+    
     void initializeFBO(int width, int height);
 
     GLuint m_shader;
