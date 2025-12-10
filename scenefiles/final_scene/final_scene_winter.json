@@ -1,0 +1,52 @@
+{
+  "name": "preset_summer_tree",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [0, 20, -60],
+    "look": [0, 0, 1],
+    "up": [0, 1, 0],
+    "heightAngle": 35
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.2, 1.2, 1.2],
+          "direction": [0.3, -1.0, 0.3]
+        }
+      ]
+    },
+    {
+      "translate": [0, -15, 0],
+      "scale": [0.7, 0.7, 0.7],
+      "primitives": [
+        {
+          "type": "mesh",
+          "meshFile": "meshes/cliff/rock.obj",
+          "textureFile": "textures/moss_tex.png",
+          "blend": 1,
+          "normalMapFile": "textures/cliff_Normal.png",
+          "normalMapStrength": 0.25,
+          "ambient": [0.15, 0.25, 0.1],
+          "diffuse": [0.3, 0.5, 0.2],
+          "specular": [0.05, 0.05, 0.05],
+          "shininess": 2.0
+        }
+      ]
+    },
+    
+    {
+      "translate": [0, 15, 0],
+      "lsystem": {
+        "plantType": "oak_tree",
+        "season": "winter"
+      }
+    }
+    
+  ]
+}

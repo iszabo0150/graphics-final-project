@@ -58,7 +58,7 @@ glm::vec3 Camera::getPos() const{
  */
 void Camera::translate(Direction dir, float deltaTime){
 
-    float speed = 2.5f;
+    float speed = 7.0f;
     glm::vec3 rightDir = glm::normalize(glm::cross(m_look, m_up));
 
 
