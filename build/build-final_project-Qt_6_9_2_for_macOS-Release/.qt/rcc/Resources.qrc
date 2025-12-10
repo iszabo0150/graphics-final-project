@@ -2,6 +2,10 @@
   <qresource prefix="/">
     <file alias="resources/shaders/default.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/default.frag</file>
     <file alias="resources/shaders/default.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/default.vert</file>
+    <file alias="resources/shaders/depth.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/depth.frag</file>
+    <file alias="resources/shaders/depth.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/depth.vert</file>
+    <file alias="resources/shaders/texture.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/texture.frag</file>
+    <file alias="resources/shaders/texture.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/texture.vert</file>
   </qresource>
 </RCC>
 

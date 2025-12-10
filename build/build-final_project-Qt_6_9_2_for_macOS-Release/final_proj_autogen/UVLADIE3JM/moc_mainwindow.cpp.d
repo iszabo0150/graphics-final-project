@@ -827,6 +827,7 @@
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/glm/vector_relational.hpp \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/camera/camera.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/realtime/realtime.h \
+  /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/lightrenderer.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/scenerenderer.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/shaperenderer.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/aspectratiowidget/aspectratiowidget.hpp \
