@@ -830,8 +830,10 @@
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/lightrenderer.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/scenerenderer.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/shaperenderer.h \
+  /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/meshloader.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/aspectratiowidget/aspectratiowidget.hpp \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/math_utils.h \
+  /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/objloader.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/scenedata.h \
   /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/sceneparser.h \
   /Users/aisosaidahosa/Qt/6.9.2/macos/lib/QtCore.framework/Versions/A/Headers/QElapsedTimer \

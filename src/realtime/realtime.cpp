@@ -71,7 +71,7 @@ void Realtime::initializeGL() {
 
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
-    m_lightRenderer.initialize(m_shapeRenderer);
+    m_lightRenderer.initialize(&m_shapeRenderer);
 
     m_isInitialized = true;
 
@@ -131,7 +131,7 @@ void Realtime::settingsChanged() {
 
 
     m_shapeRenderer.updateTessellation();
-    m_lightRenderer.setShapes(m_shapeRenderer);
+    m_lightRenderer.setShapes(&m_shapeRenderer);
     m_camera->createProjectionMatrix();
 
     update(); // asks for a PaintGL() call to occur
