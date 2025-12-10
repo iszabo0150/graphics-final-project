@@ -91,6 +91,8 @@ void Realtime::paintGL() {
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
+    // return
+
     //render the scene based on render data !!
 
    // glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
@@ -141,7 +143,7 @@ void Realtime::settingsChanged() {
 
 
     m_shapeRenderer.updateTessellation();
-    m_lightRenderer.setShapes(m_shapeRenderer);
+    m_lightRenderer.setShapes(&m_shapeRenderer);
     m_camera->createProjectionMatrix();
 
     update(); // asks for a PaintGL() call to occur

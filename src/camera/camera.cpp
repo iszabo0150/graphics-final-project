@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <cmath>
+#include <iostream>
 
 
 
@@ -57,8 +58,9 @@ glm::vec3 Camera::getPos() const{
  */
 void Camera::translate(Direction dir, float deltaTime){
 
-    float speed = 5.0f;
+    float speed = 2.5f;
     glm::vec3 rightDir = glm::normalize(glm::cross(m_look, m_up));
+
 
     //figure out what the new camera position is!
     switch(dir){
@@ -84,49 +86,67 @@ void Camera::translate(Direction dir, float deltaTime){
             break;
     }
 
+// std::cout << "Camera pos: (" << m_pos.x << ", " << m_pos.y << ", " << m_pos.z << ") " << std::endl;
     //update the view matrix :P
     createViewMatrices(m_pos, m_look, m_up);
 }
 
+
 /**
- * @brief Camera::rotates the camera depending on teh change in x and y values of the mouse
+ * @brief Camera::rotates the camera depending on the change in x and y values of the mouse
  * @param deltaX
  * @param deltaY
  */
 void Camera::rotate(float deltaX, float deltaY){
     float sensitivity = 0.005;
 
+    // Apply horizontal rotation first (around world up axis)
     float horizontalRotation = deltaX * sensitivity;
-
     glm::mat3 rotationX = Utils::getRodMatrix(horizontalRotation, glm::vec3(0,1,0));
 
-    float verticalRotation = deltaY * sensitivity;
+    // Apply horizontal rotation to look vector only
+    m_look = rotationX * m_look;
 
+    // Recalculate tilt angle after horizontal rotation
+    m_tiltAngle = asin(glm::clamp(glm::normalize(m_look).y, -1.0f, 1.0f));
+
+    // Now calculate vertical rotation limits
+    float verticalRotation = deltaY * sensitivity;
     float newVerticalAngle = m_tiltAngle + verticalRotation;
 
-
-    //so that it doesnt flipp upside down or anything crazy
+    // Clamp to prevent flipping
     float minPitch = glm::radians(-89.0f);
-    float maxPitch = glm::radians( 89.0f);
-
+    float maxPitch = glm::radians(89.0f);
     newVerticalAngle = glm::clamp(newVerticalAngle, minPitch, maxPitch);
 
     float actualRotationY = newVerticalAngle - m_tiltAngle;
 
-    glm::vec3 rightVector = glm::normalize(glm::cross(m_look, m_up));
+    // Calculate right vector using world up
+    glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 rightVector = glm::cross(m_look, worldUp);
 
+    // Handle the case where look is parallel to world up (looking straight up/down)
+    if (glm::length(rightVector) < 0.001f) {
+        // Use world forward as fallback
+        rightVector = glm::cross(m_look, glm::vec3(0.0f, 0.0f, 1.0f));
+    }
+
+    rightVector = glm::normalize(rightVector);
+
+    // Apply vertical rotation around the right vector
     glm::mat3 rotationY = Utils::getRodMatrix(actualRotationY, rightVector);
 
+    m_look = rotationY * m_look;
 
-    m_look = rotationX * rotationY * m_look;
-    m_up   = rotationX * rotationY * m_up;
+    // Recalculate up vector to be perpendicular to look and right
+    m_up = glm::normalize(glm::cross(rightVector, m_look));
+
+    // Update tilt angle
     m_tiltAngle = newVerticalAngle;
 
-    //update the view matrix :P
+    // Update the view matrix
     createViewMatrices(m_pos, m_look, m_up);
-
 }
-
 
 /**
  * @brief Camera::createMatrices creates the CTM and inverse CTM of the camera based on the pos value and look and up vectors

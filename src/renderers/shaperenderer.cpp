@@ -33,6 +33,8 @@ void ShapeRenderer::cleanup() {
         glDeleteBuffers(1, &pair.second.vbo);
     }
     m_shapeMap.clear();
+    m_meshLoader.cleanup();
+
 }
 
 /**
@@ -74,7 +76,7 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     default:
         break;
     }
-    std::cout << "jhiiiii" << std::endl;
+    // std::cout << "jhiiiii" << std::endl;
 
 
     GLuint shapeVBO;
@@ -82,7 +84,7 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     glGenBuffers(1, &shapeVBO);
 
     // Task 6: Bind the VBO you created here
-    std::cout << "buffer genned" << std::endl;
+    // std::cout << "buffer genned" << std::endl;
 
 
     glBindBuffer(GL_ARRAY_BUFFER, shapeVBO);
@@ -120,6 +122,9 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), reinterpret_cast<void*>(8 * sizeof(GLfloat))); //tangent
     glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), reinterpret_cast<void*>(11 * sizeof(GLfloat))); //bitanget
 
+    // generating the instance vbo, which will be empty for now!
+    GLuint instanceVBO;
+    glGenBuffers(1, &instanceVBO);
 
     // ================== Returning to Default State
 
@@ -130,5 +135,5 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     int vertexCount = shapeData.size() / 14;
 
 
-    return GLPrimitiveData{shapeVAO, shapeVBO, vertexCount};
+    return GLPrimitiveData{shapeVAO, shapeVBO, instanceVBO, vertexCount};
 }

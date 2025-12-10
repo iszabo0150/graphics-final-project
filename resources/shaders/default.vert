@@ -9,7 +9,17 @@ layout(location = 2) in vec2 uv;
 layout(location = 3) in vec3 tangentObjSpace;
 layout(location = 4) in vec3 bitangentObjSpace;
 
+// model matrix
+layout(location = 5) in vec4 model0;
+layout(location = 6) in vec4 model1;
+layout(location = 7) in vec4 model2;
+layout(location = 8) in vec4 model3;
 
+// material properties
+layout(location = 9) in vec3 ambient;
+layout(location = 10) in vec3 diffuse;
+layout(location = 11) in vec3 specular;
+layout(location = 12) in float shininess;
 
 // Task 5: declare `out` variables for the world-space position and normal,
 //         to be passed to the fragment shader
@@ -23,37 +33,45 @@ out vec3 bitangentWorldSpace;
 
 out vec4 lightSpacePosition;
 
-uniform mat4 modelMatrix;
-uniform mat4 modelInverseTrans;
+out vec3 materialAmbient;
+out vec3 materialDiffuse;
+out vec3 materialSpecular;
+out float materialShininess;
+
+// no londer needed because of instance rendering.
+// uniform mat4 modelMatrix;
+// uniform mat4 modelInverseTrans;
+
 uniform mat4 viewMatrix;
 uniform mat4 projMatrix;
 uniform mat4 lightMatrix;
 
 
 void main() {
-    // Task 8: compute the world-space position and normal, then pass them to
-    //         the fragment shader using the variables created in task 5
+    
+    // reconstructing matricies from instance attribs 
+    mat4 modelMatrix = mat4(model0, model1, model2, model3);
+    mat4 normalMatrix = transpose(inverse(modelMatrix));
 
     vec4 p = modelMatrix * vec4(posObjSpace, 1.0);
     posWorldSpace = p.xyz;
 
-
-    //world space normal
-    vec3 objNormal = normalize(normalObjSpace);
+    // fixed ????
+    normalWorldSpace = normalize(mat3(normalMatrix) * normalize(normalObjSpace));
+    tangentWorldSpace = normalize(mat3(normalMatrix) * tangentObjSpace);
+    bitangentWorldSpace = normalize(mat3(normalMatrix) * bitangentObjSpace);
 
     fragUV = uv;
 
-
-    //FIX !!!!!! was doing matrices weird :P
-    normalWorldSpace = normalize(mat3(modelInverseTrans) * objNormal);
-
+    materialAmbient = ambient;
+    materialDiffuse = diffuse;
+    materialSpecular = specular;
+    materialShininess = shininess;
 
     // set gl_Position to the object space position transformed to clip space
     gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(posObjSpace, 1.0);
 
-    tangentWorldSpace = normalize(mat3(modelInverseTrans) * tangentObjSpace);
-    bitangentWorldSpace = normalize(mat3(modelInverseTrans) * bitangentObjSpace);
-
     // compute light-space position using light matrix (for shadow mapping)
     lightSpacePosition = lightMatrix * p;
+
 }

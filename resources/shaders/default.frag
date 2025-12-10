@@ -48,11 +48,16 @@ in vec2 fragUV;
 in vec3 tangentWorldSpace;
 in vec3 bitangentWorldSpace;
 
+in vec3 materialAmbient;
+in vec3 materialDiffuse;
+in vec3 materialSpecular;
+in float materialShininess;
+
 out vec4 fragColor;
 
 uniform Light lights[8];
 uniform int lightCount;
-uniform Material material;
+// uniform Material material; no longer needed, passed from instance rendering
 uniform vec3 cameraPos;
 
 uniform float kd;
@@ -147,11 +152,11 @@ vec3 phongDirectional(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirN
     vec3 specular = vec3(0, 0, 0);
 
     // if (RdotV > 0.0f){
-    if (material.shininess != 0){
-        float specFactor = pow(RdotV, material.shininess);
-        specular = (1.0f - shadow) * ks * lightColor * vec3(material.cSpecular) * specFactor;
+    if (materialShininess != 0){
+        float specFactor = pow(RdotV, materialShininess);
+        specular = (1.0f - shadow) * ks * lightColor * vec3(materialSpecular) * specFactor;
     } else {
-        specular = (1.0f - shadow) * ks * lightColor * vec3(material.cSpecular);
+        specular = (1.0f - shadow) * ks * lightColor * vec3(materialSpecular);
     }
 
     return diffuse + specular;
@@ -175,16 +180,16 @@ vec3 phongPoint(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormali
     vec3 specular = vec3(0, 0, 0);
 
     // if (RdotV > 0.0f){
-    //     float specFactor = pow(RdotV, material.shininess);
-    //     specular = attenuation * ks * lightColor * vec3(material.cSpecular) * specFactor;
+    //     float specFactor = pow(RdotV, materialShininess);
+    //     specular = attenuation * ks * lightColor * vec3(materialSpecular) * specFactor;
     // }
 
 
-    if (material.shininess != 0){
-        float specFactor = pow(RdotV, material.shininess);
-        specular = attenuation * ks * lightColor * vec3(material.cSpecular) * specFactor;
+    if (materialShininess != 0){
+        float specFactor = pow(RdotV, materialShininess);
+        specular = attenuation * ks * lightColor * vec3(materialSpecular) * specFactor;
     } else {
-        specular = attenuation * ks * lightColor * vec3(material.cSpecular);
+        specular = attenuation * ks * lightColor * vec3(materialSpecular);
     }
 
     return diffuse + specular;
@@ -239,16 +244,16 @@ vec3 phongSpot(vec3 matDiff, vec3 lightColor, float NdotL, vec3 lightDirNormaliz
 
     // if (RdotV > 0.0f){
 
-    //     float specFactor = pow(RdotV, material.shininess);
-    //     specular = attenuation * lightIntensity * ks * vec3(material.cSpecular) * specFactor;
+    //     float specFactor = pow(RdotV, materialShininess);
+    //     specular = attenuation * lightIntensity * ks * vec3(materialSpecular) * specFactor;
     // }
 
 
-    if (material.shininess != 0){
-        float specFactor = pow(RdotV, material.shininess);
-        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(material.cSpecular) * specFactor;
+    if (materialShininess != 0){
+        float specFactor = pow(RdotV, materialShininess);
+        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(materialSpecular) * specFactor;
     } else {
-        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(material.cSpecular);
+        specular = (1.0f - shadow) * attenuation * ks * lightColor * vec3(materialSpecular);
     }
     return diffuse + specular;
 }
@@ -261,9 +266,9 @@ void main() {
 
     vec3 color = vec3(0.0); //all black
 
-    color += ka * material.cAmbient;
+    color += ka * materialAmbient;
 
-    vec3 matDiff = kd * vec3(material.cDiffuse);
+    vec3 matDiff = kd * vec3(materialDiffuse);
 
     if (textureInfo.isUsed) {
         vec2 repeatedUV = vec2(fragUV.x * textureInfo.repeatU, fragUV.y * textureInfo.repeatV);

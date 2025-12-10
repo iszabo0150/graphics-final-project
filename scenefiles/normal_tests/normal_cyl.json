@@ -28,10 +28,15 @@
           "primitives": [
             {
               "type": "cylinder",
-              "diffuse": [1.0, 0.0, 0.0],
-              "specular": [1.0, 1.0, 1.0],
+              "diffuse": [0.35, 0.2, 0.12],
+              "ambient": [0.15, 0.08, 0.04],
               "shininess": 25.0,
-              "normalMapFile": "textures/brick.png"            
+              "textureFile": "textures/bark2.png",
+              "textureU":4,
+              "blend": 0.75,
+              "normalMapFile": "textures/barkNormm.png" ,     
+              "normalMapU": 4,      
+              "normalMapStrength":0.4
                         }
           ]
         }
