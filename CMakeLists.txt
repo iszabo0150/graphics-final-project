@@ -55,6 +55,10 @@ add_executable(${PROJECT_NAME}
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
+    src/utils/objloader.h src/utils/objloader.cpp
+    src/shapes/meshloader.h src/shapes/meshloader.cpp
+
+
 
 
 )

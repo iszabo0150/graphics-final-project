@@ -851,10 +851,14 @@ final_proj_autogen/timestamp: \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/conetesselator.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/cubetesselator.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/cylindertesselator.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/meshloader.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/meshloader.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/shapetesselator.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/spheretesselator.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/aspectratiowidget/aspectratiowidget.hpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/math_utils.h \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/objloader.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/objloader.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/scenedata.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/scenefilereader.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/scenefilereader.h \

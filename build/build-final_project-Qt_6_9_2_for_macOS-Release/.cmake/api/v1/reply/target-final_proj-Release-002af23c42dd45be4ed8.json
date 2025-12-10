@@ -47,7 +47,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 70,
+				"line" : 74,
 				"parent" : 0
 			},
 			{
@@ -155,13 +155,13 @@
 			{
 				"command" : 5,
 				"file" : 0,
-				"line" : 67,
+				"line" : 71,
 				"parent" : 0
 			},
 			{
 				"command" : 9,
 				"file" : 0,
-				"line" : 80,
+				"line" : 84,
 				"parent" : 0
 			},
 			{
@@ -355,7 +355,9 @@
 				28,
 				30,
 				32,
-				33
+				34,
+				36,
+				37
 			]
 		}
 	],
@@ -366,11 +368,11 @@
 			"id" : "StaticGLEW::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "final_proj_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "final_proj_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "final_proj_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "final_proj::@6890427a1f51a3e7e1df",
@@ -497,7 +499,9 @@
 				28,
 				30,
 				32,
-				33
+				34,
+				36,
+				37
 			]
 		},
 		{
@@ -519,22 +523,24 @@
 				25,
 				27,
 				29,
-				31
+				31,
+				33,
+				35
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				34
+				38
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				35,
-				36
+				39,
+				40
 			]
 		}
 	],
@@ -721,6 +727,28 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/renderers/lightrenderer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/utils/objloader.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/utils/objloader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/shapes/meshloader.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/shapes/meshloader.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

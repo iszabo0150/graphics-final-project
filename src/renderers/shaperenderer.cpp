@@ -30,6 +30,8 @@ void ShapeRenderer::cleanup() {
         glDeleteBuffers(1, &pair.second.vbo);
     }
     m_shapeMap.clear();
+    m_meshLoader.cleanup();
+
 }
 
 /**

@@ -11,6 +11,7 @@
 
 #include "utils/scenedata.h"
 #include "utils/math_utils.h"
+#include "shapes/meshloader.h"
 
 struct GLPrimitiveData {
 
@@ -26,10 +27,13 @@ public:
     void initialize();
     void cleanup();
     GLPrimitiveData getPrimitiveData(PrimitiveType type) {return m_shapeMap.at(type);}
+    MeshGLData getMeshData(const std::string& filepath) { return m_meshLoader.getMeshData(filepath); }
+
     void updateTessellation();
 
 private:
     std::map<PrimitiveType, GLPrimitiveData> m_shapeMap;
+    MeshLoader m_meshLoader;
 
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
