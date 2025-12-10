@@ -1,0 +1,4 @@
+set(__QT_DEPLOY_TARGET_final_proj_FILE /Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-final_proj-Qt_6_9_2_macos_5f4fc2-Debug/final_proj)
+set(__QT_DEPLOY_TARGET_final_proj_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_StaticGLEW_FILE /Users/macdeal/Desktop/CSCI1230/graphics-final-project/build/build-final_proj-Qt_6_9_2_macos_5f4fc2-Debug/libStaticGLEW.a)
+set(__QT_DEPLOY_TARGET_StaticGLEW_TYPE STATIC_LIBRARY)

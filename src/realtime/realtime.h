@@ -11,6 +11,8 @@
 #include "renderers/shaperenderer.h"
 #include "renderers/scenerenderer.h"
 #include "renderers/lightrenderer.h"
+#include "postprocess.h"
+#include "particlesystem.h"
 
 #include <unordered_map>
 #include <QElapsedTimer>
@@ -50,6 +52,9 @@ private:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void timerEvent(QTimerEvent *event) override;
+    void fitEmitterToCamera(bool resetParticles);
+    void applyParticleEmitterFromSettings(bool resetParticles);
+
 
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
@@ -72,6 +77,9 @@ private:
     SceneRenderer m_sceneRenderer;
     LightRenderer m_lightRenderer;
     bool m_isInitialized = false;
+
+    PostProcess m_post;
+    ParticleSystem m_particles;
 
 
     // GLuint m_shader;
