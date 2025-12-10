@@ -36,6 +36,10 @@ void Realtime::finish() {
     m_shapeRenderer.cleanup();
     m_sceneRenderer.cleanup();
 
+    // particles + post processing
+    m_particles.destroyGL();
+    m_post.destroy();
+
     this->doneCurrent();
 }
 
@@ -69,6 +73,13 @@ void Realtime::initializeGL() {
 
     // Students: anything requiring OpenGL calls when the program starts should be done here
 
+    m_post.init(m_screen_width, m_screen_height);
+    m_particles.initializeGL();
+
+    // start disabled, toggle with extraCredit buttons
+    m_post.setBloomEnabled(false);
+    m_particles.setEnabled(false);
+
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
     m_lightRenderer.initialize(m_shapeRenderer);
@@ -84,24 +95,63 @@ void Realtime::paintGL() {
         return; // don't draw yet if the camera is undefined !
     }
 
-    // Clear screen color and depth before painting
+    // framebuffer (screen = 0, screenshot FBO != 0)
+    GLint targetFboInt = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &targetFboInt);
+    GLuint targetFbo = static_cast<GLuint>(targetFboInt);
+
+    // respect caller viewport size
+    GLint vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
+    int w = vp[2];
+    int h = vp[3];
+
+    const bool bloomEnabled = settings.extraCredit1;
+    const bool particlesEnabled = settings.extraCredit2;
+
+    // keep postprocess sized and in sync
+    if (!m_post.ready()) m_post.init(w, h);
+    else m_post.ensureSize(w, h);
+
+    m_post.setBloomEnabled(bloomEnabled);
+
+    if (m_post.ready()) {
+        // scene pass into postprocess FBO
+        m_post.beginScenePass(w, h);
+
+        // shadow map + scene render into the postprocess FBO
+        m_lightRenderer.render(m_renderData, static_cast<GLuint>(w), static_cast<GLuint>(h));
+        m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
+
+        // particle overlay in the same pass (so bloom and screenshots include it)
+        if (particlesEnabled) {
+            m_particles.render(m_camera->getViewMatrix(), m_camera->getProjMatrix());
+        }
+
+        // output to whatever framebuffer was originally bound
+        m_post.endToTarget(targetFbo, w, h, bloomEnabled ? 3 : 0);
+        return;
+    }
+
+    // fallback (should rarely happen)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // render the scene from the light's perspective to get shadow map
-    m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
-
-    // return
-
-    //render the scene based on render data !!
+    m_lightRenderer.render(m_renderData, static_cast<GLuint>(w), static_cast<GLuint>(h));
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
-
+    if (particlesEnabled) {
+        m_particles.render(m_camera->getViewMatrix(), m_camera->getProjMatrix());
+    }
 }
 
 void Realtime::resizeGL(int w, int h) {
-    // Tells OpenGL how big the screen is
-    glViewport(0, 0, size().width() * m_devicePixelRatio, size().height() * m_devicePixelRatio);
+    // updating stored screen size and kept postprocess sized
+    m_screen_width  = static_cast<GLuint>(w * m_devicePixelRatio);
+    m_screen_height = static_cast<GLuint>(h * m_devicePixelRatio);
 
-    // Students: anything requiring OpenGL calls when the program starts should be done here
+    glViewport(0, 0, m_screen_width, m_screen_height);
+
+    if (m_post.ready()) {
+        m_post.ensureSize(static_cast<int>(m_screen_width), static_cast<int>(m_screen_height));
+    }
 }
 
 void Realtime::sceneChanged() {
@@ -133,6 +183,10 @@ void Realtime::settingsChanged() {
     m_shapeRenderer.updateTessellation();
     m_lightRenderer.setShapes(m_shapeRenderer);
     m_camera->createProjectionMatrix();
+
+    // toggles !
+    m_post.setBloomEnabled(settings.extraCredit1);
+    m_particles.setEnabled(settings.extraCredit2);
 
     update(); // asks for a PaintGL() call to occur
 }
@@ -204,6 +258,9 @@ void Realtime::timerEvent(QTimerEvent *event) {
     if (m_keyMap[Qt::Key_Control]){
         m_camera->translate(Direction::DOWN, deltaTime);
     }
+
+    // particles
+    m_particles.update(deltaTime);
 
     update(); // asks for a PaintGL() call to occur
 }

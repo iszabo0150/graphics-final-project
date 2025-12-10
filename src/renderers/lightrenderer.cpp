@@ -71,7 +71,11 @@ void LightRenderer::makeShadowFBO() {
 }
 
 void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLuint screenHeight) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // saved whatever framebuffer was bound
+    GLint prevFboInt = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFboInt);
+    GLuint prevFbo = static_cast<GLuint>(prevFboInt);
+
     glUseProgram(m_depth_shader);
 
     // support for a single light (the sun)
@@ -79,15 +83,19 @@ void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLu
     GLint locMat = glGetUniformLocation(m_depth_shader, "lightMatrix");
     glUniformMatrix4fv(locMat, 1, GL_FALSE, &light->matrix[0][0]);
 
+    // render shadow map
     glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, m_shadow.fbo);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderDepth(renderData);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, m_default_fbo);
-    // ============= reset the viewport
+    // restore the framebuffer (screen, screenshot FBO, postprocess FBO, etc.)
+    glBindFramebuffer(GL_FRAMEBUFFER, prevFbo);
     glViewport(0, 0, screenWidth, screenHeight);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(0);
 
     // paintTexture(m_shadow.depth_map);
 }

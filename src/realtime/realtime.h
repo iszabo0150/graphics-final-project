@@ -11,6 +11,8 @@
 #include "renderers/shaperenderer.h"
 #include "renderers/scenerenderer.h"
 #include "renderers/lightrenderer.h"
+#include "postprocess/postprocess.h"
+#include "particle_system/particlesystem.h"
 
 #include <unordered_map>
 #include <QElapsedTimer>
@@ -74,5 +76,9 @@ private:
 
     // GLuint m_shader;
 
+    // Postprocessing
+    PostProcess m_post;
 
+    // Particle System
+    ParticleSystem m_particles;
 };
