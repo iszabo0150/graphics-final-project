@@ -358,7 +358,9 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
         else if (sym.name == "L") {
             float scaleVal = sym.params.empty() ? 1.0f : sym.params[0];
 
-            // radius based on last F (you can store this in turtle state)
+            // Petiole (leaf stem) length - pushes leaf away from branch
+            float petioleLength = 0.3f * scaleVal;
+
             float radius = turtle.lastThickness * 0.5f;
 
             // random angle for leaf placement around branch
@@ -367,11 +369,17 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
             glm::vec3 outward =
                 glm::normalize(cos(theta) * turtle.left + sin(theta) * turtle.up);
 
-            glm::vec3 leafPos = turtle.pos + outward * radius;
+            // Offset: outward from branch surface + along heading direction
+            glm::vec3 leafPos = turtle.pos
+                                + outward * (radius + petioleLength)
+                                + turtle.heading * (petioleLength * 0.3f);  // slight forward offset
 
-            // Build leaf coordinate frame:
-            glm::vec3 normal = outward;
+            // Build leaf coordinate frame pointing outward
+            glm::vec3 normal = glm::normalize(outward + turtle.heading * 0.3f);
             glm::vec3 tangent = glm::normalize(glm::cross(normal, turtle.heading));
+            if (glm::length(tangent) < 0.001f) {
+                tangent = turtle.left;
+            }
             glm::vec3 bitangent = glm::cross(tangent, normal);
 
             glm::mat4 rot(1.0f);
