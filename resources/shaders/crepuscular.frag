@@ -18,7 +18,7 @@ void main() {
 
     vec3 sceneColor = texture(sceneTexture, uv).rgb;
 
-    vec2 deltaTexCoord = uv = lightScreenPosition;
+    vec2 deltaTexCoord = uv - lightScreenPosition;
     deltaTexCoord *= 1.0 / float(samples) * density;
 
     vec2 texCoord = uv;
@@ -32,9 +32,9 @@ void main() {
         float depth = texture(depthTexture, texCoord).r;
         float occlusion = (depth > 0.999) ? 1.0 : 0.0;
 
-        vec3 sample = texture(sceneTexture, texCoord).rgb * occlusion;
-        sample *= illuminationDecay * weight;
-        rays += sample;
+        vec3 f_sample = texture(sceneTexture, texCoord).rgb * occlusion;
+        f_sample *= illuminationDecay * weight;
+        rays += f_sample;
 
         illuminationDecay *= decay;
 

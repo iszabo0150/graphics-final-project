@@ -35,6 +35,8 @@ void Realtime::finish() {
     // Students: anything requiring OpenGL calls when the program exits should be done here
     m_shapeRenderer.cleanup();
     m_sceneRenderer.cleanup();
+    m_crepuscularRenderer.cleanup();
+    m_screenRenderer.cleanup();
 
     this->doneCurrent();
 }
@@ -72,10 +74,11 @@ void Realtime::initializeGL() {
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
     m_lightRenderer.initialize(m_shapeRenderer);
+    m_crepuscularRenderer.initialize(0.95f, 0.98f, 0.8f, 0.01f, 100);
+    m_screenRenderer.initialize();
 
     m_isInitialized = true;
-
-
+    m_enableCrepuscular = true;
 }
 
 void Realtime::paintGL() {
@@ -89,20 +92,50 @@ void Realtime::paintGL() {
 
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
-
     //render the scene based on render data !!
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
+    if (m_enableCrepuscular) {
+
+        glm::vec3 lightPosition = -glm::normalize(glm::vec3(m_renderData.lights[0].dir)) * 1000.f;
+        glm::mat4 view = m_camera->getViewMatrix();
+        glm::mat4 proj = m_camera ->getProjMatrix();
+
+        m_crepuscularRenderer.applyCrepuscularRays(
+            m_sceneRenderer.getSceneTexture(),
+            m_sceneRenderer.getDepthTexture(),
+            lightPosition, view, proj, 
+            width() * m_devicePixelRatio, height() * m_devicePixelRatio
+        );
+
+        // render crepuscular to screen
+        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+        m_screenRenderer.renderToScreen(m_crepuscularRenderer.getOutputTexture(), 
+                                        width() * m_devicePixelRatio, height() * m_devicePixelRatio);
+
+    } else {
+
+        // render directly to screen
+        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+        m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
+                                        width() * m_devicePixelRatio, height() * m_devicePixelRatio);
+
+    }
+    
 }
+
+
 
 void Realtime::resizeGL(int w, int h) {
     // Tells OpenGL how big the screen is
     glViewport(0, 0, size().width() * m_devicePixelRatio, size().height() * m_devicePixelRatio);
 
     // Students: anything requiring OpenGL calls when the program starts should be done here
+    m_sceneRenderer.resize(w * m_devicePixelRatio, h * m_devicePixelRatio);
 }
 
 void Realtime::sceneChanged() {
+
     m_renderData.lights.clear();
 
     SceneParser::parse(settings.sceneFilePath, m_renderData);

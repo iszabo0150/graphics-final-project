@@ -11,6 +11,8 @@
 #include "renderers/shaperenderer.h"
 #include "renderers/scenerenderer.h"
 #include "renderers/lightrenderer.h"
+#include "renderers/godrayrenderer.h"
+#include "renderers/screenrenderer.h"
 
 #include <unordered_map>
 #include <QElapsedTimer>
@@ -51,7 +53,6 @@ private:
 
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
-
     // Tick Related Variables
     int m_timer;                                        // Stores timer which attempts to run ~60 times per second
     QElapsedTimer m_elapsedTimer;                       // Stores timer which keeps track of actual time between frames
@@ -69,10 +70,12 @@ private:
     ShapeRenderer m_shapeRenderer;
     SceneRenderer m_sceneRenderer;
     LightRenderer m_lightRenderer;
+    CrepuscularRenderer m_crepuscularRenderer;
+    ScreenRenderer m_screenRenderer;
+
+    bool m_enableCrepuscular = true;
     bool m_isInitialized = false;
 
-
-    // GLuint m_shader;
-
+    GLuint m_defaultFBO = 4;
 
 };

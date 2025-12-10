@@ -52,9 +52,11 @@ add_executable(${PROJECT_NAME}
     src/camera/camera.h src/camera/camera.cpp
     src/renderers/shaperenderer.h src/renderers/shaperenderer.cpp
     src/renderers/scenerenderer.h src/renderers/scenerenderer.cpp
+    src/renderers/screenrenderer.h src/renderers/screenrenderer.cpp
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
+    src/renderers/godrayrenderer.h src/renderers/godrayrenderer.cpp
 
 
 )
@@ -87,6 +89,10 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/depth.vert
         resources/shaders/texture.frag
         resources/shaders/texture.vert
+        resources/shaders/crepuscular.frag
+        resources/shaders/crepuscular.vert
+        resources/shaders/copy.frag
+        resources/shaders/copy.vert
 )
 
 # GLEW: this provides support for Windows (including 64-bit)

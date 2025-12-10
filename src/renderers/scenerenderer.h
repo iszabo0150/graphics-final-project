@@ -15,9 +15,13 @@ public:
 
     void render(const RenderData& renderData, const Camera& camera, 
                 ShapeRenderer& shapeRenderer, const Shadow &shadow);
+    
+    GLuint getSceneTexture() const { return m_sceneTexture; }
+    GLuint getDepthTexture() const { return m_depthTexture; }
 
 private:
-
+    
+    void initializeFBO(int width, int height);
     void setupShadowUniform(const Shadow& shadow);
     void setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos);
     void setupShapeUniforms(const RenderShapeData& shape, const SceneMaterial& material);
@@ -28,7 +32,15 @@ private:
     GLuint m_shader;
     std::map<std::string, GLuint> m_textureCache;
 
-    
+    GLuint m_defaultFBO;
+
+    // scene fbo info
+    GLuint m_sceneFBO;
+    GLuint m_sceneTexture;
+    GLuint m_depthTexture;
+
+    int m_fboWidth;
+    int m_fboHeight;
 
 };
 
