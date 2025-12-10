@@ -73,12 +73,9 @@ private:
     LightRenderer m_lightRenderer;
     bool m_isInitialized = false;
 
-
+    PostProcess m_post;
+    ParticleSystem m_particles;
     // GLuint m_shader;
 
-    // Postprocessing
-    PostProcess m_post;
 
-    // Particle System
-    ParticleSystem m_particles;
 };

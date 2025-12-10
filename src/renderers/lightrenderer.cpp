@@ -6,7 +6,7 @@
 #include <QOpenGLWidget>
 #include <glm/gtc/matrix_transform.hpp>
 
-void LightRenderer::initialize(ShapeRenderer renderer) {
+void LightRenderer::initialize(ShapeRenderer* renderer) {
     m_depth_shader = ShaderLoader::createShaderProgram(":/resources/shaders/depth.vert", ":/resources/shaders/depth.frag");
     m_texture_shader = ShaderLoader::createShaderProgram(":/resources/shaders/texture.vert", ":/resources/shaders/texture.frag");
     m_default_fbo = 2;
@@ -71,11 +71,7 @@ void LightRenderer::makeShadowFBO() {
 }
 
 void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLuint screenHeight) {
-    // saved whatever framebuffer was bound
-    GLint prevFboInt = 0;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFboInt);
-    GLuint prevFbo = static_cast<GLuint>(prevFboInt);
-
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(m_depth_shader);
 
     // support for a single light (the sun)
@@ -83,24 +79,20 @@ void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLu
     GLint locMat = glGetUniformLocation(m_depth_shader, "lightMatrix");
     glUniformMatrix4fv(locMat, 1, GL_FALSE, &light->matrix[0][0]);
 
-    // render shadow map
     glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, m_shadow.fbo);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderDepth(renderData);
 
-    // restore the framebuffer (screen, screenshot FBO, postprocess FBO, etc.)
-    glBindFramebuffer(GL_FRAMEBUFFER, prevFbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_default_fbo);
+    // ============= reset the viewport
     glViewport(0, 0, screenWidth, screenHeight);
-
-    glClear(GL_DEPTH_BUFFER_BIT);
-
-    glUseProgram(0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // paintTexture(m_shadow.depth_map);
 }
 
-void LightRenderer::setShapes(ShapeRenderer renderer) {
+void LightRenderer::setShapes(ShapeRenderer* renderer) {
     m_shape_renderer = renderer;
 }
 
@@ -109,18 +101,33 @@ void LightRenderer::setShapes(ShapeRenderer renderer) {
  * the resulting depth map in m_shadow_fbo
  */
 void LightRenderer::renderDepth(const RenderData& renderData) {
-    for (RenderShapeData shape: renderData.shapes) {
+    for (const RenderShapeData& shape : renderData.shapes) {
+
+        // Set model matrix uniform (same for both primitives and meshes)
         m_model = shape.ctm;
         GLint modelMatLoc = glGetUniformLocation(m_depth_shader, "modelMatrix");
         glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, &m_model[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
 
-        // get the shape vertex data
-        GLPrimitiveData shapeData = m_shape_renderer.getPrimitiveData(shape.primitive.type);
-        glBindVertexArray(shapeData.vao);
-        glDrawArrays(GL_TRIANGLES, 0, shapeData.vertexCount);
-        glBindVertexArray(0);
+        if (shape.primitive.type == PrimitiveType::PRIMITIVE_MESH) {
+            // Handle mesh
+            MeshGLData meshData = m_shape_renderer->getMeshData(shape.primitive.meshfile);
+
+            if (meshData.vertexCount == 0) {
+                continue;  // Skip if mesh failed to load
+            }
+
+            glBindVertexArray(meshData.vao);
+            glDrawArrays(GL_TRIANGLES, 0, meshData.vertexCount);
+            glBindVertexArray(0);
+        } else {
+            // Handle primitive shapes
+            GLPrimitiveData shapeData = m_shape_renderer->getPrimitiveData(shape.primitive.type);
+            glBindVertexArray(shapeData.vao);
+            glDrawArrays(GL_TRIANGLES, 0, shapeData.vertexCount);
+            glBindVertexArray(0);
+        }
     }
 }
 

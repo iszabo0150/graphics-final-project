@@ -36,11 +36,20 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     // sends over shadow map (2D texture)
     setupShadowUniform(shadow);
 
-    // for instance rendering, we're grouping all shapes by their type.
+    // for instance rendering, we're grouping all shapes by their type--> meshes have to be handles differently so they're
+    // in their own group !!
     std::unordered_map<PrimitiveType, std::vector<const RenderShapeData*>> groupedShapes;
 
+    std::unordered_map<std::string, std::vector<const RenderShapeData*>> groupedMeshes;
+
+
     for (const auto& shape : renderData.shapes) {
-        groupedShapes[shape.primitive.type].push_back(&shape); // this is simply filling the groupedShape list :)
+        if (shape.primitive.type == PrimitiveType::PRIMITIVE_MESH) {
+            // gruop meshes by their file path
+            groupedMeshes[shape.primitive.meshfile].push_back(&shape);
+        } else {
+            groupedShapes[shape.primitive.type].push_back(&shape);
+        }
     }
 
     // rendering each primitive by group instead of individually
@@ -142,6 +151,101 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         glDrawArraysInstanced(GL_TRIANGLES, 0, primitiveData.vertexCount, shapes.size());
         glBindVertexArray(0);
 
+    }
+
+    //rendering meshes !!!!
+    for (const auto& [meshfile, shapes] : groupedMeshes) {
+
+        if (shapes.empty()) continue;
+
+        MeshGLData meshData = shapeRenderer.getMeshData(meshfile);
+
+        if (meshData.vertexCount == 0) {
+            std::cerr << "Failed to load mesh: " << meshfile << std::endl;
+            continue;
+        }
+
+        std::vector<glm::mat4> modelMatrices;
+        std::vector<glm::vec3> ambients, diffuses, speculars;
+        std::vector<float> shininesses;
+
+        const RenderShapeData* materialInfo = shapes[0];
+
+        for (const auto* shape : shapes) {
+            auto info = shape->material;
+            modelMatrices.push_back(shape->ctm);
+            ambients.push_back(info.cAmbient);
+            diffuses.push_back(info.cDiffuse);
+            speculars.push_back(info.cSpecular);
+            shininesses.push_back(info.shininess);
+        }
+
+        glBindVertexArray(meshData.vao);
+        glBindBuffer(GL_ARRAY_BUFFER, meshData.instanceVBO);
+
+        size_t matrixSize = modelMatrices.size() * sizeof(glm::mat4);
+        size_t vec3Size = ambients.size() * sizeof(glm::vec3);
+        size_t floatSize = shininesses.size() * sizeof(float);
+        size_t totalSize = matrixSize + (vec3Size * 3) + floatSize;
+
+        glBufferData(GL_ARRAY_BUFFER, totalSize, nullptr, GL_DYNAMIC_DRAW);
+
+        size_t offset = 0;
+        glBufferSubData(GL_ARRAY_BUFFER, offset, matrixSize, modelMatrices.data());
+        offset += matrixSize;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, ambients.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, diffuses.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, speculars.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, floatSize, shininesses.data());
+
+        offset = 0;
+
+        // model matrix
+        for (int i = 0; i < 4; i++) {
+            glEnableVertexAttribArray(5 + i);
+            glVertexAttribPointer(5 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                                  (void*)(offset + i * sizeof(glm::vec4)));
+            glVertexAttribDivisor(5 + i, 1);
+        }
+        offset += matrixSize;
+
+        // ambient
+        glEnableVertexAttribArray(9);
+        glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(9, 1);
+        offset += vec3Size;
+
+        // diffuse
+        glEnableVertexAttribArray(10);
+        glVertexAttribPointer(10, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(10, 1);
+        offset += vec3Size;
+
+        // specular
+        glEnableVertexAttribArray(11);
+        glVertexAttribPointer(11, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(11, 1);
+        offset += vec3Size;
+
+        // shininess
+        glEnableVertexAttribArray(12);
+        glVertexAttribPointer(12, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)offset);
+        glVertexAttribDivisor(12, 1);
+
+        // setup textures
+        setupTextureUniforms(materialInfo->material);
+
+        // draw all instances of this mesh
+        glDrawArraysInstanced(GL_TRIANGLES, 0, meshData.vertexCount, shapes.size());
+
+        glBindVertexArray(0);
     }
 
     

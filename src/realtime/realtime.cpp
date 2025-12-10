@@ -36,7 +36,6 @@ void Realtime::finish() {
     m_shapeRenderer.cleanup();
     m_sceneRenderer.cleanup();
 
-    // particles + post processing
     m_particles.destroyGL();
     m_post.destroy();
 
@@ -76,13 +75,13 @@ void Realtime::initializeGL() {
     m_post.init(m_screen_width, m_screen_height);
     m_particles.initializeGL();
 
-    // start disabled, toggle with extraCredit buttons
+    // Start disabled, you’ll toggle via extraCredit buttons
     m_post.setBloomEnabled(false);
     m_particles.setEnabled(false);
 
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
-    m_lightRenderer.initialize(m_shapeRenderer);
+    m_lightRenderer.initialize(&m_shapeRenderer);
 
     m_isInitialized = true;
 
@@ -95,7 +94,7 @@ void Realtime::paintGL() {
         return; // don't draw yet if the camera is undefined !
     }
 
-    // framebuffer (screen = 0, screenshot FBO != 0)
+    // respect caller framebuffer
     GLint targetFboInt = 0;
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &targetFboInt);
     GLuint targetFbo = static_cast<GLuint>(targetFboInt);
@@ -143,7 +142,6 @@ void Realtime::paintGL() {
 }
 
 void Realtime::resizeGL(int w, int h) {
-    // updating stored screen size and kept postprocess sized
     m_screen_width  = static_cast<GLuint>(w * m_devicePixelRatio);
     m_screen_height = static_cast<GLuint>(h * m_devicePixelRatio);
 
@@ -181,10 +179,9 @@ void Realtime::settingsChanged() {
 
 
     m_shapeRenderer.updateTessellation();
-    m_lightRenderer.setShapes(m_shapeRenderer);
+    m_lightRenderer.setShapes(&m_shapeRenderer);
     m_camera->createProjectionMatrix();
 
-    // toggles !
     m_post.setBloomEnabled(settings.extraCredit1);
     m_particles.setEnabled(settings.extraCredit2);
 
@@ -259,7 +256,6 @@ void Realtime::timerEvent(QTimerEvent *event) {
         m_camera->translate(Direction::DOWN, deltaTime);
     }
 
-    // particles
     m_particles.update(deltaTime);
 
     update(); // asks for a PaintGL() call to occur

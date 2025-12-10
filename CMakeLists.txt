@@ -55,11 +55,14 @@ add_executable(${PROJECT_NAME}
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
+    src/utils/objloader.h src/utils/objloader.cpp
+    src/shapes/meshloader.h src/shapes/meshloader.cpp
 
     src/postprocess/postprocess.cpp
     src/postprocess/postprocess.h
     src/particle_system/particlesystem.cpp
     src/particle_system/particlesystem.h
+
 )
 
 # GLM: this creates its library and allows you to `#include "glm/..."`
@@ -90,10 +93,10 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/depth.vert
         resources/shaders/texture.frag
         resources/shaders/texture.vert
-
         resources/shaders/bloom_bright.frag
         resources/shaders/bloom_blur.frag
         resources/shaders/bloom_combine.frag
+        resources/shaders/fullscreen.vert
         resources/shaders/post.frag
         resources/shaders/particle.vert
         resources/shaders/particle.frag

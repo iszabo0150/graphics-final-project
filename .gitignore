@@ -1,0 +1,15 @@
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+Testing/
+*.pro.user*
+*.qbs.user*
+*.autosave
+CMakeLists.txt.user
+qtcsettings.cmake
+.DS_Store

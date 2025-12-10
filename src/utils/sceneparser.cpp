@@ -160,6 +160,9 @@ void SceneParser::dfsGetRenderData(RenderData& renderData, SceneNode* currNode, 
         // return;
     }
 
+    std::cout << renderData.shapes.size() << std::endl;
+
+
     if (!currNode->children.empty()){
         for (SceneNode* children : currNode->children){
             dfsGetRenderData(renderData, children, currCTM);
