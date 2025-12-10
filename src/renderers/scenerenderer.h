@@ -3,17 +3,20 @@
 
 #include "utils/scenedata.h"
 #include "renderers/shaperenderer.h"
+#include "renderers/lightrenderer.h"
 #include "utils/sceneparser.h"
 #include "camera/camera.h"
 
 class SceneRenderer {
 public:
     void initialize();
-    void render(const RenderData& data, const Camera& camera, ShapeRenderer& shapes);
+    void render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow);
     void cleanup();
 
 private:
     GLuint m_shader;
+
+    void setupShadowUniform(const Shadow& shadow);
 
     void setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos);
 
@@ -23,7 +26,7 @@ private:
 
     void setupTextureUniforms(const SceneMaterial& material);
 
-    GLuint loadTexture(const std::string& filename, bool isBump=false);
+    GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
 
     std::map<std::string, GLuint> m_textureCache;
 };

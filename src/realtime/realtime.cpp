@@ -44,6 +44,9 @@ void Realtime::initializeGL() {
 
     m_devicePixelRatio = this->devicePixelRatio();
 
+    m_screen_width = size().width() * m_devicePixelRatio;
+    m_screen_height = size().height() * m_devicePixelRatio;
+
     m_timer = startTimer(1000/60);
     m_elapsedTimer.start();
 
@@ -68,6 +71,7 @@ void Realtime::initializeGL() {
 
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
+    m_lightRenderer.initialize(m_shapeRenderer);
 
     m_isInitialized = true;
 
@@ -83,8 +87,11 @@ void Realtime::paintGL() {
     // Clear screen color and depth before painting
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // render the scene from the light's perspective to get shadow map
+    m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
+
     //render the scene based on render data !!
-    m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer);
+    m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
 }
 
@@ -122,6 +129,7 @@ void Realtime::settingsChanged() {
 
 
     m_shapeRenderer.updateTessellation();
+    m_lightRenderer.setShapes(m_shapeRenderer);
     m_camera->createProjectionMatrix();
 
     update(); // asks for a PaintGL() call to occur

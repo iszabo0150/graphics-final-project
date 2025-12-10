@@ -21,15 +21,13 @@ out vec2 fragUV;
 out vec3 tangentWorldSpace;
 out vec3 bitangentWorldSpace;
 
-// // Task 6: declare a uniform mat4 to store model matrix
+out vec4 lightSpacePosition;
 
 uniform mat4 modelMatrix;
 uniform mat4 modelInverseTrans;
-
-// // Task 7: declare uniform mat4's for the view and projection matrix
-
 uniform mat4 viewMatrix;
 uniform mat4 projMatrix;
+uniform mat4 lightMatrix;
 
 
 void main() {
@@ -50,14 +48,12 @@ void main() {
     normalWorldSpace = normalize(mat3(modelInverseTrans) * objNormal);
 
 
-
-    // Recall that transforming normals requires obtaining the inverse-transpose of the model matrix!
-    // In projects 5 and 6, consider the performance implications of performing this here.
-
-    // Task 9: set gl_Position to the object space position transformed to clip space
-
+    // set gl_Position to the object space position transformed to clip space
     gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(posObjSpace, 1.0);
 
     tangentWorldSpace = normalize(mat3(modelInverseTrans) * tangentObjSpace);
     bitangentWorldSpace = normalize(mat3(modelInverseTrans) * bitangentObjSpace);
+
+    // compute light-space position using light matrix (for shadow mapping)
+    lightSpacePosition = lightMatrix * p;
 }

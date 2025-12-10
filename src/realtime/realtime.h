@@ -10,6 +10,7 @@
 #include "camera/camera.h"
 #include "renderers/shaperenderer.h"
 #include "renderers/scenerenderer.h"
+#include "renderers/lightrenderer.h"
 
 #include <unordered_map>
 #include <QElapsedTimer>
@@ -28,6 +29,9 @@ public:
     void sceneChanged();
     void settingsChanged();
     void saveViewportImage(std::string filePath);
+
+    GLuint m_screen_width;
+    GLuint m_screen_height;
 
 public slots:
     void tick(QTimerEvent* event);                      // Called once per tick of m_timer
@@ -64,6 +68,7 @@ private:
     std::unique_ptr<Camera> m_camera;
     ShapeRenderer m_shapeRenderer;
     SceneRenderer m_sceneRenderer;
+    LightRenderer m_lightRenderer;
     bool m_isInitialized = false;
 
 
