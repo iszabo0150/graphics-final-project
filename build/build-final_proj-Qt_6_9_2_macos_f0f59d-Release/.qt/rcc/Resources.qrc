@@ -1,0 +1,32 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="resources/shaders/default.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/default.frag</file>
+    <file alias="resources/shaders/default.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/default.vert</file>
+    <file alias="resources/shaders/depth.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/depth.frag</file>
+    <file alias="resources/shaders/depth.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/depth.vert</file>
+    <file alias="resources/shaders/texture.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/texture.frag</file>
+    <file alias="resources/shaders/texture.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/texture.vert</file>
+    <file alias="resources/shaders/fullscreen.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/fullscreen.vert</file>
+    <file alias="resources/shaders/post.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/post.frag</file>
+    <file alias="resources/shaders/bloom_bright.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_bright.frag</file>
+    <file alias="resources/shaders/bloom_blur.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_blur.frag</file>
+    <file alias="resources/shaders/bloom_combine.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/bloom_combine.frag</file>
+    <file alias="resources/shaders/particle.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/particle.vert</file>
+    <file alias="resources/shaders/particle.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/particle.frag</file>
+    <file alias="resources/shaders/crepuscular.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/crepuscular.frag</file>
+    <file alias="resources/shaders/crepuscular.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/crepuscular.vert</file>
+    <file alias="resources/shaders/occlusion.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/occlusion.frag</file>
+    <file alias="resources/shaders/occlusion.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/occlusion.vert</file>
+    <file alias="resources/shaders/copy.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/copy.frag</file>
+    <file alias="resources/shaders/copy.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/copy.vert</file>
+    <file alias="resources/images/pz.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/pz.png</file>
+    <file alias="resources/images/nz.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/nz.png</file>
+    <file alias="resources/images/ny.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/ny.png</file>
+    <file alias="resources/images/py.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/py.png</file>
+    <file alias="resources/images/px.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/px.png</file>
+    <file alias="resources/images/nx.png">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/images/nx.png</file>
+    <file alias="resources/shaders/terrain.frag">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/terrain.frag</file>
+    <file alias="resources/shaders/terrain.vert">/Users/macdeal/Desktop/CSCI1230/graphics-final-project/resources/shaders/terrain.vert</file>
+  </qresource>
+</RCC>
+
