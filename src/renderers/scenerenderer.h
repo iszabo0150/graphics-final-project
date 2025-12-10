@@ -22,17 +22,15 @@ public:
     GLuint getSceneTexture() const { return m_sceneTexture; }
     GLuint getDepthTexture() const { return m_depthTexture; }
 
+    void paintTexture(const Camera& camera);
+    void paintTerrain(const Camera& camera);
+
 private:
     
     void initializeFBO(int width, int height);
 
-
-    void paintTexture(const Camera& camera);
-    void paintTerrain(const Camera& camera);
-
     GLuint m_shader;
     GLuint m_terrain_shader;
-
 
     void setupShadowUniform(const Shadow& shadow);
     void setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos);
@@ -54,8 +52,6 @@ private:
 
     void loadSkybox();
     void loadTerrain();
-
-    GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
 
 
     std::map<std::string, GLuint> m_textureCache;

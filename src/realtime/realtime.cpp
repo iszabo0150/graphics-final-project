@@ -153,6 +153,7 @@ void Realtime::paintGL() {
         glEnable(GL_DEPTH_TEST);
 
     }
+
     m_sceneRenderer.paintTerrain(*m_camera);
 
     // // Render skybox last (only fills empty pixels)
