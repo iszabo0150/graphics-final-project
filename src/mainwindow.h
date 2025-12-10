@@ -50,6 +50,13 @@ private:
     QDoubleSpinBox *nearBox;
     QDoubleSpinBox *farBox;
 
+    void connectParticleSeasons();
+
+    QCheckBox *particlesWinter = nullptr;
+    QCheckBox *particlesSpring = nullptr;
+    QCheckBox *particlesSummer = nullptr;
+    QCheckBox *particlesAutumn = nullptr;
+
     // Extra Credit:
     QCheckBox *ec1;
     QCheckBox *ec2;
@@ -75,4 +82,9 @@ private slots:
     void onExtraCredit2();
     void onExtraCredit3();
     void onExtraCredit4();
+
+    void onParticlesWinter();
+    void onParticlesSpring();
+    void onParticlesSummer();
+    void onParticlesAutumn();
 };

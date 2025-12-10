@@ -15,6 +15,12 @@ struct Settings {
     bool extraCredit2 = false;
     bool extraCredit3 = false;
     bool extraCredit4 = false;
+
+    // Particle season selection (treat like radio buttons)
+    bool particlesWinter = true;
+    bool particlesSpring = false;
+    bool particlesSummer = false;
+    bool particlesAutumn = false;
 };
 
 

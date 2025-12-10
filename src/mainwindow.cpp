@@ -7,7 +7,62 @@
 #include <QSettings>
 #include <QLabel>
 #include <QGroupBox>
+#include <QSignalBlocker>
+#include <QDir>
 #include <iostream>
+
+namespace {
+
+// Ensures exactly one season is selected (checkboxes used like radio buttons).
+void selectSeason(QCheckBox *winter,
+                  QCheckBox *spring,
+                  QCheckBox *summer,
+                  QCheckBox *autumn,
+                  QCheckBox *chosen) {
+    if (!winter || !spring || !summer || !autumn || !chosen) return;
+
+    winter->blockSignals(true);
+    spring->blockSignals(true);
+    summer->blockSignals(true);
+    autumn->blockSignals(true);
+
+    winter->setChecked(chosen == winter);
+    spring->setChecked(chosen == spring);
+    summer->setChecked(chosen == summer);
+    autumn->setChecked(chosen == autumn);
+
+    winter->blockSignals(false);
+    spring->blockSignals(false);
+    summer->blockSignals(false);
+    autumn->blockSignals(false);
+}
+
+void setSeasonSettingsWinter() {
+    settings.particlesWinter = true;
+    settings.particlesSpring = false;
+    settings.particlesSummer = false;
+    settings.particlesAutumn = false;
+}
+void setSeasonSettingsSpring() {
+    settings.particlesWinter = false;
+    settings.particlesSpring = true;
+    settings.particlesSummer = false;
+    settings.particlesAutumn = false;
+}
+void setSeasonSettingsSummer() {
+    settings.particlesWinter = false;
+    settings.particlesSpring = false;
+    settings.particlesSummer = true;
+    settings.particlesAutumn = false;
+}
+void setSeasonSettingsAutumn() {
+    settings.particlesWinter = false;
+    settings.particlesSpring = false;
+    settings.particlesSummer = false;
+    settings.particlesAutumn = true;
+}
+
+} // namespace
 
 void MainWindow::initialize() {
     realtime = new Realtime;
@@ -62,7 +117,7 @@ void MainWindow::initialize() {
     // Create file uploader for scene file
     uploadFile = new QPushButton();
     uploadFile->setText(QStringLiteral("Upload Scene File"));
-    
+
     saveImage = new QPushButton();
     saveImage->setText(QStringLiteral("Save Image"));
 
@@ -151,6 +206,29 @@ void MainWindow::initialize() {
     ec1->setText(QStringLiteral("Extra Credit 1"));
     ec1->setChecked(false);
 
+    // Particle season sub-toggles (sub-toggles of ec1)
+    particlesWinter = new QCheckBox();
+    particlesWinter->setText(QStringLiteral("Winter"));
+    particlesWinter->setChecked(true);
+
+    particlesSpring = new QCheckBox();
+    particlesSpring->setText(QStringLiteral("Spring"));
+    particlesSpring->setChecked(false);
+
+    particlesSummer = new QCheckBox();
+    particlesSummer->setText(QStringLiteral("Summer"));
+    particlesSummer->setChecked(false);
+
+    particlesAutumn = new QCheckBox();
+    particlesAutumn->setText(QStringLiteral("Autumn"));
+    particlesAutumn->setChecked(false);
+
+    // Default: season toggles disabled until master is enabled
+    particlesWinter->setEnabled(false);
+    particlesSpring->setEnabled(false);
+    particlesSummer->setEnabled(false);
+    particlesAutumn->setEnabled(false);
+
     ec2 = new QCheckBox();
     ec2->setText(QStringLiteral("Extra Credit 2"));
     ec2->setChecked(false);
@@ -184,6 +262,10 @@ void MainWindow::initialize() {
     // Extra Credit:
     vLayout->addWidget(ec_label);
     vLayout->addWidget(ec1);
+    vLayout->addWidget(particlesWinter);
+    vLayout->addWidget(particlesSpring);
+    vLayout->addWidget(particlesSummer);
+    vLayout->addWidget(particlesAutumn);
     vLayout->addWidget(ec2);
     vLayout->addWidget(ec3);
     vLayout->addWidget(ec4);
@@ -197,6 +279,12 @@ void MainWindow::initialize() {
     // Set default values for near and far planes
     onValChangeNearBox(0.1f);
     onValChangeFarBox(10.f);
+
+    settings.extraCredit1 = ec1->isChecked();
+    settings.particlesWinter = true;
+    settings.particlesSpring = false;
+    settings.particlesSummer = false;
+    settings.particlesAutumn = false;
 }
 
 void MainWindow::finish() {
@@ -215,6 +303,7 @@ void MainWindow::connectUIElements() {
     connectNear();
     connectFar();
     connectExtraCredit();
+    connectParticleSeasons();
 }
 
 
@@ -263,6 +352,13 @@ void MainWindow::connectExtraCredit() {
     connect(ec2, &QCheckBox::clicked, this, &MainWindow::onExtraCredit2);
     connect(ec3, &QCheckBox::clicked, this, &MainWindow::onExtraCredit3);
     connect(ec4, &QCheckBox::clicked, this, &MainWindow::onExtraCredit4);
+}
+
+void MainWindow::connectParticleSeasons() {
+    connect(particlesWinter, &QCheckBox::clicked, this, &MainWindow::onParticlesWinter);
+    connect(particlesSpring, &QCheckBox::clicked, this, &MainWindow::onParticlesSpring);
+    connect(particlesSummer, &QCheckBox::clicked, this, &MainWindow::onParticlesSummer);
+    connect(particlesAutumn, &QCheckBox::clicked, this, &MainWindow::onParticlesAutumn);
 }
 
 // From old Project 6
@@ -363,21 +459,55 @@ void MainWindow::onValChangeFarBox(double newValue) {
 // Extra Credit:
 
 void MainWindow::onExtraCredit1() {
-    settings.extraCredit1 = !settings.extraCredit1;
+    settings.extraCredit1 = ec1->isChecked();
+
+    // Enable/disable season toggles based on master
+    bool enabled = settings.extraCredit1;
+    particlesWinter->setEnabled(enabled);
+    particlesSpring->setEnabled(enabled);
+    particlesSummer->setEnabled(enabled);
+    particlesAutumn->setEnabled(enabled);
+
     realtime->settingsChanged();
 }
 
 void MainWindow::onExtraCredit2() {
-    settings.extraCredit2 = !settings.extraCredit2;
+    settings.extraCredit2 = ec2->isChecked();
     realtime->settingsChanged();
 }
 
 void MainWindow::onExtraCredit3() {
-    settings.extraCredit3 = !settings.extraCredit3;
+    settings.extraCredit3 = ec3->isChecked();
     realtime->settingsChanged();
 }
 
 void MainWindow::onExtraCredit4() {
-    settings.extraCredit4 = !settings.extraCredit4;
+    settings.extraCredit4 = ec4->isChecked();
+    realtime->settingsChanged();
+}
+
+// Particle season sub-toggles:
+
+void MainWindow::onParticlesWinter() {
+    selectSeason(particlesWinter, particlesSpring, particlesSummer, particlesAutumn, particlesWinter);
+    setSeasonSettingsWinter();
+    realtime->settingsChanged();
+}
+
+void MainWindow::onParticlesSpring() {
+    selectSeason(particlesWinter, particlesSpring, particlesSummer, particlesAutumn, particlesSpring);
+    setSeasonSettingsSpring();
+    realtime->settingsChanged();
+}
+
+void MainWindow::onParticlesSummer() {
+    selectSeason(particlesWinter, particlesSpring, particlesSummer, particlesAutumn, particlesSummer);
+    setSeasonSettingsSummer();
+    realtime->settingsChanged();
+}
+
+void MainWindow::onParticlesAutumn() {
+    selectSeason(particlesWinter, particlesSpring, particlesSummer, particlesAutumn, particlesAutumn);
+    setSeasonSettingsAutumn();
     realtime->settingsChanged();
 }
