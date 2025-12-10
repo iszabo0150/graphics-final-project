@@ -3,44 +3,64 @@
 in vec2 uv;
 out vec4 fragColor;
 
-uniform sampler2D sceneTexture;
-uniform sampler2D depthTexture;
+uniform sampler2D occlusionTexture;
 
-uniform vec2 lightScreenPosition;
+struct BlurParameters {
+    int sampleCount;
+    float blurDensity;
+    float blurExposure;
+    float decayFactor;
+    float sampleWeight;
+};
 
-uniform float exposure;
-uniform float decay;
-uniform float density;
-uniform float weight;
-uniform int samples;
+uniform BlurParameters blurParams;
+uniform vec4 lightPositionsScreen[8];
+uniform int lightCount;
 
-void main() {
+vec3 sampleRadialBlur(BlurParameters params, vec2 lightScreenPos) {
 
-    vec3 sceneColor = texture(sceneTexture, uv).rgb;
+    vec2 delta_tex_coord = (uv - lightScreenPos) * params.blurDensity * (1.0 / float(params.sampleCount));
+    vec2 tex_coordinates = uv;
+    vec3 color = texture(occlusionTexture, tex_coordinates).rgb;
+    float decay = 1.0;
 
-    vec2 deltaTexCoord = uv = lightScreenPosition;
-    deltaTexCoord *= 1.0 / float(samples) * density;
+    for (int i = 0; i < params.sampleCount; ++i) {
 
-    vec2 texCoord = uv;
-    float illuminationDecay = 1.0;
-    vec3 rays = vec3(0.0);
-
-    for (int i = 0; i < samples; i++) {
-
-        texCoord -= deltaTexCoord;
-
-        float depth = texture(depthTexture, texCoord).r;
-        float occlusion = (depth > 0.999) ? 1.0 : 0.0;
-
-        vec3 sample = texture(sceneTexture, texCoord).rgb * occlusion;
-        sample *= illuminationDecay * weight;
-        rays += sample;
-
-        illuminationDecay *= decay;
+        tex_coordinates -= delta_tex_coord;
+        vec3 current_sample = texture(occlusionTexture, tex_coordinates).rgb;
+        current_sample *= decay * params.sampleWeight;
+        color += current_sample;
+        decay *= params.decayFactor;
 
     }
 
-    rays *= exposure;
-    fragColor = vec4(sceneColor + rays, 1.0);
+    return color * params.blurExposure;
+}
 
+vec3 accumulateBlur(BlurParameters params) {
+
+    vec3 multiple_sources_color = vec3(0.0);
+
+    for (int i = 0; i < lightCount; ++i) {
+
+        multiple_sources_color += sampleRadialBlur(params, lightPositionsScreen[i].xy);
+
+    }
+
+    return multiple_sources_color;
+}
+
+void main() {
+
+    fragColor = vec4(0.0);
+
+    if (lightCount > 0) {
+
+        fragColor = vec4(accumulateBlur(blurParams), 1.0);
+
+    } else {
+
+        fragColor = texture(occlusionTexture, uv);
+
+    }
 }

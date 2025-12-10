@@ -52,9 +52,11 @@ add_executable(${PROJECT_NAME}
     src/camera/camera.h src/camera/camera.cpp
     src/renderers/shaperenderer.h src/renderers/shaperenderer.cpp
     src/renderers/scenerenderer.h src/renderers/scenerenderer.cpp
+    src/renderers/screenrenderer.h src/renderers/screenrenderer.cpp
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
+    src/renderers/godrayrenderer.h src/renderers/godrayrenderer.cpp
     src/utils/objloader.h src/utils/objloader.cpp
     src/shapes/meshloader.h src/shapes/meshloader.cpp
     src/utils/terraingenerator.h src/utils/terraingenerator.cpp
@@ -92,6 +94,13 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/depth.vert
         resources/shaders/texture.frag
         resources/shaders/texture.vert
+        resources/shaders/crepuscular.frag
+        resources/shaders/crepuscular.vert
+        resources/shaders/occlusion.frag
+        resources/shaders/occlusion.vert
+        resources/shaders/copy.frag
+        resources/shaders/copy.vert
+)
         resources/images/back.jpg
         resources/images/bottom.jpg
         resources/images/front.jpg
