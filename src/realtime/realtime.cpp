@@ -72,7 +72,7 @@ void Realtime::initializeGL() {
 
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize(m_texture_shader);
-    m_lightRenderer.initialize(m_shapeRenderer, m_texture_shader);
+    m_lightRenderer.initialize(&m_shapeRenderer, m_texture_shader);
 
     m_isInitialized = true;
 

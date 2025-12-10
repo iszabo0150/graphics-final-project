@@ -113,7 +113,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 
         // passing model matrix
         for (int i = 0; i < 4; i++) {
-            
+
             glEnableVertexAttribArray(5 + i);
             glVertexAttribPointer(5 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
                                  (void*)(offset + i * sizeof(glm::vec4)));
@@ -122,7 +122,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         }
 
         offset += matrixSize;
-        
+
         // ambient
         glEnableVertexAttribArray(9);
         glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
@@ -250,7 +250,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         glBindVertexArray(0);
     }
 
-    
+
     // OLD RENDER FUNCTION
     // for (const auto& shape : renderData.shapes) {
     //     glUseProgram(m_shader);
@@ -439,8 +439,8 @@ void SceneRenderer::paintTexture(const Camera& camera) {
     GLuint loc_texture = glGetUniformLocation(m_texture_shader, "cubeMap");
     glUniform1i(loc_texture, 0);
 
-    m_view = glm::mat4(glm::mat3(camera.getProjMatrix()));
-    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "view"), 1, GL_FALSE, &m_view[0][0]);
+    glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(camera.getViewMatrix()));  // Use VIEW matrix, not projection
+    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "view"), 1, GL_FALSE, &viewNoTranslation[0][0]);  // Use the computed matrix
     glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "projection"), 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
 
     glDrawArrays(GL_TRIANGLES, 0, 36);

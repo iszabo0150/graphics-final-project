@@ -115,6 +115,78 @@
 				"file" : 0,
 				"line" : 2172,
 				"parent" : 15
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 17
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 19
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 21
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 23
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 25
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2437,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2172,
+				"parent" : 27
 			}
 		]
 	},
@@ -131,7 +203,13 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
 			]
 		},
 		{
@@ -184,6 +262,36 @@
 			"backtrace" : 16,
 			"path" : "resources/shaders/texture.vert",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 18,
+			"path" : "resources/images/back.jpg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 20,
+			"path" : "resources/images/bottom.jpg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 22,
+			"path" : "resources/images/front.jpg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 24,
+			"path" : "resources/images/left.jpg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 26,
+			"path" : "resources/images/right.jpg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 28,
+			"path" : "resources/images/top.jpg",
+			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "UTILITY"
