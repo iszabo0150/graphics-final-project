@@ -258,6 +258,499 @@ void PlantPresets::initializePresets() {
     // Register the preset
     s_presets["oak_tree"] = oakTree;
     
+    // ========================================
+    // BUSH
+    // Based on bush.json
+    // ========================================
+    PlantPreset bush;
+    bush.name = "bush";
+    
+    // grammar
+    bush.axiom = "A(0.5,0.7)";
+    bush.iterations = 7;
+    bush.angle = 22.5f;
+    bush.step = 1.0f;
+    
+    // primitives
+    bush.stemPrimitive = PrimitiveType::PRIMITIVE_CYLINDER;
+    bush.leafPrimitive = PrimitiveType::PRIMITIVE_CONE;
+    
+    // stem material (brown woody stem)
+    bush.stemMaterial = makeMaterial(
+        glm::vec3(0.4f, 0.28f, 0.18f),
+        glm::vec3(0.16f, 0.11f, 0.07f),
+        glm::vec3(0.1f, 0.1f, 0.1f),
+        5.0f
+    );
+    
+    // Bush rules
+    // Rule A with thick > 0.05
+    {
+        LSystemRule rule;
+        rule.input = "A";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick > 0.05";
+        rule.output = "[&F(len,thick)L(1.5)A(len*0.9,thick*0.7)]/////[^+F(len*0.9,thick*0.7)L(1.5)A(len*0.81,thick*0.49)]/////[&-F(len*0.81,thick*0.49)L(1.5)A(len*0.73,thick*0.34)]";
+        rule.probability = 1.0f;
+        bush.rules.push_back(rule);
+    }
+    // Terminal A with flowers (30% chance)
+    {
+        LSystemRule rule;
+        rule.input = "A";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick <= 0.05";
+        rule.output = "[^^L(1.5)]//[&+L(1.5)]///[^-W(0.12)]///[&L(1.5)]";
+        rule.probability = 0.3f;
+        bush.rules.push_back(rule);
+    }
+    // Terminal A without flowers (70% chance)
+    {
+        LSystemRule rule;
+        rule.input = "A";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick <= 0.05";
+        rule.output = "[^^L(1.5)]//[&+L(1.5)]///[^-L(1.5)]///[&L(1.5)]";
+        rule.probability = 0.7f;
+        bush.rules.push_back(rule);
+    }
+    // F rules
+    {
+        LSystemRule rule;
+        rule.input = "F";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick > 0.05";
+        rule.output = "S(len,thick)/////F(len*0.9,thick*0.85)";
+        rule.probability = 1.0f;
+        bush.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "F";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick <= 0.05";
+        rule.output = "F(len*0.5,thick)L(1.5)";
+        rule.probability = 1.0f;
+        bush.rules.push_back(rule);
+    }
+    // S rules
+    {
+        LSystemRule rule;
+        rule.input = "S";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick > 0.05";
+        rule.output = "F(len,thick)L(1.5)";
+        rule.probability = 1.0f;
+        bush.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "S";
+        rule.params = {"len", "thick"};
+        rule.condition = "thick <= 0.05";
+        rule.output = "L(1.5)";
+        rule.probability = 1.0f;
+        bush.rules.push_back(rule);
+    }
+    
+    // BUSH SEASONAL MATERIALS
+    
+    // SUMMER - bright green leaves, white flowers
+    {
+        SeasonalMaterials summer;
+        summer.hasLeaves = true;
+        summer.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.3f, 0.65f, 0.2f),    // bright green
+            glm::vec3(0.12f, 0.26f, 0.08f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        summer.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.25f, 0.6f, 0.18f),
+            glm::vec3(0.1f, 0.24f, 0.07f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        summer.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.35f, 0.7f, 0.22f),
+            glm::vec3(0.14f, 0.28f, 0.09f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        // White flowers for summer
+        summer.flowerMeshFile = "meshes/Lilly.obj";
+        summer.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(0.98f, 0.98f, 0.95f),
+            glm::vec3(0.5f, 0.5f, 0.48f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        summer.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 1.0f, 0.97f),
+            glm::vec3(0.5f, 0.5f, 0.49f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        bush.seasonalMaterials[Season::SUMMER] = summer;
+    }
+    
+    // SPRING - bright green, pink/white flowers
+    {
+        SeasonalMaterials spring;
+        spring.hasLeaves = true;
+        spring.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.28f, 0.62f, 0.18f),
+            glm::vec3(0.11f, 0.25f, 0.07f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        spring.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.32f, 0.67f, 0.2f),
+            glm::vec3(0.13f, 0.27f, 0.08f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        // Pink/white spring flowers
+        spring.flowerMeshFile = "meshes/Lilly.obj";
+        spring.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 0.85f, 0.9f),     // light pink
+            glm::vec3(0.5f, 0.43f, 0.45f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        spring.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(0.98f, 0.75f, 0.82f),   // deeper pink
+            glm::vec3(0.49f, 0.38f, 0.41f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        bush.seasonalMaterials[Season::SPRING] = spring;
+    }
+    
+    // FALL - muted yellow-green, no flowers
+    {
+        SeasonalMaterials fall;
+        fall.hasLeaves = true;
+        fall.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.5f, 0.5f, 0.15f),     // olive/yellow-green
+            glm::vec3(0.2f, 0.2f, 0.06f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        fall.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.55f, 0.45f, 0.12f),   // brownish yellow
+            glm::vec3(0.22f, 0.18f, 0.05f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        fall.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.45f, 0.4f, 0.1f),
+            glm::vec3(0.18f, 0.16f, 0.04f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        fall.flowerMeshFile = "";  // no flowers in fall
+        bush.seasonalMaterials[Season::FALL] = fall;
+    }
+    
+    // WINTER - no leaves, no flowers
+    {
+        SeasonalMaterials winter;
+        winter.hasLeaves = false;
+        winter.flowerMeshFile = "";
+        bush.seasonalMaterials[Season::WINTER] = winter;
+    }
+    
+    s_presets["bush"] = bush;
+    
+    // ========================================
+    // FLOWER PLANT
+    // Based on flower_plant.json
+    // ========================================
+    PlantPreset flowerPlant;
+    flowerPlant.name = "flower_plant";
+    
+    // grammar
+    flowerPlant.axiom = "P";
+    flowerPlant.iterations = 5;
+    flowerPlant.angle = 18.0f;
+    flowerPlant.step = 0.2f;
+    
+    // primitives
+    flowerPlant.stemPrimitive = PrimitiveType::PRIMITIVE_CYLINDER;
+    flowerPlant.leafPrimitive = PrimitiveType::PRIMITIVE_CONE;
+    
+    // stem material (green stem)
+    flowerPlant.stemMaterial = makeMaterial(
+        glm::vec3(0.2f, 0.35f, 0.1f),
+        glm::vec3(0.08f, 0.14f, 0.04f),
+        glm::vec3(0.1f, 0.1f, 0.1f),
+        5.0f
+    );
+    
+    // Flower plant rules - P rules
+    {
+        LSystemRule rule;
+        rule.input = "P";
+        rule.output = "I+[P+O]--//[--K]I[++K]-[PO]++PO";
+        rule.probability = 0.4f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "P";
+        rule.output = "I+[P+O]--//[--K]I[++K]-[P]++PO";
+        rule.probability = 0.3f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "P";
+        rule.output = "I++[P+O]---//[--K]I[+++K]-[PO]+PO";
+        rule.probability = 0.2f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "P";
+        rule.output = "I[++K][-K]+[P]//I-[PO]++P";
+        rule.probability = 0.1f;
+        flowerPlant.rules.push_back(rule);
+    }
+    // I rules
+    {
+        LSystemRule rule;
+        rule.input = "I";
+        rule.output = "FS[//&&K][//^^K]FS";
+        rule.probability = 0.5f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "I";
+        rule.output = "FS[//&K]FS[//^K]";
+        rule.probability = 0.3f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "I";
+        rule.output = "FSF[//&&K][//^^K]S";
+        rule.probability = 0.2f;
+        flowerPlant.rules.push_back(rule);
+    }
+    // S rules
+    {
+        LSystemRule rule;
+        rule.input = "S";
+        rule.output = "SFS";
+        rule.probability = 0.5f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "S";
+        rule.output = "SF";
+        rule.probability = 0.3f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "S";
+        rule.output = "SFFS";
+        rule.probability = 0.2f;
+        flowerPlant.rules.push_back(rule);
+    }
+    // K rules (leaves)
+    {
+        LSystemRule rule;
+        rule.input = "K";
+        rule.output = "L(1)";
+        rule.probability = 0.5f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "K";
+        rule.output = "L(1.2)";
+        rule.probability = 0.25f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "K";
+        rule.output = "L(0.8)";
+        rule.probability = 0.25f;
+        flowerPlant.rules.push_back(rule);
+    }
+    // O rules (flower stalks)
+    {
+        LSystemRule rule;
+        rule.input = "O";
+        rule.output = "[&&&D/////////////////W(0.15)]";
+        rule.probability = 0.6f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "O";
+        rule.output = "[&&D///////////////W(0.12)]";
+        rule.probability = 0.25f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "O";
+        rule.output = "[&&&&D///////////////////W(0.18)]";
+        rule.probability = 0.15f;
+        flowerPlant.rules.push_back(rule);
+    }
+    // D rules
+    {
+        LSystemRule rule;
+        rule.input = "D";
+        rule.output = "FF";
+        rule.probability = 0.6f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "D";
+        rule.output = "FFF";
+        rule.probability = 0.25f;
+        flowerPlant.rules.push_back(rule);
+    }
+    {
+        LSystemRule rule;
+        rule.input = "D";
+        rule.output = "F";
+        rule.probability = 0.15f;
+        flowerPlant.rules.push_back(rule);
+    }
+    
+    // FLOWER PLANT SEASONAL MATERIALS
+    
+    // SUMMER - bright leaves, white flowers
+    {
+        SeasonalMaterials summer;
+        summer.hasLeaves = true;
+        summer.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.2f, 0.55f, 0.15f),    // bright green
+            glm::vec3(0.08f, 0.22f, 0.06f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        summer.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.18f, 0.5f, 0.12f),
+            glm::vec3(0.07f, 0.2f, 0.05f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        // White flowers
+        summer.flowerMeshFile = "meshes/Lilly.obj";
+        summer.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(0.95f, 0.95f, 0.9f),
+            glm::vec3(0.5f, 0.5f, 0.45f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        summer.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 0.98f, 0.92f),
+            glm::vec3(0.5f, 0.49f, 0.46f),
+            glm::vec3(0.4f, 0.4f, 0.4f),
+            8.0f
+        ));
+        flowerPlant.seasonalMaterials[Season::SUMMER] = summer;
+    }
+    
+    // SPRING - bright leaves, yellow flowers
+    {
+        SeasonalMaterials spring;
+        spring.hasLeaves = true;
+        spring.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.22f, 0.58f, 0.16f),
+            glm::vec3(0.09f, 0.23f, 0.06f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        spring.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.2f, 0.52f, 0.14f),
+            glm::vec3(0.08f, 0.21f, 0.06f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        // Yellow flowers for spring
+        spring.flowerMeshFile = "meshes/Lilly.obj";
+        spring.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 0.95f, 0.3f),     // bright yellow
+            glm::vec3(0.5f, 0.48f, 0.15f),
+            glm::vec3(0.4f, 0.4f, 0.3f),
+            8.0f
+        ));
+        spring.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 0.88f, 0.2f),     // golden yellow
+            glm::vec3(0.5f, 0.44f, 0.1f),
+            glm::vec3(0.4f, 0.4f, 0.3f),
+            8.0f
+        ));
+        flowerPlant.seasonalMaterials[Season::SPRING] = spring;
+    }
+    
+    // FALL - muted leaves, orange flowers
+    {
+        SeasonalMaterials fall;
+        fall.hasLeaves = true;
+        fall.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.35f, 0.4f, 0.12f),    // muted olive green
+            glm::vec3(0.14f, 0.16f, 0.05f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        fall.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.4f, 0.38f, 0.1f),     // brownish green
+            glm::vec3(0.16f, 0.15f, 0.04f),
+            glm::vec3(0.15f, 0.15f, 0.15f),
+            10.0f
+        ));
+        // Orange flowers for fall
+        fall.flowerMeshFile = "meshes/Lilly.obj";
+        fall.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(1.0f, 0.55f, 0.15f),    // bright orange
+            glm::vec3(0.5f, 0.28f, 0.08f),
+            glm::vec3(0.4f, 0.35f, 0.3f),
+            8.0f
+        ));
+        fall.flowerMaterials.push_back(makeMaterial(
+            glm::vec3(0.95f, 0.45f, 0.1f),    // deep orange
+            glm::vec3(0.48f, 0.23f, 0.05f),
+            glm::vec3(0.4f, 0.35f, 0.3f),
+            8.0f
+        ));
+        flowerPlant.seasonalMaterials[Season::FALL] = fall;
+    }
+    
+    // WINTER - muted leaves, no flowers
+    {
+        SeasonalMaterials winter;
+        winter.hasLeaves = true;  // flower plant keeps some leaves in winter
+        winter.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.25f, 0.3f, 0.1f),     // dark muted green
+            glm::vec3(0.1f, 0.12f, 0.04f),
+            glm::vec3(0.1f, 0.1f, 0.1f),
+            10.0f
+        ));
+        winter.leafMaterials.push_back(makeMaterial(
+            glm::vec3(0.22f, 0.28f, 0.08f),
+            glm::vec3(0.09f, 0.11f, 0.03f),
+            glm::vec3(0.1f, 0.1f, 0.1f),
+            10.0f
+        ));
+        winter.flowerMeshFile = "";  // no flowers in winter
+        flowerPlant.seasonalMaterials[Season::WINTER] = winter;
+    }
+    
+    s_presets["flower_plant"] = flowerPlant;
+    
     s_initialized = true;
     std::cout << "PlantPresets initialized with " << s_presets.size() << " presets" << std::endl;
 }
