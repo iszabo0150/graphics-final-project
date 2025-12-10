@@ -10,25 +10,26 @@
 class SceneRenderer {
 public:
     void initialize();
-    void render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow);
     void cleanup();
+    void resize(int width, int height);
+
+    void render(const RenderData& renderData, const Camera& camera, 
+                ShapeRenderer& shapeRenderer, const Shadow &shadow);
 
 private:
-    GLuint m_shader;
 
     void setupShadowUniform(const Shadow& shadow);
-
     void setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos);
-
     void setupShapeUniforms(const RenderShapeData& shape, const SceneMaterial& material);
-
     void setupLightUniforms(const std::vector<SceneLightData>& lights, SceneGlobalData globalData);
-
     void setupTextureUniforms(const SceneMaterial& material);
-
     GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
 
+    GLuint m_shader;
     std::map<std::string, GLuint> m_textureCache;
+
+    
+
 };
 
 #endif // SCENERENDERER_H
