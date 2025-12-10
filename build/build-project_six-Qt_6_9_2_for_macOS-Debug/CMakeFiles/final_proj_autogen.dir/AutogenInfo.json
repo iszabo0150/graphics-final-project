@@ -666,6 +666,12 @@
 			null
 		],
 		[
+			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/meshloader.h",
+			"MU",
+			"2S5AI7NIVA/moc_meshloader.cpp",
+			null
+		],
+		[
 			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/shapetesselator.h",
 			"MU",
 			"2S5AI7NIVA/moc_shapetesselator.cpp",
@@ -681,6 +687,12 @@
 			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/math_utils.h",
 			"MU",
 			"VSCBVMNR7M/moc_math_utils.cpp",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/objloader.h",
+			"MU",
+			"VSCBVMNR7M/moc_objloader.cpp",
 			null
 		],
 		[
@@ -857,7 +869,17 @@
 			null
 		],
 		[
+			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/meshloader.cpp",
+			"MU",
+			null
+		],
+		[
 			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/spheretesselator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/objloader.cpp",
 			"MU",
 			null
 		],

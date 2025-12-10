@@ -30,11 +30,11 @@ public:
     MeshGLData getMeshData(const std::string& filepath) { return m_meshLoader.getMeshData(filepath); }
 
     void updateTessellation();
+    void loadSkybox();
 
 private:
     std::map<PrimitiveType, GLPrimitiveData> m_shapeMap;
     MeshLoader m_meshLoader;
-
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
     int m_currentParam1 = -1;

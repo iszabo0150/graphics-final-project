@@ -2,14 +2,15 @@
 #include "utils/shaderloader.h"
 #include "utils/sceneparser.h"
 #include "renderers/shaperenderer.h"
+#include "realtime/realtime.h"
 
 #include <QOpenGLWidget>
 #include <glm/gtc/matrix_transform.hpp>
 
-void LightRenderer::initialize(ShapeRenderer* renderer) {
+void LightRenderer::initialize(ShapeRenderer renderer, GLuint texture_shader) {
     m_depth_shader = ShaderLoader::createShaderProgram(":/resources/shaders/depth.vert", ":/resources/shaders/depth.frag");
-    m_texture_shader = ShaderLoader::createShaderProgram(":/resources/shaders/texture.vert", ":/resources/shaders/texture.frag");
-    m_default_fbo = 2;
+    m_texture_shader = texture_shader;
+    m_default_fbo = 2; // was previously 2
     m_shape_renderer = renderer; // pass in shape info
 
     std::vector<GLfloat> fullscreen_quad_data =
