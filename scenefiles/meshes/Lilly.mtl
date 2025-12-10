@@ -1,0 +1,38 @@
+# Blender MTL File: 'Lilly.blend'
+# Material Count: 3
+
+newmtl 1f
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\1f.png
+map_d C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\1f.png
+
+newmtl 2f
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\2f.png
+map_d C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\2f.png
+
+newmtl 3f
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\3f.png
+map_d C:\\GDrive\\.shortcut-targets-by-id\\1-6sg48VkGGuauYZaI3y-V8zlcFRZ57U6\\Sushi-Bar Studios\\Marketplaces\\CGTrader\\Lillyflower\\Product\\Textures\\LillyTexture\\3f.png

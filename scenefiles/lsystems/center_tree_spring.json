@@ -58,8 +58,29 @@
           "specular": [0.2, 0.2, 0.2],
           "shininess": 15
         }
-      ]
-        ,
+      ],
+
+      "flowerMeshFile": "meshes/Lilly.obj",
+      "flowerMaterials": [
+        {
+          "diffuse": [0.988, 0.976, 0.910],
+          "ambient": [0.5, 0.5, 0.5],
+          "specular": [0.5, 0.5, 0.5],
+          "shininess": 3.0
+        },
+        {
+          "diffuse": [1.0, 0.8, 0.9],
+          "ambient": [0.5, 0.4, 0.45],
+          "specular": [0.5, 0.5, 0.5],
+          "shininess": 3.0
+        },
+        {
+          "diffuse": [0.95, 0.7, 0.75],
+          "ambient": [0.47, 0.35, 0.37],
+          "specular": [0.5, 0.5, 0.5],
+          "shininess": 3.0
+        }
+      ],
 
         "rules": [
           {
@@ -94,15 +115,22 @@
             "input": "A",
             "params": ["len", "thick", "angle"],
             "condition": "thick <= 0.05",
-            "output": "F(len*0.2,thick)[+(angle*0.8)L(1)]F(len*0.15,thick)[/(90)L(1)]F(len*0.12,thick)[/(180)L(1)]F(len*0.1,thick)[/(270)L(1)]F(len*0.08,thick)[^(20)L(1)][&(20)L(1)]",
+            "output": "F(len*0.2,thick)[+(angle*0.8)L(1)]F(len*0.15,thick)[/(90)L(1)]F(len*0.12,thick)[/(180)L(1)]F(len*0.1,thick)[/(270)L(1)]F(len*0.08,thick)[^(20)L(1)][&(20)]",
             "probability": 1.0
           },
           {
             "input": "B",
             "params": ["len", "thick", "angle"],
             "condition": "thick <= 0.05",
+            "output": "F(len*0.15,thick)[+(angle*0.6)L(1)]F(len*0.12,thick)[/(72)L(1)]F(len*0.1,thick)[/(144)L(1)]F(len*0.08,thick)[/(216)L(1)]F(len*0.06,thick)[/(288)L(1)]F(len*0.05,thick)[^(15)L(1)][&(15)W(0.5)]",
+            "probability": 0.3
+          },
+          {
+            "input": "B",
+            "params": ["len", "thick", "angle"],
+            "condition": "thick <= 0.05",
             "output": "F(len*0.15,thick)[+(angle*0.6)L(1)]F(len*0.12,thick)[/(72)L(1)]F(len*0.1,thick)[/(144)L(1)]F(len*0.08,thick)[/(216)L(1)]F(len*0.06,thick)[/(288)L(1)]F(len*0.05,thick)[^(15)L(1)][&(15)L(1)]",
-            "probability": 1.0
+            "probability": 0.7
           }
         ]
       }

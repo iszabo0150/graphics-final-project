@@ -1908,8 +1908,8 @@
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/scenefilereader.h
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/scenerenderer.cpp
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/utils/textureutils.h
-/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/cylindertesselator.cpp
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/lightrenderer.cpp
+/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/cylindertesselator.cpp
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/lightrenderer.h
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/shaperenderer.cpp
 /Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/shapes/conetesselator.cpp

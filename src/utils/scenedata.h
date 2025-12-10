@@ -198,6 +198,8 @@ struct LSystemData {
     SceneMaterial stemMaterial;
     std::vector<SceneMaterial> leafMaterials;  // Changed from single leafMaterial
 
+    std::string flowerMeshFile;           // Path to flower OBJ (e.g., lily)
+    std::vector<SceneMaterial> flowerMaterials;  // Multiple flower materials like leaves
 
     std::vector<LSystemRule> rules;    // All rules
 };

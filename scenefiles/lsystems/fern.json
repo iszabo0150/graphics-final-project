@@ -1,0 +1,75 @@
+{
+  "name": "realistic_oak",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [1.5, 1.5, 1.5],
+    "up": [0.0, 1.0, 0.0],
+    "heightAngle": 30.0,
+    "focus": [0.0, 0.0, 0.0]
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.2, 1.2, 1.2],
+          "direction": [-3.0, -2.0, -1.0]
+        }
+      ]
+    },
+    {
+      "lsystem": {
+        "axiom": "X",
+        "iterations": 3,
+        "angle": 16,
+        "step": 1.0,
+        "stemPrimitive": "cylinder",
+        "leafPrimitive": "cone",
+
+        "stemMaterial": {
+          "diffuse": [0.35, 0.55, 0.2],
+          "ambient": [0.14, 0.22, 0.08],
+          "specular": [0.1, 0.1, 0.1],
+          "shininess": 5.0
+        },
+
+        "leafMaterials": [
+          {
+            "diffuse": [0.25, 0.65, 0.15],
+            "ambient": [0.1, 0.26, 0.06],
+            "specular": [0.15, 0.15, 0.15],
+            "shininess": 12
+          },
+          {
+            "diffuse": [0.2, 0.55, 0.18],
+            "ambient": [0.08, 0.22, 0.07],
+            "specular": [0.15, 0.15, 0.15],
+            "shininess": 12
+          }
+        ],
+
+        "rules": [
+          {
+            "input": "F",
+            "output": "FX[FX[+XF]]",
+            "probability": 1.0
+          },
+          {
+            "input": "X",
+            "output": "FF[+XZ++X-F[+ZX]][-X++F-X]",
+            "probability": 1.0
+          },
+          {
+            "input": "Z",
+            "output": "[+F-X-F][++ZX]",
+            "probability": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}

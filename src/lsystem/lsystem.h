@@ -37,7 +37,7 @@ public:
 
     // Interpretation → produce CTMs for stems & leaves
     static void interpretLSystem(const LSystemData &data, const std::vector<LSymbol> &symbols,
-                          std::vector<StemData> &stems, std::vector<glm::mat4> &leafCTMs);
+                          std::vector<StemData> &stems, std::vector<glm::mat4> &leafCTMs, std::vector<glm::mat4> &flowerCTMs);
 
     // Parametric L-system helpers
     static bool evaluateCondition(const std::string &condition,

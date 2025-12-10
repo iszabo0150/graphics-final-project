@@ -1214,6 +1214,61 @@ bool ScenefileReader::parseLSystem(const QJsonObject &obj, SceneNode *node){
                   << ls->leafMaterials[i].cDiffuse.b << std::endl;
     }
 
+    // In the lsystem parsing section:
+    // In the lsystem parsing section:
+    if (obj.contains("flowerMeshFile")) {
+        if (!obj["flowerMeshFile"].isString()) {
+            std::cout << "lsystem flowerMeshFile must be a string\n";
+            return false;
+        }
+        std::filesystem::path basepath = std::filesystem::path(file_name).parent_path().parent_path();
+        std::filesystem::path relativePath(obj["flowerMeshFile"].toString().toStdString());
+        ls->flowerMeshFile = (basepath / relativePath).string();
+    }
+
+    // FLOWER MATERIALS (supports both single "flowerMaterial" and array "flowerMaterials")
+    if (obj.contains("flowerMaterials")) {
+        // New array format for multiple colors
+        if (!obj["flowerMaterials"].isArray()) {
+            std::cout << "lsystem flowerMaterials must be an array\n";
+            return false;
+        }
+        QJsonArray flowerMatsArray = obj["flowerMaterials"].toArray();
+        for (const QJsonValue &matVal : flowerMatsArray) {
+            if (!matVal.isObject()) {
+                std::cout << "each flowerMaterial in flowerMaterials must be an object\n";
+                return false;
+            }
+            SceneMaterial mat;
+            mat.clear();
+            if (!parseMaterialProperties(matVal.toObject(), mat)) {
+                return false;
+            }
+            ls->flowerMaterials.push_back(mat);
+        }
+    } else if (obj.contains("flowerMaterial")) {
+        // Single material (backwards compatible)
+        if (!obj["flowerMaterial"].isObject()) {
+            std::cout << "lsystem flowerMaterial must be an object\n";
+            return false;
+        }
+        SceneMaterial mat;
+        mat.clear();
+        if (!parseMaterialProperties(obj["flowerMaterial"].toObject(), mat)) {
+            return false;
+        }
+        ls->flowerMaterials.push_back(mat);
+    } else {
+        // Default flower material (white/cream)
+        SceneMaterial mat;
+        mat.clear();
+        mat.cDiffuse = glm::vec4(0.98f, 0.97f, 0.91f, 1.0f);
+        mat.cAmbient = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
+        mat.cSpecular = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+        mat.shininess = 30.0f;
+        ls->flowerMaterials.push_back(mat);
+    }
+
 
     // RULES ARRAY
     if (!obj.contains("rules") || !obj["rules"].isArray()) {
