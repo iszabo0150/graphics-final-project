@@ -39,3 +39,14 @@
 14	99	1765352065735987106	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
 100	3640	1765352065821550872	CMakeFiles/final_proj.dir/src/renderers/scenerenderer.cpp.o	4b736fb7609ff688
 3640	4058	1765352069361623327	final_proj	8d4416505b7b3
+99	1454	1765353174512181000	final_proj_autogen/timestamp	42bf38839bdcbfe9
+99	1454	1765353174512181000	final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+99	1454	1765353174512181000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/timestamp	42bf38839bdcbfe9
+99	1454	1765353174512181000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+1455	9774	1765353174550221257	CMakeFiles/final_proj.dir/final_proj_autogen/mocs_compilation.cpp.o	7d0459008a3589ae
+1455	9784	1765353174550653677	CMakeFiles/final_proj.dir/src/main.cpp.o	7fa6242e0c144b82
+1462	9787	1765353174557976437	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
+1457	9841	1765353174553143569	CMakeFiles/final_proj.dir/src/mainwindow.cpp.o	8091fc44d130eff9
+1456	10097	1765353174552046186	CMakeFiles/final_proj.dir/src/realtime/realtime.cpp.o	5628683885723d57
+1460	10658	1765353174556387717	CMakeFiles/final_proj.dir/src/renderers/scenerenderer.cpp.o	4b736fb7609ff688
+10658	11227	1765353183754026938	final_proj	8d4416505b7b3
