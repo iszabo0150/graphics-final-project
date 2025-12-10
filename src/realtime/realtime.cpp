@@ -120,15 +120,13 @@ void Realtime::paintGL() {
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
-    // return
-
     //render the scene based on render data !!
-
-   // glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-    // Render scene first
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
-    // copy scene to screen
+    // add terrain into the scene FBO before presenting
+    m_sceneRenderer.paintTerrain(*m_camera);
+
+    // copy scene (with skybox/terrain) to screen
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
     m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
                                     width, height);
@@ -153,13 +151,6 @@ void Realtime::paintGL() {
         glEnable(GL_DEPTH_TEST);
 
     }
-
-    m_sceneRenderer.paintTerrain(*m_camera);
-
-    // // Render skybox last (only fills empty pixels)
-    // glDisable(GL_CULL_FACE);
-    // m_sceneRenderer.paintTexture(*m_camera);
-    // glEnable(GL_CULL_FACE);
 
 }
 
