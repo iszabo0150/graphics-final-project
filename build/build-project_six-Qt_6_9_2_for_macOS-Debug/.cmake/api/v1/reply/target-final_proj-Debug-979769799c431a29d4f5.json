@@ -47,11 +47,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				"line" : 79,
-========
 				"line" : 75,
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 				"parent" : 0
 			},
 			{
@@ -159,21 +155,13 @@
 			{
 				"command" : 5,
 				"file" : 0,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				"line" : 76,
-========
 				"line" : 72,
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 				"parent" : 0
 			},
 			{
 				"command" : 9,
 				"file" : 0,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				"line" : 89,
-========
 				"line" : 85,
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 				"parent" : 0
 			},
 			{
@@ -363,17 +351,10 @@
 				28,
 				30,
 				32,
-				33,
 				34,
 				36,
 				38,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				40,
-				42,
-				43
-========
 				39
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 			]
 		}
 	],
@@ -515,17 +496,10 @@
 				28,
 				30,
 				32,
-				33,
 				34,
 				36,
 				38,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				40,
-				42,
-				43
-========
 				39
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 			]
 		},
 		{
@@ -548,40 +522,24 @@
 				27,
 				29,
 				31,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				35,
-				37,
-				39,
-				41
-========
 				33,
 				35,
 				37
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				44
-========
 				40
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Release-1c75f53be849c092541c.json
-				45,
-				46
-========
 				41,
 				42
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj-Debug-979769799c431a29d4f5.json
 			]
 		}
 	],
@@ -746,40 +704,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/lsystem/lsystem.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/lsystem/plantpresets.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/lsystem/plantpresets.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/lsystem/presets/preset_utils.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/lsystem/presets/oak_tree.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/lsystem/presets/bush.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/lsystem/presets/flower_plant.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

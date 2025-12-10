@@ -11,6 +11,8 @@
 #include "renderers/shaperenderer.h"
 #include "renderers/scenerenderer.h"
 #include "renderers/lightrenderer.h"
+#include "postprocess.h"
+#include "particlesystem.h"
 #include "renderers/godrayrenderer.h"
 #include "renderers/screenrenderer.h"
 
@@ -52,6 +54,9 @@ private:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void timerEvent(QTimerEvent *event) override;
+    void fitEmitterToCamera(bool resetParticles);
+    void applyParticleEmitterFromSettings(bool resetParticles);
+
 
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
@@ -77,6 +82,10 @@ private:
 
     bool m_enableCrepuscular = true;
     bool m_isInitialized = false;
+
+    PostProcess m_post;
+    ParticleSystem m_particles;
+    // GLuint m_shader;
 
     GLuint m_defaultFBO = 0;
 

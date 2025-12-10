@@ -67,11 +67,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "StaticGLEW::@6890427a1f51a3e7e1df",
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-82b4e12a186c97bd7255.json
-					"jsonFile" : "target-StaticGLEW-Release-6dcd7ba120927fbc5a8b.json",
-========
 					"jsonFile" : "target-StaticGLEW-Debug-62ce42ff00a543a1ecb4.json",
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-5acaea98419941b056e0.json
 					"name" : "StaticGLEW",
 					"projectIndex" : 0
 				},
@@ -92,11 +88,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "final_proj::@6890427a1f51a3e7e1df",
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-82b4e12a186c97bd7255.json
-					"jsonFile" : "target-final_proj-Release-939eaa292f47c09f8af8.json",
-========
 					"jsonFile" : "target-final_proj-Debug-979769799c431a29d4f5.json",
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-5acaea98419941b056e0.json
 					"name" : "final_proj",
 					"projectIndex" : 0
 				},
@@ -117,11 +109,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "final_proj_other_files::@6890427a1f51a3e7e1df",
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-82b4e12a186c97bd7255.json
-					"jsonFile" : "target-final_proj_other_files-Release-18f9410b1052a685d4fa.json",
-========
 					"jsonFile" : "target-final_proj_other_files-Debug-94c8f9a158959c62ebeb.json",
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/codemodel-v2-5acaea98419941b056e0.json
 					"name" : "final_proj_other_files",
 					"projectIndex" : 0
 				}

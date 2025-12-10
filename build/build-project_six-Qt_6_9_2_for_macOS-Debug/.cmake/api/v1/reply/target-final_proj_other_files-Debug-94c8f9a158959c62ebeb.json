@@ -211,57 +211,6 @@
 				"file" : 0,
 				"line" : 2172,
 				"parent" : 31
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Release-18f9410b1052a685d4fa.json
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 2437,
-				"parent" : 2
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 2172,
-				"parent" : 33
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 2437,
-				"parent" : 2
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 2172,
-				"parent" : 35
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 2437,
-				"parent" : 2
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 2172,
-				"parent" : 37
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 2437,
-				"parent" : 2
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 2172,
-				"parent" : 39
-========
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Debug-94c8f9a158959c62ebeb.json
 			}
 		]
 	},
@@ -284,13 +233,7 @@
 				9,
 				10,
 				11,
-				12,
-				13,
-				14,
-				15,
-				16,
-				17,
-				18
+				12
 			]
 		},
 		{
@@ -378,35 +321,6 @@
 		},
 		{
 			"backtrace" : 30,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Release-18f9410b1052a685d4fa.json
-			"path" : "resources/images/pz.png",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 32,
-			"path" : "resources/images/nz.png",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 34,
-			"path" : "resources/images/ny.png",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 36,
-			"path" : "resources/images/py.png",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 38,
-			"path" : "resources/images/px.png",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 40,
-			"path" : "resources/images/nx.png",
-			"sourceGroupIndex" : 0
-========
 			"path" : "resources/shaders/terrain.frag",
 			"sourceGroupIndex" : 1
 		},
@@ -414,7 +328,6 @@
 			"backtrace" : 32,
 			"path" : "resources/shaders/terrain.vert",
 			"sourceGroupIndex" : 1
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Debug-94c8f9a158959c62ebeb.json
 		}
 	],
 	"type" : "UTILITY"

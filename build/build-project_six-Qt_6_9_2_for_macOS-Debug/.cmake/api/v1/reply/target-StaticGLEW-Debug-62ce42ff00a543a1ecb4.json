@@ -26,11 +26,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-StaticGLEW-Release-773c885b98203f442cdd.json
-				"line" : 75,
-========
 				"line" : 71,
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-StaticGLEW-Debug-62ce42ff00a543a1ecb4.json
 				"parent" : 0
 			},
 			{
@@ -42,11 +38,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-StaticGLEW-Release-773c885b98203f442cdd.json
-				"line" : 76,
-========
 				"line" : 72,
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-StaticGLEW-Debug-62ce42ff00a543a1ecb4.json
 				"parent" : 0
 			}
 		]

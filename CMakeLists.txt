@@ -65,6 +65,8 @@ add_executable(${PROJECT_NAME}
     src/utils/objloader.h src/utils/objloader.cpp
     src/shapes/meshloader.h src/shapes/meshloader.cpp
     src/utils/terraingenerator.h src/utils/terraingenerator.cpp
+    src/postprocess.h src/postprocess.cpp
+    src/particlesystem.h src/particlesystem.cpp
 
 
 
@@ -99,6 +101,13 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/depth.vert
         resources/shaders/texture.frag
         resources/shaders/texture.vert
+        resources/shaders/fullscreen.vert
+        resources/shaders/post.frag
+        resources/shaders/bloom_bright.frag
+        resources/shaders/bloom_blur.frag
+        resources/shaders/bloom_combine.frag
+        resources/shaders/particle.vert
+        resources/shaders/particle.frag
         resources/shaders/crepuscular.frag
         resources/shaders/crepuscular.vert
         resources/shaders/occlusion.frag

@@ -73,7 +73,16 @@ void LightRenderer::makeShadowFBO() {
 }
 
 void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLuint screenHeight) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Save whatever framebuffer was bound when we were called
+    GLint prevFboInt = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFboInt);
+    GLuint prevFbo = static_cast<GLuint>(prevFboInt);
+
+    // Save caller viewport too (optional but safest)
+    GLint prevVP[4];
+    glGetIntegerv(GL_VIEWPORT, prevVP);
+
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(m_depth_shader);
 
     // support for a single light (the sun)
@@ -83,15 +92,29 @@ void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLu
 
     glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, m_shadow.fbo);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Shadow map only needs depth, clearing color is unnecessary and sometimes confusing
+    glClear(GL_DEPTH_BUFFER_BIT);
+
     renderDepth(renderData);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, m_default_fbo);
+    // glBindFramebuffer(GL_FRAMEBUFFER, m_default_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, prevFbo);
+
     // ============= reset the viewport
-    glViewport(0, 0, screenWidth, screenHeight);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // glViewport(0, 0, screenWidth, screenHeight);
+    // Restore caller viewport exactly (covers weird screenshot sizes)
+    glViewport(prevVP[0], prevVP[1], prevVP[2], prevVP[3]);
+
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Do NOT clear color here. The caller controls scene clears.
+    // If you want anything, depth-only is the least destructive:
+    // glClear(GL_DEPTH_BUFFER_BIT);
 
     // paintTexture(m_shadow.depth_map);
+
+    glUseProgram(0);
 }
 
 void LightRenderer::setShapes(ShapeRenderer* renderer) {
