@@ -196,7 +196,7 @@ void ConeTessellator::makeSlopeSlice(std::vector<float>& data, int param1, float
 
 void ConeTessellator::makeWedge(std::vector<float>& data, int param1, float currentTheta, float nextTheta) {
 
-    makeCapSlice(data, param1, currentTheta, nextTheta);
+    // makeCapSlice(data, param1, currentTheta, nextTheta);
     makeSlopeSlice(data, param1, currentTheta, nextTheta);
 }
 

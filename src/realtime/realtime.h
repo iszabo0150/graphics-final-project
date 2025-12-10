@@ -34,6 +34,8 @@ public:
 
     GLuint m_screen_width;
     GLuint m_screen_height;
+    GLuint m_texture_shader;
+
 
 public slots:
     void tick(QTimerEvent* event);                      // Called once per tick of m_timer

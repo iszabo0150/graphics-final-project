@@ -196,8 +196,10 @@ struct LSystemData {
     PrimitiveType leafPrimitive = PrimitiveType::PRIMITIVE_CUBE;
 
     SceneMaterial stemMaterial;
-    SceneMaterial leafMaterial;
+    std::vector<SceneMaterial> leafMaterials;  // Changed from single leafMaterial
 
+    std::string flowerMeshFile;           // Path to flower OBJ (e.g., lily)
+    std::vector<SceneMaterial> flowerMaterials;  // Multiple flower materials like leaves
 
     std::vector<LSystemRule> rules;    // All rules
 };

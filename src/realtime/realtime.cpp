@@ -70,15 +70,15 @@ void Realtime::initializeGL() {
 
 
     // Students: anything requiring OpenGL calls when the program starts should be done here
+    m_texture_shader = ShaderLoader::createShaderProgram(":/resources/shaders/texture.vert", ":/resources/shaders/texture.frag");
 
     GLuint defaultFBO = defaultFramebufferObject();
     m_defaultFBO = defaultFBO;
 
     m_shapeRenderer.initialize();
-    m_sceneRenderer.initialize();
     m_sceneRenderer.setDefaultFBO(defaultFBO);
-
-    m_lightRenderer.initialize(m_shapeRenderer);
+    m_sceneRenderer.initialize(m_texture_shader);
+    m_lightRenderer.initialize(&m_shapeRenderer, m_texture_shader);
 
     m_crepuscularRenderer.initialize(1.0f, 1.0f, 0.5f, 0.01f, 100);
     m_crepuscularRenderer.setDefaultFBO(defaultFBO);
@@ -120,7 +120,12 @@ void Realtime::paintGL() {
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
+    // return
+
     //render the scene based on render data !!
+
+   // glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+    // Render scene first
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
     // copy scene to screen
@@ -148,6 +153,13 @@ void Realtime::paintGL() {
         glEnable(GL_DEPTH_TEST);
 
     }
+    m_sceneRenderer.paintTerrain(*m_camera);
+
+    // // Render skybox last (only fills empty pixels)
+    // glDisable(GL_CULL_FACE);
+    // m_sceneRenderer.paintTexture(*m_camera);
+    // glEnable(GL_CULL_FACE);
+
 }
 
 
@@ -188,7 +200,7 @@ void Realtime::settingsChanged() {
 
 
     m_shapeRenderer.updateTessellation();
-    m_lightRenderer.setShapes(m_shapeRenderer);
+    m_lightRenderer.setShapes(&m_shapeRenderer);
     m_camera->createProjectionMatrix();
 
     update(); // asks for a PaintGL() call to occur
@@ -236,6 +248,8 @@ void Realtime::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void Realtime::timerEvent(QTimerEvent *event) {
+    bool moved = false;
+
     int elapsedms   = m_elapsedTimer.elapsed();
     float deltaTime = elapsedms * 0.001f;
     m_elapsedTimer.restart();
@@ -244,25 +258,39 @@ void Realtime::timerEvent(QTimerEvent *event) {
 
     if (m_keyMap[Qt::Key_W]){
         m_camera->translate(Direction::FORWARD, deltaTime);
+        moved = true;
+
     }
 
     if (m_keyMap[Qt::Key_A]){
         m_camera->translate(Direction::LEFT, deltaTime);
+        moved = true;
+
     }
     if (m_keyMap[Qt::Key_S]){
         m_camera->translate(Direction::BACKWARD, deltaTime);
+        moved = true;
+
     }
     if (m_keyMap[Qt::Key_D]){
         m_camera->translate(Direction::RIGHT, deltaTime);
+        moved = true;
+
     }
     if (m_keyMap[Qt::Key_Space]){
         m_camera->translate(Direction::UP, deltaTime);
+        moved = true;
+
     }
     if (m_keyMap[Qt::Key_Control]){
         m_camera->translate(Direction::DOWN, deltaTime);
+        moved = true;
+
     }
 
-    update(); // asks for a PaintGL() call to occur
+    if (moved) {
+        update();
+    }
 }
 
 // DO NOT EDIT

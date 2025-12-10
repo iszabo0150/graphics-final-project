@@ -2,12 +2,13 @@
 #include "utils/shaderloader.h"
 #include "utils/textureutils.h"
 #include "renderers/lightrenderer.h"
-
+#include "utils/terraingenerator.h"
+#include <glm/gtc/matrix_transform.hpp>
 #include <QImage>
 #include <QString>
 #include <iostream>
 
-void SceneRenderer::initialize() {
+void SceneRenderer::initialize(GLuint texture_shader) {
 
     m_shader = ShaderLoader::createShaderProgram(
         ":/resources/shaders/default.vert", 
@@ -20,8 +21,16 @@ void SceneRenderer::initialize() {
     m_fboWidth = 0;
     m_fboHeight = 0;
 
-    m_defaultFBO = 0; // will be set by caller via setDefaultFBO
+    m_defaultFBO = 0;
 
+    m_shader = ShaderLoader::createShaderProgram(":/resources/shaders/default.vert", ":/resources/shaders/default.frag");
+    m_texture_shader = texture_shader;
+    m_terrain_shader = ShaderLoader::createShaderProgram(":/resources/shaders/terrain.vert", ":/resources/shaders/terrain.frag");
+
+
+    loadSkybox();
+    loadTerrain();
+    
 }
 
 void SceneRenderer::cleanup() {
@@ -108,11 +117,20 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     // sends over shadow map (2D texture)
     setupShadowUniform(shadow);
 
-    // for instance rendering, we're grouping all shapes by their type.
+    // for instance rendering, we're grouping all shapes by their type--> meshes have to be handles differently so they're
+    // in their own group !!
     std::unordered_map<PrimitiveType, std::vector<const RenderShapeData*>> groupedShapes;
 
+    std::unordered_map<std::string, std::vector<const RenderShapeData*>> groupedMeshes;
+
+
     for (const auto& shape : renderData.shapes) {
-        groupedShapes[shape.primitive.type].push_back(&shape); // this is simply filling the groupedShape list :)
+        if (shape.primitive.type == PrimitiveType::PRIMITIVE_MESH) {
+            // gruop meshes by their file path
+            groupedMeshes[shape.primitive.meshfile].push_back(&shape);
+        } else {
+            groupedShapes[shape.primitive.type].push_back(&shape);
+        }
     }
 
     // rendering each primitive by group instead of individually
@@ -174,7 +192,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 
         // passing model matrix
         for (int i = 0; i < 4; i++) {
-            
+
             glEnableVertexAttribArray(5 + i);
             glVertexAttribPointer(5 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
                                  (void*)(offset + i * sizeof(glm::vec4)));
@@ -183,7 +201,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         }
 
         offset += matrixSize;
-        
+
         // ambient
         glEnableVertexAttribArray(9);
         glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
@@ -216,7 +234,107 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 
     }
 
-    
+    //rendering meshes !!!!
+    for (const auto& [meshfile, shapes] : groupedMeshes) {
+
+        if (shapes.empty()) continue;
+
+        MeshGLData meshData = shapeRenderer.getMeshData(meshfile);
+
+        if (meshData.vertexCount == 0) {
+            std::cerr << "Failed to load mesh: " << meshfile << std::endl;
+            continue;
+        }
+
+        std::vector<glm::mat4> modelMatrices;
+        std::vector<glm::vec3> ambients, diffuses, speculars;
+        std::vector<float> shininesses;
+
+        const RenderShapeData* materialInfo = shapes[0];
+
+        for (const auto* shape : shapes) {
+            auto info = shape->material;
+            modelMatrices.push_back(shape->ctm);
+            ambients.push_back(info.cAmbient);
+            diffuses.push_back(info.cDiffuse);
+            speculars.push_back(info.cSpecular);
+            shininesses.push_back(info.shininess);
+        }
+
+        glBindVertexArray(meshData.vao);
+        glBindBuffer(GL_ARRAY_BUFFER, meshData.instanceVBO);
+
+        size_t matrixSize = modelMatrices.size() * sizeof(glm::mat4);
+        size_t vec3Size = ambients.size() * sizeof(glm::vec3);
+        size_t floatSize = shininesses.size() * sizeof(float);
+        size_t totalSize = matrixSize + (vec3Size * 3) + floatSize;
+
+        glBufferData(GL_ARRAY_BUFFER, totalSize, nullptr, GL_DYNAMIC_DRAW);
+
+        size_t offset = 0;
+        glBufferSubData(GL_ARRAY_BUFFER, offset, matrixSize, modelMatrices.data());
+        offset += matrixSize;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, ambients.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, diffuses.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, vec3Size, speculars.data());
+        offset += vec3Size;
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, floatSize, shininesses.data());
+
+        offset = 0;
+
+        // model matrix
+        for (int i = 0; i < 4; i++) {
+            glEnableVertexAttribArray(5 + i);
+            glVertexAttribPointer(5 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                                  (void*)(offset + i * sizeof(glm::vec4)));
+            glVertexAttribDivisor(5 + i, 1);
+        }
+        offset += matrixSize;
+
+        // ambient
+        glEnableVertexAttribArray(9);
+        glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(9, 1);
+        offset += vec3Size;
+
+        // diffuse
+        glEnableVertexAttribArray(10);
+        glVertexAttribPointer(10, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(10, 1);
+        offset += vec3Size;
+
+        // specular
+        glEnableVertexAttribArray(11);
+        glVertexAttribPointer(11, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offset);
+        glVertexAttribDivisor(11, 1);
+        offset += vec3Size;
+
+        // shininess
+        glEnableVertexAttribArray(12);
+        glVertexAttribPointer(12, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)offset);
+        glVertexAttribDivisor(12, 1);
+
+        // setup textures
+        setupTextureUniforms(materialInfo->material);
+
+        // draw all instances of this mesh
+        glDrawArraysInstanced(GL_TRIANGLES, 0, meshData.vertexCount, shapes.size());
+
+        glBindVertexArray(0);
+    }
+
+    // render terrain
+    int res = m_terrain.getResolution();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
+
+
     // OLD RENDER FUNCTION
     // for (const auto& shape : renderData.shapes) {
     //     glUseProgram(m_shader);
@@ -237,6 +355,29 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     //     glBindVertexArray(0);
     // }
 
+
+    glUseProgram(0);
+}
+
+void SceneRenderer::paintTerrain(const Camera& camera) {
+
+    glUseProgram(m_terrain_shader);
+    glBindVertexArray(m_terrain_vao);
+
+    GLuint locProj = glGetUniformLocation(m_terrain_shader, "projMatrix");
+    glUniformMatrix4fv(locProj, 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
+
+    GLuint locMV = glGetUniformLocation(m_terrain_shader, "mvMatrix");
+    glm::mat4 world =  glm::lookAt(glm::vec3(1,1,1), glm::vec3(0,1,1), glm::vec3(0,0,1));
+    glm::mat4 cam = camera.getViewMatrix() * world;
+    glUniformMatrix4fv(locMV, 1, GL_FALSE, &cam[0][0]);
+
+    int res = m_terrain.getResolution();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
+
+    glBindVertexArray(0);
     glUseProgram(0);
     glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFBO);
 }
@@ -345,9 +486,112 @@ void SceneRenderer::setupTextureUniforms(const SceneMaterial& material) {
         glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, bumpTextureID);
     }
+}
+
+void SceneRenderer::loadSkybox() {
+    m_loc_cubeMap = glGetUniformLocation(m_texture_shader, "cubeMap");
+    m_loc_skyboxView = glGetUniformLocation(m_texture_shader, "view");
+    m_loc_skyboxProj = glGetUniformLocation(m_texture_shader, "projection");
+
+    // Also set the sampler uniform ONCE (it never changes):
+    glUseProgram(m_texture_shader);
+    glUniform1i(m_loc_cubeMap, 0);
+    glUseProgram(0);
+
+
+    // set up skybox cube (primitive)
+    glGenBuffers(1, &m_skybox_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_skybox_vbo);
+    glBufferData(GL_ARRAY_BUFFER, m_skybox_vertices.size() * sizeof(GLfloat), m_skybox_vertices.data(), GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &m_skybox_vao);
+    glBindVertexArray(m_skybox_vao);
+
+    glEnableVertexAttribArray(0); //position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), reinterpret_cast<void*>(0)); //position
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // set up skybox texture
+    glGenTextures(1, &m_skybox_texture);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox_texture);
+
+    // 6 TEXTURE2Ds, one for each face of the cube
+    for (int i = 0; i < m_faces.size(); i++) {
+        QString filepath = QString::fromStdString(m_faces[i]);
+        QImage image = QImage(filepath);
+        image = image.convertToFormat(QImage::Format_RGBA8888).mirrored();
+
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA,
+                     image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits());
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
 
 
 
+// used for debugging, renders depth map
+void SceneRenderer::paintTexture(const Camera& camera) {
+    glDepthMask(GL_FALSE);
+    glDepthFunc(GL_LEQUAL);
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUseProgram(m_texture_shader);
+
+    glBindVertexArray(m_skybox_vao); // bind the actual skybox "box"
+
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox_texture);
+
+    // GLuint loc_texture = glGetUniformLocation(m_texture_shader, "cubeMap");
+    // glUniform1i(loc_texture, 0);
+
+    glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(camera.getViewMatrix()));
+    glUniformMatrix4fv(m_loc_skyboxView, 1, GL_FALSE, &viewNoTranslation[0][0]);
+    glUniformMatrix4fv(m_loc_skyboxProj, 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDepthMask(GL_TRUE);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindVertexArray(0);
+    glUseProgram(0);
+    glDepthFunc(GL_LESS);
+
+}
+
+void SceneRenderer::loadTerrain() {
+    glGenBuffers(1, &m_terrain_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_terrain_vbo);
+
+    std::vector<GLfloat> verts = m_terrain.generateTerrain();
+
+
+    glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(GLfloat), verts.data(), GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &m_terrain_vao);
+    glBindVertexArray(m_terrain_vao);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(0)); //position
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(3 * sizeof(GLfloat))); //position
+
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(6 * sizeof(GLfloat))); //position
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);;
 
 }
 

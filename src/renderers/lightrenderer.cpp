@@ -2,14 +2,15 @@
 #include "utils/shaderloader.h"
 #include "utils/sceneparser.h"
 #include "renderers/shaperenderer.h"
+#include "realtime/realtime.h"
 
 #include <QOpenGLWidget>
 #include <glm/gtc/matrix_transform.hpp>
 
-void LightRenderer::initialize(ShapeRenderer renderer) {
+void LightRenderer::initialize(ShapeRenderer* renderer, GLuint texture_shader) {
     m_depth_shader = ShaderLoader::createShaderProgram(":/resources/shaders/depth.vert", ":/resources/shaders/depth.frag");
-    m_texture_shader = ShaderLoader::createShaderProgram(":/resources/shaders/texture.vert", ":/resources/shaders/texture.frag");
-    m_default_fbo = 2;
+    m_texture_shader = texture_shader;
+    m_default_fbo = 2; // was previously 2
     m_shape_renderer = renderer; // pass in shape info
 
     std::vector<GLfloat> fullscreen_quad_data =
@@ -92,7 +93,7 @@ void LightRenderer::render(const RenderData& renderData, GLuint screenWidth, GLu
     // paintTexture(m_shadow.depth_map);
 }
 
-void LightRenderer::setShapes(ShapeRenderer renderer) {
+void LightRenderer::setShapes(ShapeRenderer* renderer) {
     m_shape_renderer = renderer;
 }
 
@@ -101,18 +102,33 @@ void LightRenderer::setShapes(ShapeRenderer renderer) {
  * the resulting depth map in m_shadow_fbo
  */
 void LightRenderer::renderDepth(const RenderData& renderData) {
-    for (RenderShapeData shape: renderData.shapes) {
+    for (const RenderShapeData& shape : renderData.shapes) {
+
+        // Set model matrix uniform (same for both primitives and meshes)
         m_model = shape.ctm;
         GLint modelMatLoc = glGetUniformLocation(m_depth_shader, "modelMatrix");
         glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, &m_model[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
 
-        // get the shape vertex data
-        GLPrimitiveData shapeData = m_shape_renderer.getPrimitiveData(shape.primitive.type);
-        glBindVertexArray(shapeData.vao);
-        glDrawArrays(GL_TRIANGLES, 0, shapeData.vertexCount);
-        glBindVertexArray(0);
+        if (shape.primitive.type == PrimitiveType::PRIMITIVE_MESH) {
+            // Handle mesh
+            MeshGLData meshData = m_shape_renderer->getMeshData(shape.primitive.meshfile);
+
+            if (meshData.vertexCount == 0) {
+                continue;  // Skip if mesh failed to load
+            }
+
+            glBindVertexArray(meshData.vao);
+            glDrawArrays(GL_TRIANGLES, 0, meshData.vertexCount);
+            glBindVertexArray(0);
+        } else {
+            // Handle primitive shapes
+            GLPrimitiveData shapeData = m_shape_renderer->getPrimitiveData(shape.primitive.type);
+            glBindVertexArray(shapeData.vao);
+            glDrawArrays(GL_TRIANGLES, 0, shapeData.vertexCount);
+            glBindVertexArray(0);
+        }
     }
 }
 

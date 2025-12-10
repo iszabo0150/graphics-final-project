@@ -1,19 +1,122 @@
 {
-	"BUILD_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen",
-	"CMAKE_BINARY_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project",
+	"BUILD_DIR" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/isabella/Desktop/graphics-final-project",
 	"CMAKE_EXECUTABLE" : "/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/cmake",
 	"CMAKE_LIST_FILES" : 
 	[
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/CMakeLists.txt",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qtc/package-manager/auto-setup.cmake",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
+		"/Users/isabella/Desktop/graphics-final-project/CMakeLists.txt",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qtc/package-manager/auto-setup.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystem.cmake.in",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeNinjaFindMake.cmake",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Darwin-Initialize.cmake",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Darwin-Determine-CXX.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Bruce-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Compaq-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GNU-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/HP-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/LCC-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SDCC-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SunPro-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XL-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XLClang-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/zOS-C-DetermineCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCCompiler.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeGenericSystem.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake",
@@ -30,6 +133,19 @@
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang-CXX.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCInformation.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-C.cmake",
@@ -38,6 +154,19 @@
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang-C.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang.cmake",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCCompilerABI.c",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake",
+		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/3.30.5/CMakeCCompiler.cmake",
 		"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreConfigVersion.cmake",
 		"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreConfigVersionImpl.cmake",
 		"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreConfig.cmake",
@@ -611,112 +740,130 @@
 		"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6/Qt6Dependencies.cmake",
 		"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in"
 	],
-	"CMAKE_SOURCE_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project",
+	"CMAKE_SOURCE_DIR" : "/Users/isabella/Desktop/graphics-final-project",
 	"CROSS_CONFIG" : false,
-	"DEP_FILE" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/deps",
+	"DEP_FILE" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "final_proj_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/camera/camera.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/camera/camera.h",
 			"MU",
 			"I2NATBFSMB/moc_camera.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/lsystem/lsystem.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/lsystem/lsystem.h",
 			"MU",
 			"FQUV7VVNRN/moc_lsystem.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/mainwindow.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/mainwindow.h",
 			"MU",
 			"UVLADIE3JM/moc_mainwindow.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/realtime/realtime.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/realtime/realtime.h",
 			"MU",
 			"TXXDHOI7R2/moc_realtime.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/lightrenderer.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/lightrenderer.h",
 			"MU",
 			"GTW4662OFA/moc_lightrenderer.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/scenerenderer.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/scenerenderer.h",
 			"MU",
 			"GTW4662OFA/moc_scenerenderer.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/shaperenderer.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/shaperenderer.h",
 			"MU",
 			"GTW4662OFA/moc_shaperenderer.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/settings.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/settings.h",
 			"MU",
 			"UVLADIE3JM/moc_settings.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/shapetesselator.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/meshloader.h",
+			"MU",
+			"2S5AI7NIVA/moc_meshloader.cpp",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/shapetesselator.h",
 			"MU",
 			"2S5AI7NIVA/moc_shapetesselator.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/aspectratiowidget/aspectratiowidget.hpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/aspectratiowidget/aspectratiowidget.hpp",
 			"MU",
 			"OWQMYEJWPR/moc_aspectratiowidget.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/math_utils.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/math_utils.h",
 			"MU",
 			"VSCBVMNR7M/moc_math_utils.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/scenedata.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/objloader.h",
+			"MU",
+			"VSCBVMNR7M/moc_objloader.cpp",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/scenedata.h",
 			"MU",
 			"VSCBVMNR7M/moc_scenedata.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/scenefilereader.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/scenefilereader.h",
 			"MU",
 			"VSCBVMNR7M/moc_scenefilereader.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/sceneparser.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/sceneparser.h",
 			"MU",
 			"VSCBVMNR7M/moc_sceneparser.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/shaderloader.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/shaderloader.h",
 			"MU",
 			"VSCBVMNR7M/moc_shaderloader.cpp",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/textureutils.h",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/terraingenerator.h",
+			"MU",
+			"VSCBVMNR7M/moc_terraingenerator.cpp",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/textureutils.h",
 			"MU",
 			"VSCBVMNR7M/moc_textureutils.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/include",
-	"MOC_COMPILATION_FILE" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"QT_CORE_LIB",
@@ -735,12 +882,12 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/src",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/final_proj",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/PRIVATE",
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/glew/include",
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug",
+		"/Users/isabella/Desktop/graphics-final-project",
+		"/Users/isabella/Desktop/graphics-final-project/src",
+		"/Users/isabella/Desktop/graphics-final-project/final_proj",
+		"/Users/isabella/Desktop/graphics-final-project/PRIVATE",
+		"/Users/isabella/Desktop/graphics-final-project/glew/include",
 		"/Users/isabella/Qt/6.9.2/macos/lib/QtCore.framework/Headers",
 		"/Users/isabella/Qt/6.9.2/macos/lib/QtCore.framework",
 		"/Users/isabella/Qt/6.9.2/macos/mkspecs/macx-clang",
@@ -780,99 +927,114 @@
 		"-c",
 		"/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/final_proj_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qt/rcc/qrc_Resources.cpp"
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qt/rcc/qrc_Resources.cpp"
 	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 8,
-	"PARSE_CACHE_FILE" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/final_proj_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/final_proj_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/Users/isabella/Qt/6.9.2/macos/libexec/moc",
 	"QT_UIC_EXECUTABLE" : "/Users/isabella/Qt/6.9.2/macos/libexec/uic",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 9,
-	"SETTINGS_FILE" : "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/final_proj_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/CMakeFiles/final_proj_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/camera/camera.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/camera/camera.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/lsystem/lsystem.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/lsystem/lsystem.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/main.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/main.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/mainwindow.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/mainwindow.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/realtime/realtime.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/realtime/realtime.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/lightrenderer.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/lightrenderer.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/scenerenderer.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/scenerenderer.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/renderers/shaperenderer.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/renderers/shaperenderer.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/settings.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/settings.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/conetesselator.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/conetesselator.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/cubetesselator.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/cubetesselator.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/cylindertesselator.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/cylindertesselator.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/shapes/spheretesselator.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/meshloader.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/scenefilereader.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/shapes/spheretesselator.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/sceneparser.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/objloader.cpp",
 			"MU",
 			null
 		],
 		[
-			"/Users/isabella/Desktop/cs1230/graphics-final-project/src/utils/textureutils.cpp",
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/scenefilereader.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/sceneparser.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/terraingenerator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/isabella/Desktop/graphics-final-project/src/utils/textureutils.cpp",
 			"MU",
 			null
 		]
@@ -881,7 +1043,7 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qt/rcc/qrc_Resources.cpp"
+		"/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qt/rcc/qrc_Resources.cpp"
 	],
 	"UIC_UI_FILES" : [],
 	"USE_BETTER_GRAPH" : true,

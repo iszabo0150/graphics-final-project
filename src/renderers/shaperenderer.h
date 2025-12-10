@@ -11,6 +11,7 @@
 
 #include "utils/scenedata.h"
 #include "utils/math_utils.h"
+#include "shapes/meshloader.h"
 
 struct GLPrimitiveData {
 
@@ -28,11 +29,14 @@ public:
     GLPrimitiveData getPrimitiveData(PrimitiveType type) {return m_shapeMap.at(type);}
     GLuint getVAO(PrimitiveType type) const {return m_shapeMap.at(type).vao;}
     int getVertexCount(PrimitiveType type) const {return m_shapeMap.at(type).vertexCount;}
+    MeshGLData getMeshData(const std::string& filepath) { return m_meshLoader.getMeshData(filepath); }
+
     void updateTessellation();
+    void loadSkybox();
 
 private:
     std::map<PrimitiveType, GLPrimitiveData> m_shapeMap;
-
+    MeshLoader m_meshLoader;
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
     int m_currentParam1 = -1;

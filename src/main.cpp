@@ -5,6 +5,9 @@
 #include <iostream>
 #include <QSettings>
 
+#include <cstdlib>
+#include <ctime>
+
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
@@ -24,5 +27,8 @@ int main(int argc, char *argv[]) {
 
     int return_val = a.exec();
     w.finish();
+
+    srand(time(nullptr));
+
     return return_val;
 }

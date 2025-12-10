@@ -6,10 +6,12 @@
 #include "renderers/lightrenderer.h"
 #include "utils/sceneparser.h"
 #include "camera/camera.h"
+#include "utils/terraingenerator.h"
 
 class SceneRenderer {
 public:
-    void initialize();
+
+    void initialize(GLuint texture_shader);
     void cleanup();
     void resize(int width, int height);
     void setDefaultFBO(GLuint fbo) { m_defaultFBO = fbo; }
@@ -23,15 +25,21 @@ public:
 private:
     
     void initializeFBO(int width, int height);
+
+
+    void paintTexture(const Camera& camera);
+    void paintTerrain(const Camera& camera);
+
+    GLuint m_shader;
+    GLuint m_terrain_shader;
+
+
     void setupShadowUniform(const Shadow& shadow);
     void setupCameraUniforms(const Camera& camera, glm::vec3 cameraPos);
     void setupShapeUniforms(const RenderShapeData& shape, const SceneMaterial& material);
     void setupLightUniforms(const std::vector<SceneLightData>& lights, SceneGlobalData globalData);
     void setupTextureUniforms(const SceneMaterial& material);
     GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
-
-    GLuint m_shader;
-    std::map<std::string, GLuint> m_textureCache;
 
     GLuint m_defaultFBO;
 
@@ -43,6 +51,80 @@ private:
     int m_fboWidth;
     int m_fboHeight;
 
+
+    void loadSkybox();
+    void loadTerrain();
+
+    GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
+
+
+    std::map<std::string, GLuint> m_textureCache;
+
+    // terrain
+    GLuint m_terrain_vao;
+    GLuint m_terrain_vbo;
+    TerrainGenerator m_terrain;
+
+    // skybox
+    GLuint m_skybox_texture;
+    GLuint m_texture_shader;
+
+    GLint m_loc_cubeMap;
+    GLint m_loc_skyboxView;
+    GLint m_loc_skyboxProj;
+
+    std::vector<float> m_skybox_vertices = {   -1.0f,  1.0f, -1.0f,
+                                            -1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+
+                                            -1.0f, -1.0f,  1.0f,
+                                            -1.0f, -1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+
+                                            -1.0f, -1.0f,  1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f, -1.0f,  1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+
+                                            -1.0f,  1.0f, -1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+
+                                            -1.0f, -1.0f, -1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+                                            1.0f, -1.0f,  1.0f};
+
+    GLuint m_skybox_vao;
+    GLuint m_skybox_vbo;
+    glm::mat4 m_view;
+
+    std::vector<std::string> m_faces = {":/resources/images/right.jpg",
+                                        ":/resources/images/left.jpg",
+                                        ":/resources/images/bottom.jpg",
+                                        ":/resources/images/top.jpg",
+                                        ":/resources/images/front.jpg",
+                                        ":/resources/images/back.jpg"};
 };
 
 #endif // SCENERENDERER_H

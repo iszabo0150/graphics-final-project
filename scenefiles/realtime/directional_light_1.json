@@ -10,7 +10,7 @@
     "position": [-6.0, 4.0, 4.0],
     "up": [0.0, 1.0, 0.0],
     "focus": [0, 0, 0],
-    "heightAngle": 30.0
+    "heightAngle": 60.0
   },
   "groups": [
     {
@@ -67,17 +67,8 @@
               "shininess": 15.0
             }
           ]
-        },
-        {
-          "translate": [0.0, -0.6, 0.0],
-          "scale": [6.0, 0.1, 6.0],
-          "primitives": [
-            {
-              "type": "cube",
-              "diffuse": [0.1, 0.4, 0.8]
-            }
-          ]
         }
+        
       ]
     }
   ]
