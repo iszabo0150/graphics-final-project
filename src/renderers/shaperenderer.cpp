@@ -3,6 +3,9 @@
 #include "settings.h"
 #include "shapes/shapetesselator.h"
 #include <iostream>
+#include <QCoreApplication>
+#include <QImage>
+
 
 /**
  * @brief ShapeRenderer::initializes the GL data for our primitives. the vaos, vbos, and vertex count for each shape

@@ -15,7 +15,7 @@ struct Shadow {
 
 class LightRenderer {
 public:
-    void initialize(ShapeRenderer* renderer);
+    void initialize(ShapeRenderer renderer, GLuint texture_shader);
     void render(const RenderData& renderData, GLuint screenWidth, GLuint screenHeight);
     static glm::mat4 calculateLightMatrix(SceneLight *light, glm::vec3 position, glm::vec3 dir);
     Shadow getShadow();
@@ -41,6 +41,8 @@ private:
     glm::mat4 m_model = glm::mat4(1.0f);
 
     Shadow m_shadow;
+
+    GLuint m_texture;
 
 };
 

@@ -9,9 +9,10 @@
 
 class SceneRenderer {
 public:
-    void initialize();
+    void initialize(GLuint texture_shader);
     void render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow);
     void cleanup();
+    void paintTexture(const Camera& camera);
 
 private:
     GLuint m_shader;
@@ -26,9 +27,66 @@ private:
 
     void setupTextureUniforms(const SceneMaterial& material);
 
+    void loadSkybox();
+
     GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
 
     std::map<std::string, GLuint> m_textureCache;
+    GLuint m_skybox_texture;
+    GLuint m_texture_shader;
+
+    std::vector<float> m_skybox_vertices = {   -1.0f,  1.0f, -1.0f,
+                                            -1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+
+                                            -1.0f, -1.0f,  1.0f,
+                                            -1.0f, -1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+
+                                            -1.0f, -1.0f,  1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f, -1.0f,  1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+
+                                            -1.0f,  1.0f, -1.0f,
+                                            1.0f,  1.0f, -1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            1.0f,  1.0f,  1.0f,
+                                            -1.0f,  1.0f,  1.0f,
+                                            -1.0f,  1.0f, -1.0f,
+
+                                            -1.0f, -1.0f, -1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            1.0f, -1.0f, -1.0f,
+                                            -1.0f, -1.0f,  1.0f,
+                                            1.0f, -1.0f,  1.0f};
+
+    GLuint m_skybox_vao;
+    GLuint m_skybox_vbo;
+    glm::mat4 m_view;
+
+    std::vector<std::string> m_faces = {":/resources/images/right.jpg",
+                                        ":/resources/images/left.jpg",
+                                        ":/resources/images/bottom.jpg",
+                                        ":/resources/images/top.jpg",
+                                        ":/resources/images/front.jpg",
+                                        ":/resources/images/back.jpg"};
 };
 
 #endif // SCENERENDERER_H

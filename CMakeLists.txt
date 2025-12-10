@@ -91,7 +91,13 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/depth.vert
         resources/shaders/texture.frag
         resources/shaders/texture.vert
-)
+        resources/images/back.jpg
+        resources/images/bottom.jpg
+        resources/images/front.jpg
+        resources/images/left.jpg
+        resources/images/right.jpg
+        resources/images/top.jpg)
+
 
 # GLEW: this provides support for Windows (including 64-bit)
 if (WIN32)
