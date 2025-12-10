@@ -1,0 +1,51 @@
+{
+  "name": "root",
+  "globalData": {
+    "ambientCoeff": 1,
+    "diffuseCoeff": 1,
+    "specularCoeff": 1,
+    "transparentCoeff": 0
+  },
+  "cameraData": {
+    "position": [-2, 0, 0],
+    "up": [0.0, 1.0, 0.0],
+    "heightAngle": 45.0,
+    "focus": [0.0, 0.0, 0.0]
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "direction": [0.0, -1.0, 0.0],
+          "color": [1.0, 1.0, 1.0]
+        }
+      ]
+    },
+    {
+      "groups": [
+        {
+          "scale": [3, 3, 3],
+          "rotate": [0, 1, 0, -70],
+          "translate": [0, -0.3, 0],
+          "groups": [
+            {
+              "rotate": [1, 0, 0, 10],
+              "primitives": [
+                {
+                  "type": "mesh",
+                  "ambient": [0.988, 0.976, 0.910],
+                  "meshFile": "scenefiles/meshes/Lilly.obj",
+                  "blend": 1.0,
+                  "diffuse": [0.988, 0.976, 0.910],
+                  "specular": [1.0, 1.0, 1.0],
+                  "shininess": 30.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

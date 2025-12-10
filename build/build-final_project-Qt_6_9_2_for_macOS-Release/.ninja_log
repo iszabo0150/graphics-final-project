@@ -1,4 +1,5 @@
 # ninja log v6
+<<<<<<< Updated upstream
 59526	59606	1765328802855699424	libStaticGLEW.a	3dd072d7eb2c6cb1
 781	5236	1765330156139434985	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
 10	59	1765330411716279953	StaticGLEW_autogen/mocs_compilation.cpp	453800aedff19f16
@@ -75,3 +76,60 @@
 76	2268	1765331673785006234	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
 76	2273	1765331673784494690	CMakeFiles/final_proj.dir/src/realtime/realtime.cpp.o	5628683885723d57
 2273	2551	1765331675981886619	final_proj	b34dfd93ab329f21
+=======
+98552	101542	1765333371248177869	CMakeFiles/final_proj.dir/src/camera/camera.cpp.o	11edb7c6b8df8f9
+100314	112422	1765333373010745486	CMakeFiles/final_proj.dir/src/lsystem/lsystem.cpp.o	4a96db77ed7f9609
+95278	98660	1765333367974553575	CMakeFiles/final_proj.dir/src/shapes/spheretesselator.cpp.o	edabb141067e66b0
+1752	10123	1765340222245444786	CMakeFiles/final_proj.dir/src/renderers/scenerenderer.cpp.o	4b736fb7609ff688
+75	1741	1765340222190065000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/timestamp	42bf38839bdcbfe9
+101542	108992	1765333374238680665	CMakeFiles/final_proj.dir/src/utils/textureutils.cpp.o	6774cc62f855cc92
+1082	13615	1765338264348871694	CMakeFiles/final_proj.dir/src/utils/objloader.cpp.o	7f33045fc4071b8b
+45	94020	1765333272739561537	CMakeFiles/StaticGLEW.dir/glew/src/glew.c.o	a0d2cfb928e5e55a
+1746	9603	1765340222239796863	CMakeFiles/final_proj.dir/src/mainwindow.cpp.o	8091fc44d130eff9
+10123	10492	1765340230616282496	final_proj	8d4416505b7b3
+1742	8119	1765340222235974462	CMakeFiles/final_proj.dir/final_proj_autogen/mocs_compilation.cpp.o	7d0459008a3589ae
+95204	95273	1765333367968195908	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/.qt/rcc/qrc_Resources.cpp	1161069e3bd5a6da
+44	343	1765333272739357867	CMakeFiles/StaticGLEW.dir/StaticGLEW_autogen/mocs_compilation.cpp.o	b1d24a9811b26898
+1750	5307	1765340222243307629	CMakeFiles/final_proj.dir/src/renderers/shaperenderer.cpp.o	349fc20a75efe45a
+95204	95273	1765333367968195908	.qt/rcc/qrc_Resources.cpp	1161069e3bd5a6da
+1748	9572	1765340222241363494	CMakeFiles/final_proj.dir/src/utils/sceneparser.cpp.o	7644d8ea79bfe0a
+95275	112357	1765333367971397909	CMakeFiles/final_proj.dir/src/utils/scenefilereader.cpp.o	83709ce729d36f77
+48	643	1765334094039783503	CMakeFiles/final_proj.dir/src/shapes/conetesselator.cpp.o	8ef40d28e9d75afb
+98432	100313	1765333371128353077	CMakeFiles/final_proj.dir/src/shapes/cylindertesselator.cpp.o	55736b1261cb95c5
+95278	98552	1765333367974100736	CMakeFiles/final_proj.dir/src/shapes/cubetesselator.cpp.o	b154636bccc6fab3
+1743	8677	1765340222236463370	CMakeFiles/final_proj.dir/src/main.cpp.o	7fa6242e0c144b82
+75	1741	1765340222190065000	final_proj_autogen/timestamp	42bf38839bdcbfe9
+75	1741	1765340222190065000	final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+12	49	1765338263279625374	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/StaticGLEW_autogen/mocs_compilation.cpp	453800aedff19f16
+1745	9479	1765340222238339761	CMakeFiles/final_proj.dir/src/realtime/realtime.cpp.o	5628683885723d57
+75	1741	1765340222190065000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+104458	104720	1765333377154981852	CMakeFiles/final_proj.dir/build/build-final_project-Qt_6_9_2_for_macOS-Release/.qt/rcc/qrc_Resources.cpp.o	4c80a4b071547cca
+94020	94258	1765333366716833040	libStaticGLEW.a	3dd072d7eb2c6cb1
+1770	9118	1765340222263247593	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
+12	49	1765338263279625374	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/StaticGLEW_autogen/timestamp	453800aedff19f16
+95275	98430	1765333367970894527	CMakeFiles/final_proj.dir/src/settings.cpp.o	a9f9719449a9cbb1
+12	49	1765338263279625374	StaticGLEW_autogen/timestamp	453800aedff19f16
+12	49	1765338263279625374	StaticGLEW_autogen/mocs_compilation.cpp	453800aedff19f16
+1771	5819	1765340222264596580	CMakeFiles/final_proj.dir/src/shapes/meshloader.cpp.o	8c7f4bf9439a63e4
+6	35	1765341698123902340	StaticGLEW_autogen/timestamp	453800aedff19f16
+6	35	1765341698123902340	StaticGLEW_autogen/mocs_compilation.cpp	453800aedff19f16
+6	35	1765341698123902340	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/StaticGLEW_autogen/timestamp	453800aedff19f16
+6	35	1765341698123902340	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/StaticGLEW_autogen/mocs_compilation.cpp	453800aedff19f16
+35	560	1765341698667438000	final_proj_autogen/timestamp	42bf38839bdcbfe9
+35	560	1765341698667438000	final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+35	560	1765341698667438000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/timestamp	42bf38839bdcbfe9
+35	560	1765341698667438000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+561	1297	1765341698678872070	CMakeFiles/final_proj.dir/src/shapes/conetesselator.cpp.o	8ef40d28e9d75afb
+562	1694	1765341698679246112	CMakeFiles/final_proj.dir/src/renderers/shaperenderer.cpp.o	349fc20a75efe45a
+1694	1757	1765341699811549819	CMakeFiles/final_proj.dir/build/build-final_project-Qt_6_9_2_for_macOS-Release/.qt/rcc/qrc_Resources.cpp.o	4c80a4b071547cca
+1297	2231	1765341699414754934	CMakeFiles/final_proj.dir/src/shapes/meshloader.cpp.o	8c7f4bf9439a63e4
+561	2638	1765341698678445945	CMakeFiles/final_proj.dir/src/main.cpp.o	7fa6242e0c144b82
+561	2648	1765341698678275445	CMakeFiles/final_proj.dir/final_proj_autogen/mocs_compilation.cpp.o	7d0459008a3589ae
+562	2710	1765341698679958195	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
+561	2800	1765341698678764820	CMakeFiles/final_proj.dir/src/utils/sceneparser.cpp.o	7644d8ea79bfe0a
+561	2838	1765341698678663487	CMakeFiles/final_proj.dir/src/mainwindow.cpp.o	8091fc44d130eff9
+561	2853	1765341698678557154	CMakeFiles/final_proj.dir/src/realtime/realtime.cpp.o	5628683885723d57
+562	3007	1765341698679616070	CMakeFiles/final_proj.dir/src/renderers/scenerenderer.cpp.o	4b736fb7609ff688
+563	3517	1765341698680418778	CMakeFiles/final_proj.dir/src/utils/objloader.cpp.o	7f33045fc4071b8b
+3517	3701	1765341701634515356	final_proj	8d4416505b7b3
+>>>>>>> Stashed changes

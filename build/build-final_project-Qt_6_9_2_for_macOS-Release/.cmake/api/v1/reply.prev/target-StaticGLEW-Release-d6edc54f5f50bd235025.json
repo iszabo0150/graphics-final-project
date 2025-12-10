@@ -26,7 +26,11 @@
 			{
 				"command" : 0,
 				"file" : 0,
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/target-StaticGLEW-Release-d6edc54f5f50bd235025.json
 				"line" : 65,
+========
+				"line" : 70,
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/target-StaticGLEW-Release-f8ea86ccdecb5ae6ef2a.json
 				"parent" : 0
 			},
 			{
@@ -38,7 +42,11 @@
 			{
 				"command" : 1,
 				"file" : 0,
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/target-StaticGLEW-Release-d6edc54f5f50bd235025.json
 				"line" : 66,
+========
+				"line" : 71,
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/target-StaticGLEW-Release-f8ea86ccdecb5ae6ef2a.json
 				"parent" : 0
 			}
 		]

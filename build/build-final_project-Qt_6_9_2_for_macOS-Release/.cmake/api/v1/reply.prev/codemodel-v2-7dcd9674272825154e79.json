@@ -1,0 +1,142 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				},
+				{
+					"build" : "glm",
+					"jsonFile" : "directory-glm-Release-2bef2a2728e6bac3f360.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "glm"
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "final_proj",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "StaticGLEW::@6890427a1f51a3e7e1df",
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-17b5445bf3381f6e7232.json
+					"jsonFile" : "target-StaticGLEW-Release-d6edc54f5f50bd235025.json",
+========
+					"jsonFile" : "target-StaticGLEW-Release-d31a1b90237b94df8bbe.json",
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-7dcd9674272825154e79.json
+					"name" : "StaticGLEW",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "StaticGLEW_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-StaticGLEW_autogen-Release-34b40843fbd0a2794d8f.json",
+					"name" : "StaticGLEW_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "StaticGLEW_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-StaticGLEW_autogen_timestamp_deps-Release-ec299a01de5c465de223.json",
+					"name" : "StaticGLEW_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_proj::@6890427a1f51a3e7e1df",
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-17b5445bf3381f6e7232.json
+					"jsonFile" : "target-final_proj-Release-2a1eec7851250908b6a4.json",
+========
+					"jsonFile" : "target-final_proj-Release-0a2ce3f9fefc63ae5381.json",
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-7dcd9674272825154e79.json
+					"name" : "final_proj",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_proj_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-final_proj_autogen-Release-cb46b13bd655500e702f.json",
+					"name" : "final_proj_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_proj_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-final_proj_autogen_timestamp_deps-Release-6612254cc975f97ac058.json",
+					"name" : "final_proj_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_proj_other_files::@6890427a1f51a3e7e1df",
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-17b5445bf3381f6e7232.json
+					"jsonFile" : "target-final_proj_other_files-Release-ed1f4a3f708c73a271d4.json",
+========
+					"jsonFile" : "target-final_proj_other_files-Release-360596f0007f0be52470.json",
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/codemodel-v2-7dcd9674272825154e79.json
+					"name" : "final_proj_other_files",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release",
+		"source" : "/Users/aisosaidahosa/Desktop/graphics/graphics-final-project"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

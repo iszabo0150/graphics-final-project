@@ -23,7 +23,11 @@
 			{
 				"command" : 3,
 				"file" : 1,
+<<<<<<<< Updated upstream:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply/target-final_proj_other_files-Release-360596f0007f0be52470.json
 				"line" : 80,
+========
+				"line" : 84,
+>>>>>>>> Stashed changes:build/build-final_project-Qt_6_9_2_for_macOS-Release/.cmake/api/v1/reply.prev/target-final_proj_other_files-Release-faf9356bd4baa2a4bc47.json
 				"parent" : 0
 			},
 			{
