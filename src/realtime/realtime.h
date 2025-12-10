@@ -76,6 +76,6 @@ private:
     bool m_enableCrepuscular = true;
     bool m_isInitialized = false;
 
-    GLuint m_defaultFBO = 4;
+    GLuint m_defaultFBO = 0;
 
 };

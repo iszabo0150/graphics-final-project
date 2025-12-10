@@ -20,7 +20,7 @@ void SceneRenderer::initialize() {
     m_fboWidth = 0;
     m_fboHeight = 0;
 
-    m_defaultFBO = 4;
+    m_defaultFBO = 0; // will be set by caller via setDefaultFBO
 
 }
 

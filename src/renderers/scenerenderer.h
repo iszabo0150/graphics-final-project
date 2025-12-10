@@ -12,6 +12,7 @@ public:
     void initialize();
     void cleanup();
     void resize(int width, int height);
+    void setDefaultFBO(GLuint fbo) { m_defaultFBO = fbo; }
 
     void render(const RenderData& renderData, const Camera& camera, 
                 ShapeRenderer& shapeRenderer, const Shadow &shadow);

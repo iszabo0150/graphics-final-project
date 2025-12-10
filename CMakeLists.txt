@@ -91,6 +91,8 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/texture.vert
         resources/shaders/crepuscular.frag
         resources/shaders/crepuscular.vert
+        resources/shaders/occlusion.frag
+        resources/shaders/occlusion.vert
         resources/shaders/copy.frag
         resources/shaders/copy.vert
 )

@@ -71,14 +71,23 @@ void Realtime::initializeGL() {
 
     // Students: anything requiring OpenGL calls when the program starts should be done here
 
+    GLuint defaultFBO = defaultFramebufferObject();
+    m_defaultFBO = defaultFBO;
+
     m_shapeRenderer.initialize();
     m_sceneRenderer.initialize();
+    m_sceneRenderer.setDefaultFBO(defaultFBO);
+
     m_lightRenderer.initialize(m_shapeRenderer);
-    m_crepuscularRenderer.initialize(0.95f, 0.98f, 0.8f, 0.01f, 100);
+
+    m_crepuscularRenderer.initialize(1.0f, 1.0f, 0.5f, 0.01f, 100);
+    m_crepuscularRenderer.setDefaultFBO(defaultFBO);
+
     m_screenRenderer.initialize();
 
     m_isInitialized = true;
     m_enableCrepuscular = true;
+
 }
 
 void Realtime::paintGL() {
@@ -95,6 +104,36 @@ void Realtime::paintGL() {
     //render the scene based on render data !!
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
+    // copy scene to screen
+    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+    m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
+                                    width() * m_devicePixelRatio, height() * m_devicePixelRatio);
+
+    // if god rays enabled, blend them on top
+    if (m_enableCrepuscular) {
+
+        glm::mat4 view = m_camera->getViewMatrix();
+        glm::mat4 proj = m_camera ->getProjMatrix();
+
+        // additive blending for god rays
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+        m_crepuscularRenderer.renderGodRaysToScreen(
+            m_sceneRenderer.getSceneTexture(),
+            m_sceneRenderer.getDepthTexture(),
+            view, proj, 
+            width() * m_devicePixelRatio, height() * m_devicePixelRatio,
+            m_renderData, m_shapeRenderer
+        );
+
+        glDisable(GL_BLEND);
+        glEnable(GL_DEPTH_TEST);
+
+    }
+
+    /* OLD APPROACH
     if (m_enableCrepuscular) {
 
         glm::vec3 lightPosition = -glm::normalize(glm::vec3(m_renderData.lights[0].dir)) * 1000.f;
@@ -105,7 +144,8 @@ void Realtime::paintGL() {
             m_sceneRenderer.getSceneTexture(),
             m_sceneRenderer.getDepthTexture(),
             lightPosition, view, proj, 
-            width() * m_devicePixelRatio, height() * m_devicePixelRatio
+            width() * m_devicePixelRatio, height() * m_devicePixelRatio,
+            m_renderData, m_shapeRenderer
         );
 
         // render crepuscular to screen
@@ -121,6 +161,7 @@ void Realtime::paintGL() {
                                         width() * m_devicePixelRatio, height() * m_devicePixelRatio);
 
     }
+    */
     
 }
 
