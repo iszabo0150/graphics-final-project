@@ -109,6 +109,11 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // draw skybox first while depth is cleared
+    glDisable(GL_CULL_FACE);
+    paintTexture(camera);
+    glEnable(GL_CULL_FACE);
+
     glm::vec3 cameraPos = camera.getPos();
 
     glUseProgram(m_shader);
@@ -379,7 +384,6 @@ void SceneRenderer::paintTerrain(const Camera& camera) {
 
     glBindVertexArray(0);
     glUseProgram(0);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFBO);
 }
 
 //the felow functions are helper functions for all of the uniforms in the shaders !
