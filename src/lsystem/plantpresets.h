@@ -67,20 +67,6 @@ private:
     // initialize all presets (called once on first access)
     static void initializePresets();
     
-    // helper to create materials
-    static SceneMaterial makeMaterial(const glm::vec3& diffuse, 
-                                      const glm::vec3& ambient,
-                                      const glm::vec3& specular, 
-                                      float shininess);
-    
-    static SceneMaterial makeStemMaterial(const glm::vec3& diffuse,
-                                          const glm::vec3& ambient,
-                                          const glm::vec3& specular,
-                                          float shininess,
-                                          const std::string& textureFile,
-                                          const std::string& normalMapFile,
-                                          float blend);
-    
     // storage for all presets
     static std::map<std::string, PlantPreset> s_presets;
     static bool s_initialized;

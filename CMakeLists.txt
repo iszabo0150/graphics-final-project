@@ -54,6 +54,10 @@ add_executable(${PROJECT_NAME}
     src/renderers/scenerenderer.h src/renderers/scenerenderer.cpp
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
     src/lsystem/plantpresets.h src/lsystem/plantpresets.cpp
+    src/lsystem/presets/preset_utils.h
+    src/lsystem/presets/oak_tree.cpp
+    src/lsystem/presets/bush.cpp
+    src/lsystem/presets/flower_plant.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
     src/utils/objloader.h src/utils/objloader.cpp
