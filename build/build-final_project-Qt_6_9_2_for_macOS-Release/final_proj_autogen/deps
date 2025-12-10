@@ -835,6 +835,8 @@ final_proj_autogen/timestamp: \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/camera/camera.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/lsystem.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/lsystem.h \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/plantpresets.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/plantpresets.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/main.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/mainwindow.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/mainwindow.h \

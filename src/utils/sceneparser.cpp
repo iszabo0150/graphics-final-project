@@ -108,24 +108,27 @@ void SceneParser::dfsGetRenderData(RenderData& renderData, SceneNode* currNode, 
         const float refThickness = 1.0f;  // adjust based on the scene file's intended base size
         const float refLength = 1.0f;
 
-        for (const glm::mat4 &localM : flowerCTMs) {
-            RenderShapeData r;
+        // Only generate flowers if we have flower materials and mesh file
+        const auto& flowerMats = currNode->lsystem->flowerMaterials;
+        if (!flowerMats.empty() && !currNode->lsystem->flowerMeshFile.empty()) {
+            for (const glm::mat4 &localM : flowerCTMs) {
+                RenderShapeData r;
 
-            // randomly select a flower material from the available options
-            const auto& flowerMats = currNode->lsystem->flowerMaterials;
-            int matIndex = rand() % flowerMats.size();
-            const SceneMaterial& chosenMat = flowerMats[matIndex];
+                // randomly select a flower material from the available options
+                int matIndex = rand() % flowerMats.size();
+                const SceneMaterial& chosenMat = flowerMats[matIndex];
 
-            ScenePrimitive p;
-            p.type = PrimitiveType::PRIMITIVE_MESH;
-            p.meshfile = currNode->lsystem->flowerMeshFile;
-            p.material = chosenMat;
+                ScenePrimitive p;
+                p.type = PrimitiveType::PRIMITIVE_MESH;
+                p.meshfile = currNode->lsystem->flowerMeshFile;
+                p.material = chosenMat;
 
-            r.primitive = p;
-            r.material = chosenMat;
-            r.ctm = currCTM * localM;
+                r.primitive = p;
+                r.material = chosenMat;
+                r.ctm = currCTM * localM;
 
-            renderData.shapes.push_back(r);
+                renderData.shapes.push_back(r);
+            }
         }
 
         for (const StemData &stem : stems) {
@@ -162,20 +165,23 @@ void SceneParser::dfsGetRenderData(RenderData& renderData, SceneNode* currNode, 
 
 
 
-        for (const glm::mat4 &localM : leafCTMs) {
-            RenderShapeData r;
+        // Only generate leaves if we have leaf materials (winter has none)
+        const auto& leafMats = currNode->lsystem->leafMaterials;
+        if (!leafMats.empty()) {
+            for (const glm::mat4 &localM : leafCTMs) {
+                RenderShapeData r;
 
-            // Randomly select a leaf material from the available options
-            const auto& leafMats = currNode->lsystem->leafMaterials;
-            int matIndex = rand() % leafMats.size();
-            const SceneMaterial& chosenMat = leafMats[matIndex];
+                // Randomly select a leaf material from the available options
+                int matIndex = rand() % leafMats.size();
+                const SceneMaterial& chosenMat = leafMats[matIndex];
 
-            r.primitive = makePrimitive(currNode->lsystem->leafPrimitive, chosenMat);
-            r.material = chosenMat;
+                r.primitive = makePrimitive(currNode->lsystem->leafPrimitive, chosenMat);
+                r.material = chosenMat;
 
-            r.ctm = currCTM * localM;
+                r.ctm = currCTM * localM;
 
-            renderData.shapes.push_back(r);
+                renderData.shapes.push_back(r);
+            }
         }
         // return;
     }

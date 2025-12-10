@@ -630,6 +630,12 @@
 			null
 		],
 		[
+			"/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/plantpresets.h",
+			"MU",
+			"FQUV7VVNRN/moc_plantpresets.cpp",
+			null
+		],
+		[
 			"/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/mainwindow.h",
 			"MU",
 			"UVLADIE3JM/moc_mainwindow.cpp",
@@ -816,6 +822,11 @@
 		],
 		[
 			"/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/lsystem.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/lsystem/plantpresets.cpp",
 			"MU",
 			null
 		],
