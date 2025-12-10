@@ -301,6 +301,7 @@ void PostProcess::resizeAttachments(int w, int h) {
 }
 
 void PostProcess::beginScenePass(int w, int h) {
+
     if (!ready()) return;
 
     ensureSize(w, h);
@@ -313,6 +314,7 @@ void PostProcess::beginScenePass(int w, int h) {
 
     glClearColor(0.f, 0.f, 0.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
 }
 
 void PostProcess::endToTarget(GLuint targetFbo, int w, int h, int mode) {

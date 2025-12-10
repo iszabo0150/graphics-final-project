@@ -334,37 +334,20 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         glBindVertexArray(0);
     }
 
-    // render terrain
-    int res = m_terrain.getResolution();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
-
-
-    // OLD RENDER FUNCTION
-    // for (const auto& shape : renderData.shapes) {
-    //     glUseProgram(m_shader);
-
-    //     // get the shape's vao from shaperenderer
-    //     GLPrimitiveData primitiveData = shapeRenderer.getPrimitiveData(shape.primitive.type);
-    //     glBindVertexArray(primitiveData.vao);
-
-    //     // set up all uniforms :P
-    //     // setupCameraUniforms(camera, cameraPos);
-    //     setupShapeUniforms(shape, shape.material);
-    //     // setupLightUniforms(renderData.lights, renderData.globalData);
-    //     setupTextureUniforms(shape.material);
-
-    //     // drawwwwwww and unbind after it done !
-    //     glDrawArrays(GL_TRIANGLES, 0, primitiveData.vertexCount);
-
-    //     glBindVertexArray(0);
-    // }
-
-
     glUseProgram(0);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFBO);
+
 }
 
 void SceneRenderer::paintTerrain(const Camera& camera) {
+
+    // save currently bound FBO to restore after terrain rendering
+    GLint prevFBO = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
+
+    // bind scene FBO to render terrain into it
+    glBindFramebuffer(GL_FRAMEBUFFER, m_sceneFBO);
+    glViewport(0, 0, m_fboWidth, m_fboHeight);
 
     glUseProgram(m_terrain_shader);
     glBindVertexArray(m_terrain_vao);
@@ -384,9 +367,13 @@ void SceneRenderer::paintTerrain(const Camera& camera) {
 
     glBindVertexArray(0);
     glUseProgram(0);
+
+    // restore previously bound FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, static_cast<GLuint>(prevFBO));
+
 }
 
-//the felow functions are helper functions for all of the uniforms in the shaders !
+//the below functions are helper functions for all of the uniforms in the shaders !
 
 void SceneRenderer::setupShadowUniform(const Shadow& shadow) {
     glActiveTexture(GL_TEXTURE0);
