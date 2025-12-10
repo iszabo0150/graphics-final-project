@@ -3,12 +3,26 @@
 #include "utils/textureutils.h"
 #include "renderers/lightrenderer.h"
 #include "utils/terraingenerator.h"
-
+#include <glm/gtc/matrix_transform.hpp>
 #include <QImage>
 #include <QString>
-#include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 void SceneRenderer::initialize(GLuint texture_shader) {
+
+    m_shader = ShaderLoader::createShaderProgram(
+        ":/resources/shaders/default.vert", 
+        ":/resources/shaders/default.frag"
+    );
+
+    m_sceneFBO = 0;
+    m_sceneTexture = 0;
+    m_depthTexture = 0;
+    m_fboWidth = 0;
+    m_fboHeight = 0;
+
+    m_defaultFBO = 0;
+
     m_shader = ShaderLoader::createShaderProgram(":/resources/shaders/default.vert", ":/resources/shaders/default.frag");
     m_texture_shader = texture_shader;
     m_terrain_shader = ShaderLoader::createShaderProgram(":/resources/shaders/terrain.vert", ":/resources/shaders/terrain.frag");
@@ -16,15 +30,66 @@ void SceneRenderer::initialize(GLuint texture_shader) {
 
     loadSkybox();
     loadTerrain();
+    
 }
 
 void SceneRenderer::cleanup() {
+
     glDeleteProgram(m_shader);
+
+    // deleting scene fbo for cleanup
+    if (m_sceneFBO) glDeleteFramebuffers(1, &m_sceneFBO);
+    if (m_sceneTexture) glDeleteTextures(1, &m_sceneTexture);
+    if (m_depthTexture) glDeleteTextures(1, &m_depthTexture);
 
     for (auto& pair : m_textureCache) {
         glDeleteTextures(1, &pair.second);
     }
     m_textureCache.clear();
+}
+
+void SceneRenderer::initializeFBO(int width, int height) {
+
+    if (m_sceneFBO) glDeleteFramebuffers(1, &m_sceneFBO);
+    if (m_sceneTexture) glDeleteTextures(1, &m_sceneTexture);
+    if (m_depthTexture) glDeleteTextures(1, &m_depthTexture);
+
+    m_fboWidth = width;
+    m_fboHeight = height;
+
+    // scene fbo
+    glGenFramebuffers(1, &m_sceneFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_sceneFBO);
+    
+    // color texture
+    glGenTextures(1, &m_sceneTexture);
+    glBindTexture(GL_TEXTURE_2D, m_sceneTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, 
+                 GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 
+                          GL_TEXTURE_2D, m_sceneTexture, 0);
+    
+    // depth texture
+    glGenTextures(1, &m_depthTexture);
+    glBindTexture(GL_TEXTURE_2D, m_depthTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, width, height, 0,
+                 GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
+                          GL_TEXTURE_2D, m_depthTexture, 0);
+
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFBO);
+
+}
+
+void SceneRenderer::resize(int width, int height) {
+
+    if ( width != m_fboWidth || height != m_fboHeight ) initializeFBO(width, height);
+
 }
 
 /**
@@ -35,6 +100,19 @@ void SceneRenderer::cleanup() {
  * @param shapeRenderer
  */
 void SceneRenderer::render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow) {
+
+    if (m_sceneFBO == 0) initializeFBO(800, 600);
+
+    // binding scene fbo
+    glBindFramebuffer(GL_FRAMEBUFFER, m_sceneFBO);
+    glViewport(0, 0, m_fboWidth, m_fboHeight);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // draw skybox first while depth is cleared
+    glDisable(GL_CULL_FACE);
+    paintTexture(camera);
+    glEnable(GL_CULL_FACE);
 
     glm::vec3 cameraPos = camera.getPos();
 

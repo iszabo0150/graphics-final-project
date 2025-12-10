@@ -1,0 +1,87 @@
+{
+  "name": "winter_garden",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [0, 25, -80],
+    "look": [0, 0, 1],
+    "up": [0, 1, 0],
+    "heightAngle": 45
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.0, 1.0, 1.1],
+          "direction": [0.3, -1.0, 0.3]
+        }
+      ]
+    },
+
+    {
+      "translate": [0, 0, 0],
+      "lsystem": {
+        "plantType": "oak_tree",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [-25, 0, 10],
+      "scale": [0.6, 0.6, 0.6],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [25, 0, 10],
+      "scale": [0.6, 0.6, 0.6],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [-15, 0, 20],
+      "scale": [0.8, 0.8, 0.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [15, 0, 20],
+      "scale": [0.8, 0.8, 0.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [-35, 0, -5],
+      "scale": [0.5, 0.5, 0.5],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "winter"
+      }
+    },
+
+    {
+      "translate": [35, 0, -5],
+      "scale": [0.5, 0.5, 0.5],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "winter"
+      }
+    }
+  ]
+}

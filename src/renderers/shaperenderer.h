@@ -27,6 +27,8 @@ public:
     void initialize();
     void cleanup();
     GLPrimitiveData getPrimitiveData(PrimitiveType type) {return m_shapeMap.at(type);}
+    GLuint getVAO(PrimitiveType type) const {return m_shapeMap.at(type).vao;}
+    int getVertexCount(PrimitiveType type) const {return m_shapeMap.at(type).vertexCount;}
     MeshGLData getMeshData(const std::string& filepath) { return m_meshLoader.getMeshData(filepath); }
 
     void updateTessellation();

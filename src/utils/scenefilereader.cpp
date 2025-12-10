@@ -1,5 +1,6 @@
 #include "scenefilereader.h"
 #include "scenedata.h"
+#include "lsystem/plantpresets.h"
 
 #include "glm/gtc/type_ptr.hpp"
 
@@ -1063,6 +1064,62 @@ bool ScenefileReader::parseLSystem(const QJsonObject &obj, SceneNode *node){
     LSystemData *ls = new LSystemData();
     node->lsystem = ls;
     ls->valid = true;
+
+    std::filesystem::path basepath = std::filesystem::path(file_name).parent_path().parent_path();
+
+    // ========================================
+    // CHECK FOR PLANT TYPE PRESET FIRST
+    // ========================================
+    if (obj.contains("plantType")) {
+        if (!obj["plantType"].isString()) {
+            std::cout << "lsystem plantType must be a string\n";
+            return false;
+        }
+        
+        std::string plantType = obj["plantType"].toString().toStdString();
+        const PlantPreset* preset = PlantPresets::getPreset(plantType);
+        
+        if (!preset) {
+            std::cout << "Unknown plant type: " << plantType << "\n";
+            std::cout << "Available presets: ";
+            for (const auto& name : PlantPresets::getAvailablePresets()) {
+                std::cout << name << " ";
+            }
+            std::cout << "\n";
+            return false;
+        }
+        
+        // Determine season (default to SUMMER if not specified)
+        Season season = Season::SUMMER;
+        if (obj.contains("season")) {
+            if (!obj["season"].isString()) {
+                std::cout << "lsystem season must be a string\n";
+                return false;
+            }
+            std::string seasonStr = obj["season"].toString().toLower().toStdString();
+            if (seasonStr == "spring") season = Season::SPRING;
+            else if (seasonStr == "summer") season = Season::SUMMER;
+            else if (seasonStr == "fall" || seasonStr == "autumn") season = Season::FALL;
+            else if (seasonStr == "winter") season = Season::WINTER;
+            else {
+                std::cout << "Unknown season: " << seasonStr << " (using summer)\n";
+            }
+        }
+        
+        // Create LSystemData from preset
+        *ls = PlantPresets::createLSystemData(*preset, season, basepath.string());
+        
+        std::cout << "Loaded plant preset '" << plantType << "' for season " 
+                  << (season == Season::SPRING ? "SPRING" : 
+                      season == Season::SUMMER ? "SUMMER" : 
+                      season == Season::FALL ? "FALL" : "WINTER") << std::endl;
+        
+        return true;
+    }
+
+    // ========================================
+    // TRADITIONAL JSON PARSING (for backwards compatibility)
+    // ========================================
 
     // AXIOM
     if (!obj.contains("axiom") || !obj["axiom"].isString()) {

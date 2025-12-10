@@ -183,14 +183,14 @@ void MainWindow::initialize() {
     farSlider = new QSlider(Qt::Orientation::Horizontal); // Far plane slider
     farSlider->setTickInterval(1);
     farSlider->setMinimum(1000);
-    farSlider->setMaximum(10000);
-    farSlider->setValue(10000);
+    farSlider->setMaximum(100000);
+    farSlider->setValue(40000);
 
     farBox = new QDoubleSpinBox();
     farBox->setMinimum(10.f);
-    farBox->setMaximum(100.f);
+    farBox->setMaximum(1000.f);
     farBox->setSingleStep(0.1f);
-    farBox->setValue(100.f);
+    farBox->setValue(400.f);
 
     // Adds the slider and number box to the parameter layouts
     lnear->addWidget(nearSlider);

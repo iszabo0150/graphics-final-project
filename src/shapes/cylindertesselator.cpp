@@ -28,10 +28,10 @@ std::vector<float> CylinderTessellator::tessellate(int p1, int p2) {
 
 void CylinderTessellator::makeWedge(std::vector<float>& data, int param1,  float currentTheta, float nextTheta) {
     // top cap
-    makeCapSlice(data, param1, true, currentTheta, nextTheta);
+    // makeCapSlice(data, param1, true, currentTheta, nextTheta);
 
     // bottom cap
-    makeCapSlice(data, param1, false, currentTheta, nextTheta);
+    // makeCapSlice(data, param1, false, currentTheta, nextTheta);
 
     // side surface
     makeSideSlice(data, param1, currentTheta, nextTheta);

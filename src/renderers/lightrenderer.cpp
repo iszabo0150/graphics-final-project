@@ -51,12 +51,13 @@ void LightRenderer::makeShadowFBO() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT,
                  0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    // Set border color to 1.0 (max depth) so areas outside shadow map aren't shadowed
+    float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
     glBindFramebuffer(GL_FRAMEBUFFER, m_shadow.fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_shadow.depth_map, 0);
@@ -187,10 +188,19 @@ glm::mat4 LightRenderer::calculateLightMatrix(SceneLight *light, glm::vec3 posit
         break;
     case LightType::LIGHT_DIRECTIONAL:
         // calculate light space matrix for shadow mapping
-        // encompasses everything in the axis-aligned box (-10, 10), (-10, 10), (near, far)
-        lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.01f, 10.0f);
-        lightView = glm::lookAt(lightInvDir, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        lightSpaceMatrix = lightProjection * lightView;
+        // Position the light far enough to see the whole scene
+        {
+            float orthoSize = 100.0f;  // covers a 200x200 area (adjust based on your scene)
+            float nearPlane = 0.1f;
+            float farPlane = 200.0f;   // far enough to capture distant objects
+            
+            // Position light above the scene center, offset by light direction
+            glm::vec3 lightPos = lightInvDir * 100.0f;  // move light far back along inverse direction
+            
+            lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, nearPlane, farPlane);
+            lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            lightSpaceMatrix = lightProjection * lightView;
+        }
         break;
 
     case LightType::LIGHT_SPOT:

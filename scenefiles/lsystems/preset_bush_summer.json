@@ -1,0 +1,31 @@
+{
+  "name": "preset_bush_summer",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [10, 10, 10],
+    "up": [0.0, 1.0, 0.0],
+    "heightAngle": 30.0,
+    "focus": [0.0, 0.0, 0.0]
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.0, 1.0, 1.0],
+          "direction": [-3.0, -2.0, -1.0]
+        }
+      ]
+    },
+    {
+      "lsystem": {
+        "plantType": "bush",
+        "season": "summer"
+      }
+    }
+  ]
+}
