@@ -12,7 +12,7 @@ out vec3 textureDir;
 void main() {
     //gl_Position = vec4(position, 1.0f);
     //texture_coords = uv_coords;
-    textureDir = position;
+    textureDir = vec3(-position.x, -position.y, position.z);
     vec4 pos = projection * view * vec4(position, 1.0);
     gl_Position = pos.xyww;
 

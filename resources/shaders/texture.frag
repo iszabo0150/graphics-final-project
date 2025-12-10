@@ -25,6 +25,6 @@ void main() {
     // below linearization did not work
     //fragColor = vec4(newDepth, newDepth, newDepth, 1.0f);
    // fragColor = vec4(depthValue, depthValue, depthValue, 1.0f);
-    fragColor = texture(cubeMap, textureDir);
-   // fragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+   fragColor = texture(cubeMap, textureDir);
+   //fragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 }

@@ -92,15 +92,18 @@ void Realtime::paintGL() {
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
     //render the scene based on render data !!
-    //m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
-    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    glCullFace(GL_FRONT);
+
+   // glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+    glDisable(GL_CULL_FACE);
+    //glFrontFace(GL_CCW);
+    //glCullFace(GL_FRONT);
 
     m_sceneRenderer.paintTexture(*m_camera);
 
-    glEnable(GL_BACK);
+    glEnable(GL_CULL_FACE);
+
+    m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
+
 
 }
 

@@ -81,12 +81,12 @@ private:
     GLuint m_skybox_vbo;
     glm::mat4 m_view;
 
-    std::vector<std::string> m_faces = {":/resources/images/back.jpg",
-                                        ":/resources/images/bottom.jpg",
-                                        ":/resources/images/front.jpg",
+    std::vector<std::string> m_faces = {":/resources/images/right.jpg",
                                         ":/resources/images/left.jpg",
-                                        ":/resources/images/right.jpg",
-                                        ":/resources/images/top.jpg"};
+                                        ":/resources/images/bottom.jpg",
+                                        ":/resources/images/top.jpg",
+                                        ":/resources/images/front.jpg",
+                                        ":/resources/images/back.jpg"};
 };
 
 #endif // SCENERENDERER_H

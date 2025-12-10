@@ -185,7 +185,7 @@ void SceneRenderer::loadSkybox() {
 
     // set up skybox texture
     glGenTextures(1, &m_skybox_texture);
-    glActiveTexture(GL_TEXTURE4);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox_texture);
 
     // 6 TEXTURE2Ds, one for each face of the cube
@@ -213,7 +213,7 @@ void SceneRenderer::loadSkybox() {
 void SceneRenderer::paintTexture(const Camera& camera) {
     glDepthMask(GL_FALSE);
     glDepthFunc(GL_LEQUAL);
-    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(m_texture_shader);
 
     glBindVertexArray(m_skybox_vao); // bind the actual skybox "box"
@@ -226,8 +226,8 @@ void SceneRenderer::paintTexture(const Camera& camera) {
     glUniform1i(loc_texture, 0);
 
     m_view = glm::mat4(glm::mat3(camera.getProjMatrix()));
-    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "viewMatrix"), 1, GL_FALSE, &m_view[0][0]);
-    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "projMatrix"), 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "view"), 1, GL_FALSE, &m_view[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "projection"), 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthMask(GL_TRUE);
