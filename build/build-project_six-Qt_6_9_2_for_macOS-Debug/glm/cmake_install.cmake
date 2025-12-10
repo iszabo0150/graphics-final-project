@@ -1,4 +1,4 @@
-# Install script for directory: /Users/isabella/Desktop/cs1230/graphics-final-project/glm
+# Install script for directory: /Users/isabella/Desktop/graphics-final-project/glm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

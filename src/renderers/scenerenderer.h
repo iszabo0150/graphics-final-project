@@ -6,6 +6,7 @@
 #include "renderers/lightrenderer.h"
 #include "utils/sceneparser.h"
 #include "camera/camera.h"
+#include "utils/terraingenerator.h"
 
 class SceneRenderer {
 public:
@@ -13,9 +14,11 @@ public:
     void render(const RenderData& renderData, const Camera& camera, ShapeRenderer& shapeRenderer, const Shadow &shadow);
     void cleanup();
     void paintTexture(const Camera& camera);
+    void paintTerrain(const Camera& camera);
 
 private:
     GLuint m_shader;
+    GLuint m_terrain_shader;
 
     void setupShadowUniform(const Shadow& shadow);
 
@@ -28,10 +31,19 @@ private:
     void setupTextureUniforms(const SceneMaterial& material);
 
     void loadSkybox();
+    void loadTerrain();
 
     GLuint loadTexture(const std::string& filename, bool isBump=false, GLuint slot=0);
 
+
     std::map<std::string, GLuint> m_textureCache;
+
+    // terrain
+    GLuint m_terrain_vao;
+    GLuint m_terrain_vbo;
+    TerrainGenerator m_terrain;
+
+    // skybox
     GLuint m_skybox_texture;
     GLuint m_texture_shader;
 

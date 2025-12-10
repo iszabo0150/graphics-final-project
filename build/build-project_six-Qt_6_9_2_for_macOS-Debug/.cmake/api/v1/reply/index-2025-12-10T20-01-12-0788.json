@@ -1,0 +1,97 @@
+{
+	"cmake" : 
+	{
+		"generator" : 
+		{
+			"multiConfig" : false,
+			"name" : "Ninja"
+		},
+		"paths" : 
+		{
+			"cmake" : "/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/cmake",
+			"cpack" : "/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/cpack",
+			"ctest" : "/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/ctest",
+			"root" : "/Users/isabella/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30"
+		},
+		"version" : 
+		{
+			"isDirty" : false,
+			"major" : 3,
+			"minor" : 30,
+			"patch" : 5,
+			"string" : "3.30.5",
+			"suffix" : ""
+		}
+	},
+	"objects" : 
+	[
+		{
+<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/index-2025-12-10T20-01-12-0788.json
+			"jsonFile" : "codemodel-v2-e752e383490848f733b4.json",
+========
+			"jsonFile" : "codemodel-v2-5acaea98419941b056e0.json",
+>>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/index-2025-12-10T19-24-09-0987.json
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 7
+			}
+		},
+		{
+			"jsonFile" : "cache-v2-c04d5b2d85e2b5ed0cd2.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		},
+		{
+			"jsonFile" : "cmakeFiles-v1-6194171f0e6d390ecba9.json",
+			"kind" : "cmakeFiles",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 1
+			}
+		}
+	],
+	"reply" : 
+	{
+		"cache-v2" : 
+		{
+			"jsonFile" : "cache-v2-c04d5b2d85e2b5ed0cd2.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		},
+		"cmakeFiles-v1" : 
+		{
+			"jsonFile" : "cmakeFiles-v1-6194171f0e6d390ecba9.json",
+			"kind" : "cmakeFiles",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 1
+			}
+		},
+		"codemodel-v2" : 
+		{
+<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/index-2025-12-10T20-01-12-0788.json
+			"jsonFile" : "codemodel-v2-e752e383490848f733b4.json",
+========
+			"jsonFile" : "codemodel-v2-5acaea98419941b056e0.json",
+>>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/index-2025-12-10T19-24-09-0987.json
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 7
+			}
+		}
+	}
+}

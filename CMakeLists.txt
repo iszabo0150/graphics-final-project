@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
     src/utils/objloader.h src/utils/objloader.cpp
     src/shapes/meshloader.h src/shapes/meshloader.cpp
+    src/utils/terraingenerator.h src/utils/terraingenerator.cpp
 
 
 
@@ -109,8 +110,9 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/images/py.png
         resources/images/px.png
         resources/images/nx.png
-
-    )
+        
+        resources/shaders/terrain.frag
+        resources/shaders/terrain.vert)
 
 
 # GLEW: this provides support for Windows (including 64-bit)
