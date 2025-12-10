@@ -71,7 +71,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/cmake --regenerate-during-build -S/Users/isabella/Desktop/cs1230/graphics-final-project -B/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug
+  command = /Users/isabella/Qt/Tools/CMake/CMake.app/Contents/bin/cmake --regenerate-during-build -S/Users/isabella/Desktop/graphics-final-project -B/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug
   description = Re-running CMake...
   generator = 1
 
