@@ -30,8 +30,8 @@ private:
     GLuint m_texture_shader;
     GLuint m_default_fbo;
 
-    GLuint SHADOW_WIDTH = 1024;
-    GLuint SHADOW_HEIGHT = 1024;
+    GLuint SHADOW_WIDTH = 2048;
+    GLuint SHADOW_HEIGHT = 2048;
 
     GLuint m_fullscreen_vbo;
     GLuint m_fullscreen_vao;

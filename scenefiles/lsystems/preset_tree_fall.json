@@ -1,0 +1,31 @@
+{
+  "name": "preset_fall_tree",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [0, 20, -60],
+    "look": [0, 0, 1],
+    "up": [0, 1, 0],
+    "heightAngle": 35
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [1.2, 1.2, 1.2],
+          "direction": [0.3, -1.0, 0.3]
+        }
+      ]
+    },
+    {
+      "lsystem": {
+        "plantType": "oak_tree",
+        "season": "fall"
+      }
+    }
+  ]
+}

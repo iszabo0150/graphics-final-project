@@ -115,12 +115,18 @@ private:
     GLuint m_skybox_vbo;
     glm::mat4 m_view;
 
-    std::vector<std::string> m_faces = {":/resources/images/right.jpg",
-                                        ":/resources/images/left.jpg",
-                                        ":/resources/images/bottom.jpg",
-                                        ":/resources/images/top.jpg",
-                                        ":/resources/images/front.jpg",
-                                        ":/resources/images/back.jpg"};
+    // std::vector<std::string> m_faces = {":/resources/images/right.jpg",
+    //                                     ":/resources/images/left.jpg",
+    //                                     ":/resources/images/bottom.jpg",
+    //                                     ":/resources/images/top.jpg",
+    //                                     ":/resources/images/front.jpg",
+    //                                     ":/resources/images/back.jpg"};
+    std::vector<std::string> m_faces = {":/resources/images/pz.png",
+                                        ":/resources/images/nz.png",
+                                        ":/resources/images/ny.png",
+                                        ":/resources/images/py.png",
+                                        ":/resources/images/px.png",
+                                        ":/resources/images/nx.png"};
 };
 
 #endif // SCENERENDERER_H

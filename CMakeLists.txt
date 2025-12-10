@@ -54,6 +54,11 @@ add_executable(${PROJECT_NAME}
     src/renderers/scenerenderer.h src/renderers/scenerenderer.cpp
     src/renderers/screenrenderer.h src/renderers/screenrenderer.cpp
     src/lsystem/lsystem.h src/lsystem/lsystem.cpp
+    src/lsystem/plantpresets.h src/lsystem/plantpresets.cpp
+    src/lsystem/presets/preset_utils.h
+    src/lsystem/presets/oak_tree.cpp
+    src/lsystem/presets/bush.cpp
+    src/lsystem/presets/flower_plant.cpp
     src/utils/textureutils.h src/utils/textureutils.cpp
     src/renderers/lightrenderer.h src/renderers/lightrenderer.cpp
     src/renderers/godrayrenderer.h src/renderers/godrayrenderer.cpp
@@ -107,6 +112,14 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/images/left.jpg
         resources/images/right.jpg
         resources/images/top.jpg
+
+        resources/images/pz.png
+        resources/images/nz.png
+        resources/images/ny.png
+        resources/images/py.png
+        resources/images/px.png
+        resources/images/nx.png
+        
         resources/shaders/terrain.frag
         resources/shaders/terrain.vert
     )

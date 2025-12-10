@@ -12,7 +12,7 @@
 		],
 		"files" : 
 		[
-			"/Users/isabella/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
+			"/Users/aisosaidahosa/Qt/6.9.2/macos/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
 			"CMakeLists.txt"
 		],
 		"nodes" : 
@@ -23,7 +23,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 85,
+				"line" : 89,
 				"parent" : 0
 			},
 			{
@@ -211,7 +211,6 @@
 				"file" : 0,
 				"line" : 2172,
 				"parent" : 31
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Release-18f9410b1052a685d4fa.json
 			},
 			{
 				"command" : 1,
@@ -260,8 +259,6 @@
 				"file" : 0,
 				"line" : 2172,
 				"parent" : 39
-========
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Debug-94c8f9a158959c62ebeb.json
 			}
 		]
 	},
@@ -302,9 +299,7 @@
 				3,
 				4,
 				5,
-				6,
-				13,
-				14
+				6
 			]
 		}
 	],
@@ -313,7 +308,7 @@
 		{
 			"backtrace" : 4,
 			"isGenerated" : true,
-			"path" : "build/build-project_six-Qt_6_9_2_for_macOS-Debug/.qt/rcc/Resources.qrc",
+			"path" : "build/build-final_project-Qt_6_9_2_for_macOS-Release/.qt/rcc/Resources.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -378,7 +373,6 @@
 		},
 		{
 			"backtrace" : 30,
-<<<<<<<< HEAD:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Release-18f9410b1052a685d4fa.json
 			"path" : "resources/images/pz.png",
 			"sourceGroupIndex" : 0
 		},
@@ -406,15 +400,6 @@
 			"backtrace" : 40,
 			"path" : "resources/images/nx.png",
 			"sourceGroupIndex" : 0
-========
-			"path" : "resources/shaders/terrain.frag",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 32,
-			"path" : "resources/shaders/terrain.vert",
-			"sourceGroupIndex" : 1
->>>>>>>> main:build/build-project_six-Qt_6_9_2_for_macOS-Debug/.cmake/api/v1/reply/target-final_proj_other_files-Debug-94c8f9a158959c62ebeb.json
 		}
 	],
 	"type" : "UTILITY"
