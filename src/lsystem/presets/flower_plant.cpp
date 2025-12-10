@@ -24,42 +24,42 @@ PlantPreset createFlowerPlantPreset() {
         5.0f
     );
     
-    // ============ RULES ============
+    // rulessss
     
-    // P rules
+    // p rules
     addRule(preset, "P", "I+[P+O]--//[--K]I[++K]-[PO]++PO", 0.4f);
     addRule(preset, "P", "I+[P+O]--//[--K]I[++K]-[P]++PO", 0.3f);
     addRule(preset, "P", "I++[P+O]---//[--K]I[+++K]-[PO]+PO", 0.2f);
     addRule(preset, "P", "I[++K][-K]+[P]//I-[PO]++P", 0.1f);
     
-    // I rules
+    // i rules
     addRule(preset, "I", "FS[//&&K][//^^K]FS", 0.5f);
     addRule(preset, "I", "FS[//&K]FS[//^K]", 0.3f);
     addRule(preset, "I", "FSF[//&&K][//^^K]S", 0.2f);
     
-    // S rules
+    // s rules
     addRule(preset, "S", "SFS", 0.5f);
     addRule(preset, "S", "SF", 0.3f);
     addRule(preset, "S", "SFFS", 0.2f);
     
-    // K rules (leaves)
+    // k rules (leaves)
     addRule(preset, "K", "L(1)", 0.5f);
     addRule(preset, "K", "L(1.2)", 0.25f);
     addRule(preset, "K", "L(0.8)", 0.25f);
     
-    // O rules (flower stalks)
+    // o rules (flower stalks)
     addRule(preset, "O", "[&&&D/////////////////W(0.15)]", 0.6f);
     addRule(preset, "O", "[&&D///////////////W(0.12)]", 0.25f);
     addRule(preset, "O", "[&&&&D///////////////////W(0.18)]", 0.15f);
     
-    // D rules
+    // d rules
     addRule(preset, "D", "FF", 0.6f);
     addRule(preset, "D", "FFF", 0.25f);
     addRule(preset, "D", "F", 0.15f);
     
-    // ============ SEASONAL MATERIALS ============
+    // materiallllssss
     
-    // SUMMER - bright leaves, white flowers
+    // summer - bright leaves, white flowers
     {
         SeasonalMaterials summer;
         summer.hasLeaves = true;
@@ -71,7 +71,7 @@ PlantPreset createFlowerPlantPreset() {
         preset.seasonalMaterials[Season::SUMMER] = summer;
     }
     
-    // SPRING - bright leaves, yellow flowers
+    // spring - bright leaves, yellow flowers
     {
         SeasonalMaterials spring;
         spring.hasLeaves = true;
@@ -83,7 +83,7 @@ PlantPreset createFlowerPlantPreset() {
         preset.seasonalMaterials[Season::SPRING] = spring;
     }
     
-    // FALL - muted leaves, orange flowers
+    // fall - muted leaves, orange flowers
     {
         SeasonalMaterials fall;
         fall.hasLeaves = true;
@@ -95,7 +95,7 @@ PlantPreset createFlowerPlantPreset() {
         preset.seasonalMaterials[Season::FALL] = fall;
     }
     
-    // WINTER - muted leaves, no flowers
+    // winter - muted leaves, no flowers
     {
         SeasonalMaterials winter;
         winter.hasLeaves = true;

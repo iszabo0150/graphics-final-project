@@ -24,24 +24,24 @@ PlantPreset createBushPreset() {
         5.0f
     );
     
-    // ============ RULES ============
+    // rulessssss
     
-    // Rule A with thick > 0.05
+    // rule A with thick > 0.05
     addRule(preset, "A",
         "[&F(len,thick)L(1.5)A(len*0.9,thick*0.7)]/////[^+F(len*0.9,thick*0.7)L(1.5)A(len*0.81,thick*0.49)]/////[&-F(len*0.81,thick*0.49)L(1.5)A(len*0.73,thick*0.34)]",
         1.0f, {"len", "thick"}, "thick > 0.05");
     
-    // Terminal A WITH flowers - 30%
+    // terminal A WITH flowers - 30%
     addRule(preset, "A",
         "[^^L(1.5)]//[&+L(1.5)]///[^-W(0.12)]///[&L(1.5)]",
         0.3f, {"len", "thick"}, "thick <= 0.05");
     
-    // Terminal A WITHOUT flowers - 70%
+    // terminal A WITHOUT flowers - 70%
     addRule(preset, "A",
         "[^^L(1.5)]//[&+L(1.5)]///[^-L(1.5)]///[&L(1.5)]",
         0.7f, {"len", "thick"}, "thick <= 0.05");
     
-    // F rules
+    // f rules
     addRule(preset, "F",
         "S(len,thick)/////F(len*0.9,thick*0.85)",
         1.0f, {"len", "thick"}, "thick > 0.05");
@@ -50,7 +50,7 @@ PlantPreset createBushPreset() {
         "F(len*0.5,thick)L(1.5)",
         1.0f, {"len", "thick"}, "thick <= 0.05");
     
-    // S rules
+    // s rules
     addRule(preset, "S",
         "F(len,thick)L(1.5)",
         1.0f, {"len", "thick"}, "thick > 0.05");
@@ -59,9 +59,9 @@ PlantPreset createBushPreset() {
         "L(1.5)",
         1.0f, {"len", "thick"}, "thick <= 0.05");
     
-    // ============ SEASONAL MATERIALS ============
+    // materialsssss
     
-    // SUMMER - bright green, white flowers
+    // summer - bright green, white flowers
     {
         SeasonalMaterials summer;
         summer.hasLeaves = true;
@@ -74,7 +74,7 @@ PlantPreset createBushPreset() {
         preset.seasonalMaterials[Season::SUMMER] = summer;
     }
     
-    // SPRING - bright green, pink flowers
+    // spring - bright green, pink flowers
     {
         SeasonalMaterials spring;
         spring.hasLeaves = true;
@@ -86,7 +86,7 @@ PlantPreset createBushPreset() {
         preset.seasonalMaterials[Season::SPRING] = spring;
     }
     
-    // FALL - muted yellow-green, no flowers
+    // fall - muted yellow-green, no flowers
     {
         SeasonalMaterials fall;
         fall.hasLeaves = true;
@@ -97,7 +97,7 @@ PlantPreset createBushPreset() {
         preset.seasonalMaterials[Season::FALL] = fall;
     }
     
-    // WINTER - no leaves, no flowers
+    // winter - no leaves, no flowers
     {
         SeasonalMaterials winter;
         winter.hasLeaves = false;

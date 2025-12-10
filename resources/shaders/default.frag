@@ -72,22 +72,29 @@ float calculateShadow(vec4 lightPosition, vec3 lightDir) {
     // depth map range is [0, 1], projectionCoords are [-1, 1]
     projectionCoords = projectionCoords * 0.5 + 0.5;
 
-    float xOffset = 1.0/1024.0f;
-    float yOffset = 1.0/1024.0f;
+    // If outside the shadow map frustum, no shadow
+    if (projectionCoords.z > 1.0 || projectionCoords.z < 0.0) {
+        return 0.0;
+    }
+    if (projectionCoords.x < 0.0 || projectionCoords.x > 1.0 ||
+        projectionCoords.y < 0.0 || projectionCoords.y > 1.0) {
+        return 0.0;
+    }
 
+    float xOffset = 1.0/2048.0f;
+    float yOffset = 1.0/2048.0f;
 
-    float dot = dot(normalize(normalWorldSpace), lightDir);
-    dot = clamp(dot, 0.0f, 1.0f);
-    float bias = max(0.05 * (1.0 - dot), 0.005);
+    vec3 normal = normalize(normalWorldSpace);
+    float NdotL = dot(normal, normalize(-lightDir));
+    NdotL = clamp(NdotL, 0.0f, 1.0f);
+    float bias = max(0.005 * (1.0 - NdotL), 0.001);
 
     float sum = 0.0f;
-    // samples 25 texels
+    // samples 25 texels (PCF soft shadows)
     for (int y = -2; y <= 2; ++y) {
         for (int x = -2; x <=2; ++x) {
             vec2 offsets = vec2(x * xOffset, y * yOffset);
-            // add 0.001 to avoid z-fighting
             vec2 coords = projectionCoords.xy + offsets;
-
 
             float closestDepth = texture(shadowTexture, coords).r;
             float currDepth = projectionCoords.z - bias;

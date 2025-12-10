@@ -27,14 +27,14 @@ PlantPreset createOakTreePreset() {
         0.5f
     );
     
-    // ============ RULES ============
+    // ruless
     
-    // Rule A with thick > 0.05
+    // rule A with thick > 0.05
     addRule(preset, "A",
         "F(len*0.62,thick)[+(angle*0.95)^(6)B(len*1.5,thick*0.4,angle*1.12)]F(len*0.15,thick)L(1)/(117)[+(angle*1.3)^(12)B(len*1.5,thick*0.4,angle*0.92)]F(len*0.09,thick)L(1)/(122)[+(angle*0.85)^(3)B(len*1.5,thick*0.4,angle*0.88)]F(len*0.11,thick)L(1)A(len*0.93,thick*0.55,angle*1.05)",
         0.3f, {"len", "thick", "angle"}, "thick > 0.05");
     
-    // Rule B variations with thick > 0.05
+    // rule B variations with thick > 0.05
     addRule(preset, "B",
         "F(len*0.6,thick)L(1)^(6)[+(angle*0.78)B(len*0.88,thick*0.55,angle*0.82)]F(len*0.1,thick)L(1)/(142)[+(angle*0.62)B(len*0.88,thick*0.55,angle*0.9)]F(len*0.08,thick)L(1)/(127)[+(angle*0.95)B(len*0.88,thick*0.55,angle*0.88)]F(len*0.07,thick)L(1)",
         0.3f, {"len", "thick", "angle"}, "thick > 0.05");
@@ -47,24 +47,24 @@ PlantPreset createOakTreePreset() {
         "F(len*0.45,thick)L(1)^(4)[+(angle*0.92)B(len*0.88,thick*0.55,angle*0.95)]F(len*0.11,thick)L(1)/(118)[+(angle*0.55)B(len*0.88,thick*0.55,angle*0.92)]F(len*0.07,thick)L(1)/(155)[+(angle*0.85)B(len*0.88,thick*0.55,angle*0.9)]F(len*0.05,thick)L(1)",
         0.4f, {"len", "thick", "angle"}, "thick > 0.05");
     
-    // Terminal rules (thick <= 0.05)
+    // terminal rules (thick <= 0.05)
     addRule(preset, "A",
         "F(len*0.2,thick)[+(angle*0.8)L(1)]F(len*0.15,thick)[/(90)L(1)]F(len*0.12,thick)[/(180)L(1)]F(len*0.1,thick)[/(270)L(1)]F(len*0.08,thick)[^(20)L(1)][&(20)]",
         1.0f, {"len", "thick", "angle"}, "thick <= 0.05");
     
-    // Terminal B WITH flowers - 30%
+    // terminal B WITH flowers - 30%
     addRule(preset, "B",
         "F(len*0.15,thick)[+(angle*0.6)L(1)]F(len*0.12,thick)[/(72)L(1)]F(len*0.1,thick)[/(144)L(1)]F(len*0.08,thick)[/(216)L(1)]F(len*0.06,thick)[/(288)L(1)]F(len*0.05,thick)[^(15)L(1)][&(15)W(0.5)]",
         0.3f, {"len", "thick", "angle"}, "thick <= 0.05");
     
-    // Terminal B WITHOUT flowers - 70%
+    // terminal B WITHOUT flowers - 70%
     addRule(preset, "B",
         "F(len*0.15,thick)[+(angle*0.6)L(1)]F(len*0.12,thick)[/(72)L(1)]F(len*0.1,thick)[/(144)L(1)]F(len*0.08,thick)[/(216)L(1)]F(len*0.06,thick)[/(288)L(1)]F(len*0.05,thick)[^(15)L(1)][&(15)L(1)]",
         0.7f, {"len", "thick", "angle"}, "thick <= 0.05");
     
-    // ============ SEASONAL MATERIALS ============
+    // materialssss
     
-    // SUMMER - lush green
+    // summer - lush green
     {
         SeasonalMaterials summer;
         summer.hasLeaves = true;
@@ -74,7 +74,7 @@ PlantPreset createOakTreePreset() {
         preset.seasonalMaterials[Season::SUMMER] = summer;
     }
     
-    // SPRING - green with flowers
+    // spring - green with flowers
     {
         SeasonalMaterials spring;
         spring.hasLeaves = true;
@@ -87,7 +87,7 @@ PlantPreset createOakTreePreset() {
         preset.seasonalMaterials[Season::SPRING] = spring;
     }
     
-    // FALL - orange/red/yellow
+    // fall - orange/red/yellow
     {
         SeasonalMaterials fall;
         fall.hasLeaves = true;
@@ -99,7 +99,7 @@ PlantPreset createOakTreePreset() {
         preset.seasonalMaterials[Season::FALL] = fall;
     }
     
-    // WINTER - no leaves
+    // winter - no leaves
     {
         SeasonalMaterials winter;
         winter.hasLeaves = false;
