@@ -100,7 +100,7 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/occlusion.vert
         resources/shaders/copy.frag
         resources/shaders/copy.vert
-)
+
         resources/images/back.jpg
         resources/images/bottom.jpg
         resources/images/front.jpg
@@ -108,7 +108,8 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/images/right.jpg
         resources/images/top.jpg
         resources/shaders/terrain.frag
-        resources/shaders/terrain.vert)
+        resources/shaders/terrain.vert
+    )
 
 
 # GLEW: this provides support for Windows (including 64-bit)
