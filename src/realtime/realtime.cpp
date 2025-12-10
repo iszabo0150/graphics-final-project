@@ -68,10 +68,11 @@ void Realtime::initializeGL() {
 
 
     // Students: anything requiring OpenGL calls when the program starts should be done here
+    m_texture_shader = ShaderLoader::createShaderProgram(":/resources/shaders/texture.vert", ":/resources/shaders/texture.frag");
 
     m_shapeRenderer.initialize();
-    m_sceneRenderer.initialize();
-    m_lightRenderer.initialize(m_shapeRenderer);
+    m_sceneRenderer.initialize(m_texture_shader);
+    m_lightRenderer.initialize(m_shapeRenderer, m_texture_shader);
 
     m_isInitialized = true;
 
@@ -91,7 +92,15 @@ void Realtime::paintGL() {
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
     //render the scene based on render data !!
-    m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
+    //m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
+    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_FRONT);
+
+    m_sceneRenderer.paintTexture(*m_camera);
+
+    glEnable(GL_BACK);
 
 }
 

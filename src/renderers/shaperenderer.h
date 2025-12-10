@@ -24,10 +24,10 @@ public:
     void cleanup();
     GLPrimitiveData getPrimitiveData(PrimitiveType type) {return m_shapeMap.at(type);}
     void updateTessellation();
+    void loadSkybox();
 
 private:
     std::map<PrimitiveType, GLPrimitiveData> m_shapeMap;
-
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);
 
     int m_currentParam1 = -1;

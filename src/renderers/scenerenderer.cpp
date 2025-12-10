@@ -6,8 +6,10 @@
 #include <QImage>
 #include <QString>
 
-void SceneRenderer::initialize() {
+void SceneRenderer::initialize(GLuint texture_shader) {
     m_shader = ShaderLoader::createShaderProgram(":/resources/shaders/default.vert", ":/resources/shaders/default.frag");
+    m_texture_shader = texture_shader;
+    loadSkybox();
 }
 
 void SceneRenderer::cleanup() {
@@ -55,6 +57,7 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 
         glBindVertexArray(0);
     }
+
     glUseProgram(0);
 }
 
@@ -162,11 +165,80 @@ void SceneRenderer::setupTextureUniforms(const SceneMaterial& material) {
         glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, bumpTextureID);
     }
+}
+
+void SceneRenderer::loadSkybox() {
+
+    // set up skybox cube (primitive)
+    glGenBuffers(1, &m_skybox_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_skybox_vbo);
+    glBufferData(GL_ARRAY_BUFFER, m_skybox_vertices.size() * sizeof(GLfloat), m_skybox_vertices.data(), GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &m_skybox_vao);
+    glBindVertexArray(m_skybox_vao);
+
+    glEnableVertexAttribArray(0); //position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), reinterpret_cast<void*>(0)); //position
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // set up skybox texture
+    glGenTextures(1, &m_skybox_texture);
+    glActiveTexture(GL_TEXTURE4);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox_texture);
+
+    // 6 TEXTURE2Ds, one for each face of the cube
+    for (int i = 0; i < m_faces.size(); i++) {
+        QString filepath = QString::fromStdString(m_faces[i]);
+        QImage image = QImage(filepath);
+        image = image.convertToFormat(QImage::Format_RGBA8888).mirrored();
+
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA,
+                     image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits());
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
 
 
 
+// used for debugging, renders depth map
+void SceneRenderer::paintTexture(const Camera& camera) {
+    glDepthMask(GL_FALSE);
+    glDepthFunc(GL_LEQUAL);
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUseProgram(m_texture_shader);
+
+    glBindVertexArray(m_skybox_vao); // bind the actual skybox "box"
+
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox_texture);
+
+    GLuint loc_texture = glGetUniformLocation(m_texture_shader, "cubeMap");
+    glUniform1i(loc_texture, 0);
+
+    m_view = glm::mat4(glm::mat3(camera.getProjMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "viewMatrix"), 1, GL_FALSE, &m_view[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(m_texture_shader, "projMatrix"), 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDepthMask(GL_TRUE);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindVertexArray(0);
+    glUseProgram(0);
+    glDepthFunc(GL_LESS);
 
 }
+
 
 GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump, GLuint slot) {
     // check if texture is already loaded

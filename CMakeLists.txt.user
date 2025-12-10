@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 17.0.1, 2025-12-07T16:26:11. -->
+<!-- Written by QtCreator 17.0.1, 2025-12-07T22:45:40. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -216,12 +216,14 @@
      <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
      <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
      <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
-     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
+     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">final_proj</value>
+     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
+     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">final_proj</value>
      <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
      <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
      <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug</value>
     </valuemap>
     <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
    </valuemap>
@@ -299,7 +301,7 @@
       <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
        <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
        <valuelist type="QVariantList" key="CMakeProjectManager.MakeStep.BuildTargets">
-        <value type="QString">install</value>
+        <value type="QString"></value>
        </valuelist>
        <value type="bool" key="CMakeProjectManager.MakeStep.ClearSystemEnvironment">false</value>
        <valuelist type="QVariantList" key="CMakeProjectManager.MakeStep.UserEnvironmentChanges"/>
@@ -389,12 +391,14 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">final_proj</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">final_proj</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
