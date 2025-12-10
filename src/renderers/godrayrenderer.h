@@ -16,17 +16,12 @@ class CrepuscularRenderer {
         void cleanup();
         void setDefaultFBO(GLuint fbo) { m_defaultFBO = fbo; }
 
-        void applyCrepuscularRays(GLuint sceneTexture, GLuint depthTexture,
-                      const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
-                      int width, int height, const RenderData& renderData,
-                      ShapeRenderer& shapeRenderer);
+        void renderOcclusion(const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
+                             int width, int height, const RenderData& renderData,
+                             ShapeRenderer& shapeRenderer);
         
-        void renderGodRaysToScreen(GLuint sceneTexture, GLuint depthTexture,
-                       const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
-                       int width, int height, const RenderData& renderData,
-                       ShapeRenderer& shapeRenderer);
-
-        GLuint getOutputTexture() const { return m_outputTexture; }
+        void blendCrepuscular(const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
+                             int width, int height, const RenderData& renderData);        GLuint getOutputTexture() const { return m_outputTexture; }
         GLuint getFBO() const { return m_fbo; }
 
     private:
@@ -35,12 +30,10 @@ class CrepuscularRenderer {
         void initializeFullscreenQuad();
 
         void initializeDirectionalGeometry();
-        void renderOcclusionMask(const glm::mat4& viewMatrix,
-                     const glm::mat4& projectionMatrix,
-                     const RenderData& renderData,
-                     ShapeRenderer& shapeRenderer);
-
-
+        void renderOcclusionMaskInternal(const glm::mat4& viewMatrix,
+                                        const glm::mat4& projectionMatrix,
+                                        const RenderData& renderData,
+                                        ShapeRenderer& shapeRenderer);
         GLuint m_crepuscularShader;
         GLuint m_occlusionShader;
         

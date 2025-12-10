@@ -96,18 +96,37 @@ void Realtime::paintGL() {
         return; // don't draw yet if the camera is undefined !
     }
 
-    // Clear screen color and depth before painting
+    int width = size().width() * m_devicePixelRatio;
+    int height = size().height() * m_devicePixelRatio;
+
+    // occlusion pre-pass for crepuscular rays
+    if (m_enableCrepuscular) {
+
+        m_crepuscularRenderer.renderOcclusion(
+            m_camera->getViewMatrix(), m_camera->getProjMatrix(),
+            width, height, m_renderData, m_shapeRenderer
+        );
+
+        // reset viewport to full size for main scene render (occlusion pass reduced it)
+        glViewport(0, 0, width, height);
+        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
+
+    }
+
+    // clear screen color and depth before painting, disable blend if active
+    glDisable(GL_BLEND);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
+
     //render the scene based on render data !!
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
     // copy scene to screen
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
     m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
-                                    width() * m_devicePixelRatio, height() * m_devicePixelRatio);
+                                    width, height);
 
     // if god rays enabled, blend them on top
     if (m_enableCrepuscular) {
@@ -117,52 +136,18 @@ void Realtime::paintGL() {
 
         // additive blending for god rays
         glDisable(GL_DEPTH_TEST);
-        glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glEnable(GL_BLEND);
 
-        m_crepuscularRenderer.renderGodRaysToScreen(
-            m_sceneRenderer.getSceneTexture(),
-            m_sceneRenderer.getDepthTexture(),
-            view, proj, 
-            width() * m_devicePixelRatio, height() * m_devicePixelRatio,
-            m_renderData, m_shapeRenderer
+        m_crepuscularRenderer.blendCrepuscular(
+            view, proj,
+            width, height, m_renderData
         );
 
         glDisable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
 
     }
-
-    /* OLD APPROACH
-    if (m_enableCrepuscular) {
-
-        glm::vec3 lightPosition = -glm::normalize(glm::vec3(m_renderData.lights[0].dir)) * 1000.f;
-        glm::mat4 view = m_camera->getViewMatrix();
-        glm::mat4 proj = m_camera ->getProjMatrix();
-
-        m_crepuscularRenderer.applyCrepuscularRays(
-            m_sceneRenderer.getSceneTexture(),
-            m_sceneRenderer.getDepthTexture(),
-            lightPosition, view, proj, 
-            width() * m_devicePixelRatio, height() * m_devicePixelRatio,
-            m_renderData, m_shapeRenderer
-        );
-
-        // render crepuscular to screen
-        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-        m_screenRenderer.renderToScreen(m_crepuscularRenderer.getOutputTexture(), 
-                                        width() * m_devicePixelRatio, height() * m_devicePixelRatio);
-
-    } else {
-
-        // render directly to screen
-        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-        m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
-                                        width() * m_devicePixelRatio, height() * m_devicePixelRatio);
-
-    }
-    */
-    
 }
 
 

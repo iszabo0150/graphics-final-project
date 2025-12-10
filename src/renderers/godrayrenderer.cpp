@@ -34,7 +34,7 @@ void CrepuscularRenderer::initialize(float exposure, float decay, float density,
     m_density = density;
     m_weight = weight;
     m_samples = samples;
-    m_defaultFBO = 0; // set by caller via setDefaultFBO
+    m_defaultFBO = 0;
     
     initializeFullscreenQuad();
 
@@ -155,7 +155,7 @@ void CrepuscularRenderer::initializeFBO(int width, int height) {
 
 }
 
-void CrepuscularRenderer::renderOcclusionMask(const glm::mat4& viewMatrix,
+void CrepuscularRenderer::renderOcclusionMaskInternal(const glm::mat4& viewMatrix,
                                               const glm::mat4& projectionMatrix,
                                               const RenderData& renderData,
                                               ShapeRenderer& shapeRenderer) {
@@ -210,14 +210,19 @@ void CrepuscularRenderer::renderOcclusionMask(const glm::mat4& viewMatrix,
 
         glm::mat4 lightModel = glm::mat4(1.0f);
 
+        // rendering the sun to be gigantic.
         if (light.type == LightType::LIGHT_DIRECTIONAL) {
+
             glm::vec3 lightDir = glm::normalize(glm::vec3(light.dir));
             glm::vec3 lightWorldPos = -lightDir * 100.0f;
             lightModel = glm::translate(lightModel, lightWorldPos);
             lightModel = glm::scale(lightModel, glm::vec3(100.0f));
+
         } else if (light.type == LightType::LIGHT_POINT) {
+
             lightModel = glm::translate(lightModel, glm::vec3(light.pos));
             lightModel = glm::scale(lightModel, glm::vec3(0.5f));
+
         } else {
             lightModel = glm::translate(lightModel, glm::vec3(light.pos));
             lightModel = glm::scale(lightModel, glm::vec3(0.3f));
@@ -244,104 +249,30 @@ void CrepuscularRenderer::renderOcclusionMask(const glm::mat4& viewMatrix,
 
 }
 
-void CrepuscularRenderer::applyCrepuscularRays(GLuint sceneTexture, GLuint depthTexture,
-                                               const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
-                                               int width, int height,
-                                               const RenderData& renderData, ShapeRenderer& shapeRenderer) {
+void CrepuscularRenderer::renderOcclusion(const glm::mat4& viewMatrix,
+                                          const glm::mat4& projectionMatrix,
+                                          int width, int height,
+                                          const RenderData& renderData,
+                                          ShapeRenderer& shapeRenderer) {
 
     static int lastWidth = 0, lastHeight = 0;
     if (width != lastWidth || height != lastHeight) {
-
         initializeFBO(width, height);
         lastWidth = width;
         lastHeight = height;
-
     }
 
-    // rendering the occlusion mask
-    renderOcclusionMask(viewMatrix, projectionMatrix, renderData, shapeRenderer);
+    // render occlusion mask to occlusion FBO
+    renderOcclusionMaskInternal(viewMatrix, projectionMatrix, renderData, shapeRenderer);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
-    glViewport(0, 0, width, height);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glUseProgram(m_crepuscularShader);
-
-    // collect light screen positions
-    std::vector<glm::vec4> lightPositions;
-    for (const auto& light : renderData.lights) {
-        glm::vec3 lightWorldPos;
-        if (light.type == LightType::LIGHT_DIRECTIONAL) {
-            glm::vec3 lightDir = glm::normalize(glm::vec3(light.dir));
-            lightWorldPos = -lightDir * 100.0f;
-        } else if (light.type == LightType::LIGHT_POINT) {
-            lightWorldPos = glm::vec3(light.pos);
-        } else {
-            lightWorldPos = glm::vec3(light.pos);
-        }
-
-        glm::vec4 clip = projectionMatrix * viewMatrix * glm::vec4(lightWorldPos, 1.0f);
-        glm::vec4 ndc = clip / clip.w;
-        glm::vec4 screen = (ndc + 1.0f) * 0.5f;
-        lightPositions.push_back(screen);
-    }
-
-    // set blur parameters and lights
-    glUniform1i(glGetUniformLocation(m_crepuscularShader, "blurParams.sampleCount"), m_samples);
-    glUniform1f(glGetUniformLocation(m_crepuscularShader, "blurParams.blurDensity"), m_density);
-    glUniform1f(glGetUniformLocation(m_crepuscularShader, "blurParams.sampleWeight"), m_weight);
-    glUniform1f(glGetUniformLocation(m_crepuscularShader, "blurParams.decayFactor"), m_decay);
-    glUniform1f(glGetUniformLocation(m_crepuscularShader, "blurParams.blurExposure"), m_exposure);
-
-    if (!lightPositions.empty()) {
-        glUniform4fv(glGetUniformLocation(m_crepuscularShader, "lightPositionsScreen"),
-                     lightPositions.size(), &lightPositions[0][0]);
-    }
-    glUniform1i(glGetUniformLocation(m_crepuscularShader, "lightCount"), static_cast<int>(lightPositions.size()));
-    
-    // binding texture from scene
-    glActiveTexture(GL_TEXTURE5);
-    glBindTexture(GL_TEXTURE_2D, sceneTexture);
-    glUniform1i(glGetUniformLocation(m_crepuscularShader, "sceneTexture"), 5);
-    
-    // binding occlusion texture
-    glActiveTexture(GL_TEXTURE6);
-    glBindTexture(GL_TEXTURE_2D, m_occlusionTexture);
-    glUniform1i(glGetUniformLocation(m_crepuscularShader, "occlusionTexture"), 6);
-    
-    // drawing to fullscreen quad
-    glBindVertexArray(m_quadVAO);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    glBindVertexArray(0);
-    
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glUseProgram(0);
-                                            
 }
 
-// NEW APPROACH: Render directly to screen with additive blending (like proj5)
-void CrepuscularRenderer::renderGodRaysToScreen(GLuint sceneTexture, GLuint depthTexture, 
-                                                const glm::mat4& viewMatrix, 
-                                                const glm::mat4& projectionMatrix,
-                                                int width, int height,
-                                                const RenderData& renderData, 
-                                                ShapeRenderer& shapeRenderer) {
+void CrepuscularRenderer::blendCrepuscular(const glm::mat4& viewMatrix,
+                                           const glm::mat4& projectionMatrix,
+                                           int width, int height,
+                                           const RenderData& renderData) {
 
-    static int lastWidth = 0, lastHeight = 0;
-    if (width != lastWidth || height != lastHeight) {
-        initializeFBO(width, height);
-        lastWidth = width;
-        lastHeight = height;
-    }
-
-    // render the occlusion mask
-    renderOcclusionMask(viewMatrix, projectionMatrix, renderData, shapeRenderer);
-
-    // render god rays to current framebuffer
-    // caller must have already bound the screen framebuffer and enabled blending outside
-    glDisable(GL_DEPTH_TEST); // ensure fullscreen quad not depth-tested against previous scene
     glViewport(0, 0, width, height);
-
     glUseProgram(m_crepuscularShader);
 
     // collect light screen positions
