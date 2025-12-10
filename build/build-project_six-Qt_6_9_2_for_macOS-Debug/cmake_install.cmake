@@ -1,4 +1,4 @@
-# Install script for directory: /Users/isabella/Desktop/cs1230/graphics-final-project
+# Install script for directory: /Users/isabella/Desktop/graphics-final-project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/glm/cmake_install.cmake")
+  include("/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/glm/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -57,6 +57,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "/Users/isabella/Desktop/cs1230/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/Users/isabella/Desktop/graphics-final-project/build/build-project_six-Qt_6_9_2_for_macOS-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

@@ -99,10 +99,14 @@ void Realtime::paintGL() {
     // Render scene first
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
-    // Render skybox last (only fills empty pixels)
-    glDisable(GL_CULL_FACE);
-    m_sceneRenderer.paintTexture(*m_camera);
-    glEnable(GL_CULL_FACE);
+    m_sceneRenderer.paintTerrain(*m_camera);
+
+    // // Render skybox last (only fills empty pixels)
+    // glDisable(GL_CULL_FACE);
+    // m_sceneRenderer.paintTexture(*m_camera);
+    // glEnable(GL_CULL_FACE);
+
+
 
 
 }

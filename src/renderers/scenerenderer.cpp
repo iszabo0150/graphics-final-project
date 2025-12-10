@@ -2,14 +2,20 @@
 #include "utils/shaderloader.h"
 #include "utils/textureutils.h"
 #include "renderers/lightrenderer.h"
+#include "utils/terraingenerator.h"
 
 #include <QImage>
 #include <QString>
+#include <glm/gtc/matrix_transform.hpp>
 
 void SceneRenderer::initialize(GLuint texture_shader) {
     m_shader = ShaderLoader::createShaderProgram(":/resources/shaders/default.vert", ":/resources/shaders/default.frag");
     m_texture_shader = texture_shader;
+    m_terrain_shader = ShaderLoader::createShaderProgram(":/resources/shaders/terrain.vert", ":/resources/shaders/terrain.frag");
+
+
     loadSkybox();
+    loadTerrain();
 }
 
 void SceneRenderer::cleanup() {
@@ -250,6 +256,11 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
         glBindVertexArray(0);
     }
 
+    // render terrain
+    int res = m_terrain.getResolution();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
+
 
     // OLD RENDER FUNCTION
     // for (const auto& shape : renderData.shapes) {
@@ -272,6 +283,28 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     // }
 
 
+    glUseProgram(0);
+}
+
+void SceneRenderer::paintTerrain(const Camera& camera) {
+
+    glUseProgram(m_terrain_shader);
+    glBindVertexArray(m_terrain_vao);
+
+    GLuint locProj = glGetUniformLocation(m_terrain_shader, "projMatrix");
+    glUniformMatrix4fv(locProj, 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
+
+    GLuint locMV = glGetUniformLocation(m_terrain_shader, "mvMatrix");
+    glm::mat4 world =  glm::lookAt(glm::vec3(1,1,1), glm::vec3(0,1,1), glm::vec3(0,0,1));
+    glm::mat4 cam = camera.getViewMatrix() * world;
+    glUniformMatrix4fv(locMV, 1, GL_FALSE, &cam[0][0]);
+
+    int res = m_terrain.getResolution();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
+
+    glBindVertexArray(0);
     glUseProgram(0);
 }
 
@@ -462,6 +495,31 @@ void SceneRenderer::paintTexture(const Camera& camera) {
 
 }
 
+void SceneRenderer::loadTerrain() {
+    glGenBuffers(1, &m_terrain_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_terrain_vbo);
+
+    std::vector<GLfloat> verts = m_terrain.generateTerrain();
+
+
+    glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(GLfloat), verts.data(), GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &m_terrain_vao);
+    glBindVertexArray(m_terrain_vao);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(0)); //position
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(3 * sizeof(GLfloat))); //position
+
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), reinterpret_cast<void*>(6 * sizeof(GLfloat))); //position
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);;
+
+}
 
 GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump, GLuint slot) {
     // check if texture is already loaded
