@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libStaticGLEW.a CMakeFiles/StaticGLEW.dir/StaticGLEW_autogen/mocs_compilation.cpp.o CMakeFiles/StaticGLEW.dir/glew/src/glew.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libStaticGLEW.a

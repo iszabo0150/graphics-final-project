@@ -115,13 +115,6 @@ qt6_add_resources(${PROJECT_NAME} "Resources"
         resources/shaders/copy.frag
         resources/shaders/copy.vert
 
-        resources/images/back.jpg
-        resources/images/bottom.jpg
-        resources/images/front.jpg
-        resources/images/left.jpg
-        resources/images/right.jpg
-        resources/images/top.jpg
-
         resources/images/pz.png
         resources/images/nz.png
         resources/images/ny.png
