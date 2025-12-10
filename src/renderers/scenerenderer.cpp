@@ -143,10 +143,6 @@ void SceneRenderer::setupTextureUniforms(const SceneMaterial& material) {
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, bumpTextureID);
     }
-
-
-
-
 }
 
 GLuint SceneRenderer::loadTexture(const std::string& filename, bool isBump) {

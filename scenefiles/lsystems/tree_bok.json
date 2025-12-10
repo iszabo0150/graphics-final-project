@@ -1,0 +1,97 @@
+{
+  "name": "realistic_oak",
+  "globalData": {
+    "ambientCoeff": 0.3,
+    "diffuseCoeff": 0.7,
+    "specularCoeff": 0.4
+  },
+  "cameraData": {
+    "position": [-6, -4, -10],
+    "up": [0, 1, 0],
+    "heightAngle": 35,
+    "focus": [0, 2, 0]
+  },
+  "groups": [
+    {
+      "lights": [
+        {
+          "type": "directional",
+          "color": [2.0, 2.0, 2.0],
+          "direction": [-2.0, -4.0, -6.0]
+        }
+      ]
+    },
+    {
+      "translate": [9.0, -3.0, 1.0],
+      "lights": [
+        {
+          "type": "point",
+          "color": [0.5, 0.5, 0.5],
+          "attenuationCoeff": [1, 0, 0]
+        }
+      ]
+    },
+    {
+      "translate": [-9.0, -3.0, 1.0],
+      "lights": [
+        {
+          "type": "point",
+          "color": [0.5, 0.5, 0.5],
+          "attenuationCoeff": [1, 0, 0]
+        }
+      ]
+    },
+    {
+      "lsystem": {
+        "axiom": "A(1,10)",
+        "iterations": 10,
+        "angle": 45,
+        "step": 1.0,
+        "stemPrimitive": "cylinder",
+        "leafPrimitive": "sphere",
+        "stemMaterial": {
+          "diffuse": [0.35, 0.2, 0.12],
+          "ambient": [0.15, 0.08, 0.04],
+          "specular": [0.1, 0.1, 0.1],
+          "shininess": 8
+        },
+        "leafMaterial": {
+          "diffuse": [0.15, 0.6, 0.15],
+          "ambient": [0.08, 0.25, 0.08],
+          "specular": [0.2, 0.2, 0.2],
+          "shininess": 15
+        },
+        "rules": [
+          {
+            "input": "A",
+            "params": ["l", "w"],
+            "condition": "true",
+            "output": "!(w)F(l)[&(60)B(l*0.8,w*0.707)]/(137.5)A(l*0.85,w*0.707)",
+            "probability": 1.0
+          },
+          {
+            "input": "B",
+            "params": ["l", "w"],
+            "condition": "true",
+            "output": "!(w)F(l)[-(30)$C(l*0.9,w*0.707)]C(l*0.9,w*0.707)",
+            "probability": 1.0
+          },
+          {
+            "input": "C",
+            "params": ["l", "w"],
+            "condition": "true",
+            "output": "!(w)F(l)[+(30)$B(l*0.9,w*0.707)]B(l*0.9,w*0.707)",
+            "probability": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+

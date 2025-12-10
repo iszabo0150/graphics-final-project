@@ -7,16 +7,43 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <regex>
-
 /**
  * @brief LSystem::parseLSymbol turns a string into an LSymbol ! Kind of overkill right now but will eb helpful once things get fancier for the
  * final !!
  * @param tokenString
  * @return
  */
-LSymbol LSystem::parseLSymbol(const std::string &tokenString){
+LSymbol LSystem::parseLSymbol(const std::string &tokenString) {
     LSymbol symbol;
-    symbol.name = tokenString;
+
+    // Match: Letter optionally followed by (params)
+    std::regex symbolRegex(R"(([A-Za-z+\-\[\]&\^\\\/])(?:\(([^)]*)\))?)");
+    std::smatch match;
+
+    if (std::regex_match(tokenString, match, symbolRegex)) {
+        symbol.name = match[1].str();
+
+        // Parse parameters if present
+        if (match[2].matched && !match[2].str().empty()) {
+            std::string paramStr = match[2].str();
+            std::stringstream ss(paramStr);
+            std::string param;
+
+            while (std::getline(ss, param, ',')) {
+                // Trim whitespace
+                param.erase(0, param.find_first_not_of(" \t"));
+                param.erase(param.find_last_not_of(" \t") + 1);
+                try {
+                    symbol.params.push_back(std::stof(param));
+                } catch (...) {
+                    symbol.params.push_back(0.0f);
+                }
+            }
+        }
+    } else {
+        symbol.name = tokenString;
+    }
+
     return symbol;
 }
 
@@ -25,33 +52,180 @@ LSymbol LSystem::parseLSymbol(const std::string &tokenString){
  * @param string
  * @return
  */
-std::vector<LSymbol> LSystem::tokenize(const std::string &string){
+std::vector<LSymbol> LSystem::tokenize(const std::string &string) {
     std::vector<LSymbol> tokenizedResult;
 
-    // extracts letters and operands from the string: eg  A, F, L, +, -, [, ], &, ^, \, /
-    std::regex tokenRegex(R"([A-Za-z]|[\+\-\[\]\&\^\\\/])");
+    // Match symbols with optional parameters OR single operators
+    std::regex tokenRegex(R"([A-Za-z+\-\[\]&\^\\\/](?:\([^)]*\))?)");
 
-    //looping thorugh all the matches
-    for (auto match = std::sregex_iterator(string.begin(), string.end(), tokenRegex); match != std::sregex_iterator(); match++){
+    for (auto match = std::sregex_iterator(string.begin(), string.end(), tokenRegex);
+         match != std::sregex_iterator(); ++match) {
         tokenizedResult.push_back(parseLSymbol(match->str()));
     }
 
     return tokenizedResult;
 }
 
-/**
- * @brief LSystem::applyRule expands the string based on teh symbol's rule !
- * @param symbol
- * @param data
- * @return
- */
-std::string LSystem::applyRule(const LSymbol &symbol, const LSystemData &data){
-    for (const auto &rule : data.rules) {
-        if (rule.input == symbol.name) {
-            return rule.output;
+bool LSystem::evaluateCondition(const std::string &condition,
+                                const std::map<std::string, float> &paramValues) {
+    if (condition.empty()) return true;
+
+    // Replace parameter names with values
+    std::string expr = condition;
+    for (const auto &[name, value] : paramValues) {
+        size_t pos = 0;
+        while ((pos = expr.find(name, pos)) != std::string::npos) {
+            // Make sure it's a whole word (not part of another variable)
+            if ((pos == 0 || !isalnum(expr[pos-1])) &&
+                (pos + name.length() >= expr.length() || !isalnum(expr[pos + name.length()]))) {
+                expr.replace(pos, name.length(), std::to_string(value));
+            }
+            pos += std::to_string(value).length();
         }
     }
-    return symbol.name; //if there's no rule for a symbol it stays as is !
+
+    // Simple evaluation for comparison operators
+    // Supports: >, <, >=, <=, ==, !=
+    std::regex compRegex(R"(([\d.]+)\s*(>=|<=|>|<|==|!=)\s*([\d.]+))");
+    std::smatch match;
+
+    if (std::regex_search(expr, match, compRegex)) {
+        float left = std::stof(match[1].str());
+        std::string op = match[2].str();
+        float right = std::stof(match[3].str());
+
+        if (op == ">") return left > right;
+        if (op == "<") return left < right;
+        if (op == ">=") return left >= right;
+        if (op == "<=") return left <= right;
+        if (op == "==") return std::abs(left - right) < 1e-6f;
+        if (op == "!=") return std::abs(left - right) >= 1e-6f;
+    }
+
+    return true; // Default to true if can't parse
+}
+
+std::string LSystem::substituteParams(const std::string &output,
+                                      const std::map<std::string, float> &paramValues) {
+    std::string result;
+    size_t i = 0;
+
+    while (i < output.length()) {
+        // Check if we're at an opening parenthesis - this starts a parameter list
+        if (output[i] == '(') {
+            result += '(';
+            i++;
+
+            // Find the matching closing parenthesis
+            size_t start = i;
+            int depth = 1;
+            size_t end = i;
+
+            while (end < output.length() && depth > 0) {
+                if (output[end] == '(') depth++;
+                if (output[end] == ')') depth--;
+                if (depth > 0) end++;
+            }
+
+            if (depth == 0) {
+                // Extract everything inside parentheses
+                std::string paramList = output.substr(start, end - start);
+
+                // Split by commas (but not commas inside nested parentheses)
+                std::vector<std::string> params;
+                std::string currentParam;
+                int parenDepth = 0;
+
+                for (char c : paramList) {
+                    if (c == '(') parenDepth++;
+                    else if (c == ')') parenDepth--;
+                    else if (c == ',' && parenDepth == 0) {
+                        params.push_back(currentParam);
+                        currentParam.clear();
+                        continue;
+                    }
+                    currentParam += c;
+                }
+                if (!currentParam.empty()) {
+                    params.push_back(currentParam);
+                }
+
+                // Process each parameter
+                for (size_t p = 0; p < params.size(); p++) {
+                    if (p > 0) result += ",";
+
+                    std::string expr = params[p];
+
+                    // Replace all parameters in this expression
+                    for (const auto &[name, value] : paramValues) {
+                        size_t pos = 0;
+                        while ((pos = expr.find(name, pos)) != std::string::npos) {
+                            bool before = (pos == 0 || !isalnum(expr[pos-1]));
+                            bool after = (pos + name.length() >= expr.length() || !isalnum(expr[pos + name.length()]));
+
+                            if (before && after) {
+                                expr.replace(pos, name.length(), std::to_string(value));
+                            }
+                            pos++;
+                        }
+                    }
+
+                    // Evaluate the expression
+                    float val = evaluateArithmetic(expr);
+                    result += std::to_string(val);
+                }
+
+                result += ')';
+                i = end + 1;
+                continue;
+            }
+        }
+
+        result += output[i];
+        i++;
+    }
+
+    return result;
+}
+// Helper function to evaluate arithmetic expressions
+float LSystem::evaluateArithmetic(const std::string &expr) {
+    // Handle multiplication and division first (higher precedence)
+    for (size_t i = 0; i < expr.length(); i++) {
+        if (expr[i] == '*' || expr[i] == '/') {
+            // Find left operand
+            size_t leftStart = i;
+            while (leftStart > 0 && (isdigit(expr[leftStart-1]) || expr[leftStart-1] == '.')) {
+                leftStart--;
+            }
+
+            // Find right operand
+            size_t rightEnd = i + 1;
+            while (rightEnd < expr.length() && (isdigit(expr[rightEnd]) || expr[rightEnd] == '.')) {
+                rightEnd++;
+            }
+
+            float left = std::stof(expr.substr(leftStart, i - leftStart));
+            float right = std::stof(expr.substr(i + 1, rightEnd - i - 1));
+            float result = (expr[i] == '*') ? left * right : left / right;
+
+            std::string newExpr = expr.substr(0, leftStart) +
+                                  std::to_string(result) +
+                                  expr.substr(rightEnd);
+            return evaluateArithmetic(newExpr);
+        }
+    }
+
+    // Handle addition and subtraction (lower precedence)
+    for (size_t i = 1; i < expr.length(); i++) { // Start at 1 to handle negative numbers
+        if (expr[i] == '+' || expr[i] == '-') {
+            float left = evaluateArithmetic(expr.substr(0, i));
+            float right = evaluateArithmetic(expr.substr(i + 1));
+            return (expr[i] == '+') ? left + right : left - right;
+        }
+    }
+
+    // Base case: just a number
+    return std::stof(expr);
 }
 
 /**
@@ -77,6 +251,68 @@ std::vector<LSymbol> LSystem::expandLSystem(const LSystemData &data){
     return tokenize(current);
 }
 
+std::string LSystem::applyRule(const LSymbol &symbol, const LSystemData &data) {
+    struct Candidate {
+        const LSystemRule* rule;
+        std::map<std::string, float> paramValues;
+    };
+
+    std::vector<Candidate> candidates;
+
+    // 1. Collect all valid rules
+    for (const auto &rule : data.rules) {
+        if (rule.input != symbol.name) continue;
+        if (rule.params.size() != symbol.params.size()) continue;
+
+        // Map parameter values
+        std::map<std::string, float> paramValues;
+        for (size_t i = 0; i < rule.params.size(); i++) {
+            paramValues[rule.params[i]] = symbol.params[i];
+        }
+
+        // Condition check
+        if (!evaluateCondition(rule.condition, paramValues)) continue;
+
+        candidates.push_back({ &rule, paramValues });
+    }
+
+    // 2. No rules matched → return symbol unchanged
+    if (candidates.empty()) {
+        std::string result = symbol.name;
+        if (!symbol.params.empty()) {
+            result += "(";
+            for (size_t i = 0; i < symbol.params.size(); i++) {
+                if (i > 0) result += ",";
+                result += std::to_string(symbol.params[i]);
+            }
+            result += ")";
+        }
+        return result;
+    }
+
+    // 3. Compute total probability weight
+    float totalWeight = 0.0f;
+    for (auto &c : candidates) {
+        totalWeight += c.rule->probability;
+    }
+
+    // 4. Pick random threshold in [0, totalWeight]
+    float r = (float(rand()) / RAND_MAX) * totalWeight;
+
+    // 5. Select rule by cumulative probability
+    float accum = 0.0f;
+    for (auto &c : candidates) {
+        accum += c.rule->probability;
+        if (r <= accum) {
+            // Apply this rule
+            return substituteParams(c.rule->output, c.paramValues);
+        }
+    }
+
+    // Safety fallback (should never hit)
+    return substituteParams(candidates.back().rule->output, candidates.back().paramValues);
+}
+
 /**
  * @brief LSystem::interpretLSystem interprets an L system based on turtle grammar !!
  * @param data the configurations / rules for the l system
@@ -84,13 +320,13 @@ std::vector<LSymbol> LSystem::expandLSystem(const LSystemData &data){
  * @param stemCTMs
  * @param leafCTMs
  */
-void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbol> &symbols, std::vector<glm::mat4> &stemCTMs,
+void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbol> &symbols, std::vector<StemData> &stems,
                                std::vector<glm::mat4> &leafCTMs){
 
     TState turtle;
     turtle.pos = glm::vec3(0, 0, 0);
     turtle.heading = glm::vec3(0, 1, 0);  // forward direction (Y+)
-    turtle.left    = glm::vec3(-1, 0, 0); // left direction (X-)
+    turtle.left    = glm::vec3(1, 0, 0);  // Changed from -1 to 1
     turtle.up      = glm::vec3(0, 0, 1);  // up direction (Z+)
 
     std::stack<TState> stateStack;
@@ -98,61 +334,102 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
     for (const auto &sym : symbols) {
 
         if (sym.name == "F") { // move forward and draw stem
-            float segmentLength = data.step;
+            float segmentLength = sym.params.empty() ? data.step : sym.params[0];
+            float thickness = (sym.params.size() > 1) ? sym.params[1] : 0.05f;
+
+            turtle.lastThickness = thickness;
 
             glm::vec3 center = turtle.pos + turtle.heading * (segmentLength * 0.5f);
 
-            // make rotation matrix from turtle's orientation vectors !
             glm::mat4 rot(1.0f);
             rot[0] = glm::vec4(turtle.left,   0);
             rot[1] = glm::vec4(turtle.heading, 0);
             rot[2] = glm::vec4(turtle.up,     0);
 
-            glm::mat4 ctm = glm::translate(glm::mat4(1.0f), center) * rot;
-            ctm = glm::scale(ctm, glm::vec3(0.05f, segmentLength, 0.05f));
 
-            stemCTMs.push_back(ctm);
+
+            glm::mat4 ctm = glm::translate(glm::mat4(1.0f), center) * rot;
+            ctm = glm::scale(ctm, glm::vec3(thickness, segmentLength, thickness));
+
+            stems.push_back({ctm, thickness, segmentLength});
             turtle.pos += turtle.heading * segmentLength;
         }
 
-        else if (sym.name == "L") { // create a leaf
-            glm::mat4 leaf = glm::translate(glm::mat4(1.0f), turtle.pos);
-            leaf = glm::scale(leaf, glm::vec3(0.1f));
+        else if (sym.name == "L") {
+            float scaleVal = sym.params.empty() ? 1.0f : sym.params[0];
+
+            // radius based on last F (you can store this in turtle state)
+            float radius = turtle.lastThickness * 0.5f;
+
+            // random angle for leaf placement around branch
+            float theta = ((rand() % 10000) / 10000.f) * 2.f * M_PI;
+
+            glm::vec3 outward =
+                glm::normalize(cos(theta) * turtle.left + sin(theta) * turtle.up);
+
+            glm::vec3 leafPos = turtle.pos + outward * radius;
+
+            // Build leaf coordinate frame:
+            glm::vec3 normal = outward;
+            glm::vec3 tangent = glm::normalize(glm::cross(normal, turtle.heading));
+            glm::vec3 bitangent = glm::cross(tangent, normal);
+
+            glm::mat4 rot(1.0f);
+            rot[0] = glm::vec4(tangent,   0);
+            rot[1] = glm::vec4(normal,    0);
+            rot[2] = glm::vec4(bitangent, 0);
+
+            // Random twist of the leaf
+            float twist = ((rand() % 10000) / 10000.f) * 2.f * M_PI;
+            rot = glm::rotate(rot, twist, normal);
+
+            glm::mat4 leaf = glm::translate(glm::mat4(1.0f), leafPos);
+            leaf *= rot;
+
+            leaf = glm::scale(leaf, glm::vec3(0.5f * scaleVal, 0.12f * scaleVal, 0.3f * scaleVal));
+
             leafCTMs.push_back(leaf);
         }
 
+
         else if (sym.name == "+") { // turn left (counter-clockwise around up axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), data.angle, turtle.up);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angle, turtle.up);
             turtle.heading = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.heading, 0)));
             turtle.left    = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.left, 0)));
         }
 
         else if (sym.name == "-") { // turn right (clockwise around up axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -data.angle, turtle.up);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -angle, turtle.up);
             turtle.heading = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.heading, 0)));
             turtle.left    = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.left, 0)));
         }
 
         else if (sym.name == "&") { // pitch down (rotate heading down around left axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), data.angle, turtle.left);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angle, turtle.left);
             turtle.heading = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.heading, 0)));
             turtle.up      = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.up, 0)));
         }
 
         else if (sym.name == "^") { // pitch up (rotate heading up around left axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -data.angle, turtle.left);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -angle, turtle.left);
             turtle.heading = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.heading, 0)));
             turtle.up      = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.up, 0)));
         }
 
         else if (sym.name == "\\") { // roll left (rotate left around heading axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), data.angle, turtle.heading);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angle, turtle.heading);
             turtle.left = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.left, 0)));
             turtle.up   = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.up, 0)));
         }
 
         else if (sym.name == "/") { // roll right (rotate right around heading axis)
-            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -data.angle, turtle.heading);
+            float angle = sym.params.empty() ? data.angle : glm::radians(sym.params[0]);
+            glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), -angle, turtle.heading);
             turtle.left = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.left, 0)));
             turtle.up   = glm::normalize(glm::vec3(rotation * glm::vec4(turtle.up, 0)));
         }
