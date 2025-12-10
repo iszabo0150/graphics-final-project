@@ -21,6 +21,7 @@ public:
     
     GLuint getSceneTexture() const { return m_sceneTexture; }
     GLuint getDepthTexture() const { return m_depthTexture; }
+    GLuint getSceneFBO() const { return m_sceneFBO; }
 
     void paintTexture(const Camera& camera);
     void paintTerrain(const Camera& camera);

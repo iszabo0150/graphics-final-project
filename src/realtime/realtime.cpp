@@ -274,14 +274,12 @@ void Realtime::initializeGL() {
 
 void Realtime::paintGL() {
     // Students: anything requiring OpenGL calls every frame should be done here
-    if (!m_camera) {
-        return; // don't draw yet if the camera is undefined !
-    }
+    if (!m_camera) return; // don't draw yet if the camera is undefined !
 
     // Capture whatever framebuffer is currently bound (screen or screenshot FBO)
-    GLint targetFboInt = 0;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &targetFboInt);
-    GLuint targetFbo = static_cast<GLuint>(targetFboInt);
+    GLint targetFBOInt = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &targetFBOInt);
+    GLuint targetFBO = static_cast<GLuint>(targetFBOInt);
 
     // Use current viewport size if it differs from m_screen_width/height
     GLint vp[4];
@@ -297,76 +295,91 @@ void Realtime::paintGL() {
     else m_post.ensureSize(w, h);
     m_post.setBloomEnabled(bloomEnabled);
 
-    // PARTICLE PIPELINE ========
-    // If postprocess is ready, render the whole scene into its FBO, then composite to targetFbo
+    // PARTICLE & POSTPROCESS PIPELINE
+    // if postprocess is ready, use it for bloom effects
+
     if (m_post.ready()) {
 
-        m_post.beginScenePass(w, h); // binds internal FBO and clears color+depth
+        glDisable(GL_BLEND);
 
-        // Clear screen color and depth before painting
-        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // render the scene from the light's perspective to get shadow map
+        // render scene + terrain to scene FBO first
         m_lightRenderer.render(m_renderData, static_cast<GLuint>(w), static_cast<GLuint>(h));
-
-        //render the scene based on render data !!
         m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
+        m_sceneRenderer.paintTerrain(*m_camera);
 
-        // Particles last so they overlay everything (and do not get overwritten by a skybox pass)
-        if (particlesEnabled) {
-            m_particles.render(m_camera->getViewMatrix(), m_camera->getProjMatrix());
+        // bind postprocess FBO and composite scene + particles
+        m_post.beginScenePass(w, h);
+
+        // copy scene texture to postprocess fbo
+        m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), w, h);
+
+        // render particles on top
+        if (particlesEnabled) m_particles.render(m_camera->getViewMatrix(), m_camera->getProjMatrix());
+
+        // apply bloom and composite to target fbo
+        m_post.endToTarget(targetFBO, w, h, bloomEnabled ? 3 : 0);
+
+        // blend god rays on top if enabled
+        if (m_enableCrepuscular) {
+    
+            m_crepuscularRenderer.renderOcclusion(
+                m_camera->getViewMatrix(), m_camera->getProjMatrix(),
+                w, h, m_renderData, m_shapeRenderer
+            );
+
+            // blend on target fbo
+            glBindFramebuffer(GL_FRAMEBUFFER, targetFBO);
+            glViewport(0, 0, w, h);
+            glDisable(GL_DEPTH_TEST);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            glEnable(GL_BLEND);
+
+            m_crepuscularRenderer.blendCrepuscular(
+                m_camera->getViewMatrix(), m_camera->getProjMatrix(),
+                w, h, m_renderData
+            );
+
+            glDisable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
         }
 
-        // Composite the postprocess result to the originally bound framebuffer
-        m_post.endToTarget(targetFbo, w, h, bloomEnabled ? 3 : 0);
         return;
-
     }
 
-    // Fallback path if postprocess is not ready
-    // Clear screen color and depth before painting
+    // FALLBACK path if postprocess is not ready
     int width = size().width() * m_devicePixelRatio;
     int height = size().height() * m_devicePixelRatio;
 
     // occlusion pre-pass for crepuscular rays
     if (m_enableCrepuscular) {
-
         m_crepuscularRenderer.renderOcclusion(
             m_camera->getViewMatrix(), m_camera->getProjMatrix(),
             width, height, m_renderData, m_shapeRenderer
         );
-
-        // reset viewport to full size for main scene render (occlusion pass reduced it)
-        glViewport(0, 0, width, height);
-        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-
     }
 
-    // clear screen color and depth before painting, disable blend if active
-    glDisable(GL_BLEND);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // render the scene from the light's perspective to get shadow map
+    // render scene from light's perspective for shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
-    //render the scene based on render data !!
-
-    // Render scene first
+    // render scene (includes skybox) into scene FBO
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 
-    // add terrain into the scene FBO before presenting
+    // add terrain into scene FBO (paintTerrain binds scene FBO internally)
     m_sceneRenderer.paintTerrain(*m_camera);
 
-    // copy scene (with skybox/terrain) to screen
-    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebufferObject());
-    m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), 
-                                    width, height);
-
+    // render particles into scene FBO if enabled
     if (particlesEnabled) {
+        glBindFramebuffer(GL_FRAMEBUFFER, m_sceneRenderer.getSceneFBO());
+        glViewport(0, 0, width, height);
         m_particles.render(m_camera->getViewMatrix(), m_camera->getProjMatrix());
     }
-    
-    // if god rays enabled, blend them on top
+
+    // copy complete scene (skybox + terrain + particles) to screen
+    glBindFramebuffer(GL_FRAMEBUFFER, targetFBO);
+    glViewport(0, 0, w, h);
+    m_screenRenderer.renderToScreen(m_sceneRenderer.getSceneTexture(), w, h);
+
+    // blend god rays on top if enabled
     if (m_enableCrepuscular) {
 
         glm::mat4 view = m_camera->getViewMatrix();
@@ -402,7 +415,7 @@ void Realtime::resizeGL(int w, int h) {
     }
     // Students: anything requiring OpenGL calls when the program starts should be done here
     m_sceneRenderer.resize(w * m_devicePixelRatio, h * m_devicePixelRatio);
-    
+
 }
 
 void Realtime::sceneChanged() {
