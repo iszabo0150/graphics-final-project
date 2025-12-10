@@ -216,7 +216,7 @@ void CrepuscularRenderer::renderOcclusionMaskInternal(const glm::mat4& viewMatri
             glm::vec3 lightDir = glm::normalize(glm::vec3(light.dir));
             glm::vec3 lightWorldPos = -lightDir * 100.0f;
             lightModel = glm::translate(lightModel, lightWorldPos);
-            lightModel = glm::scale(lightModel, glm::vec3(100.0f));
+            lightModel = glm::scale(lightModel, glm::vec3(25.0f));
 
         } else if (light.type == LightType::LIGHT_POINT) {
 
