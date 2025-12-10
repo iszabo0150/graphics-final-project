@@ -1162,34 +1162,58 @@ bool ScenefileReader::parseLSystem(const QJsonObject &obj, SceneNode *node){
               << ls->stemMaterial.cDiffuse.b << std::endl;
 
 
-    // LEAF MATERIAL
-    if (obj.contains("leafMaterial")) {
+    // LEAF MATERIALS (supports both single "leafMaterial" and array "leafMaterials")
+    if (obj.contains("leafMaterials")) {
+        // New array format for multiple colors
+        if (!obj["leafMaterials"].isArray()) {
+            std::cout << "lsystem leafMaterials must be an array\n";
+            return false;
+        }
+        QJsonArray leafMatsArray = obj["leafMaterials"].toArray();
+        for (const QJsonValue &matVal : leafMatsArray) {
+            if (!matVal.isObject()) {
+                std::cout << "each leafMaterial in leafMaterials must be an object\n";
+                return false;
+            }
+            SceneMaterial mat;
+            mat.clear();
+            if (!parseMaterialProperties(matVal.toObject(), mat)) {
+                return false;
+            }
+            ls->leafMaterials.push_back(mat);
+        }
+    } else if (obj.contains("leafMaterial")) {
+        // Single material (backwards compatible)
         if (!obj["leafMaterial"].isObject()) {
             std::cout << "lsystem leafMaterial must be an object\n";
             return false;
         }
-        // Actually parse the leaf material!
-        ls->leafMaterial.clear();
-        if (!parseMaterialProperties(obj["leafMaterial"].toObject(), ls->leafMaterial)) {
+        SceneMaterial mat;
+        mat.clear();
+        if (!parseMaterialProperties(obj["leafMaterial"].toObject(), mat)) {
             return false;
         }
+        ls->leafMaterials.push_back(mat);
     } else {
         // Default leaf material (green)
-        ls->leafMaterial.clear();
-        ls->leafMaterial.cDiffuse = glm::vec4(0.2f, 0.8f, 0.2f, 1.0f);
-        ls->leafMaterial.cAmbient = glm::vec4(0.1f, 0.3f, 0.1f, 1.0f);
-        ls->leafMaterial.cSpecular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-        ls->leafMaterial.shininess = 10.0f;
+        SceneMaterial mat;
+        mat.clear();
+        mat.cDiffuse = glm::vec4(0.2f, 0.8f, 0.2f, 1.0f);
+        mat.cAmbient = glm::vec4(0.1f, 0.3f, 0.1f, 1.0f);
+        mat.cSpecular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+        mat.shininess = 10.0f;
+        ls->leafMaterials.push_back(mat);
     }
 
+    // Update debug output
+    std::cout << "=== AFTER PARSING LEAF MATERIALS ===" << std::endl;
+    std::cout << "Number of leaf materials: " << ls->leafMaterials.size() << std::endl;
+    for (size_t i = 0; i < ls->leafMaterials.size(); i++) {
+        std::cout << "Leaf " << i << " diffuse: " << ls->leafMaterials[i].cDiffuse.r << ", "
+                  << ls->leafMaterials[i].cDiffuse.g << ", "
+                  << ls->leafMaterials[i].cDiffuse.b << std::endl;
+    }
 
-
-
-    // After the LEAF MATERIAL section
-    std::cout << "=== AFTER PARSING LEAF MATERIAL ===" << std::endl;
-    std::cout << "Leaf diffuse: " << ls->leafMaterial.cDiffuse.r << ", "
-              << ls->leafMaterial.cDiffuse.g << ", "
-              << ls->leafMaterial.cDiffuse.b << std::endl;
 
     // RULES ARRAY
     if (!obj.contains("rules") || !obj["rules"].isArray()) {
@@ -1381,5 +1405,65 @@ bool ScenefileReader::parseMaterialProperties(const QJsonObject &matObj, SceneMa
         mat.blend = (float)matObj["blend"].toDouble();
     }
 
+    // ===============================
+    // TEXTURE MAP
+    // ===============================
+    if (matObj.contains("textureFile")) {
+        if (!matObj["textureFile"].isString()) {
+            std::cout << "material textureFile must be a string\n";
+            return false;
+        }
+
+        std::filesystem::path rel(matObj["textureFile"].toString().toStdString());
+        mat.textureMap.filename = (std::filesystem::path(file_name).parent_path().parent_path() / rel).string();
+        mat.textureMap.repeatU = matObj.contains("textureU") && matObj["textureU"].isDouble() ? matObj["textureU"].toDouble() : 1;
+        mat.textureMap.repeatV = matObj.contains("textureV") && matObj["textureV"].isDouble() ? matObj["textureV"].toDouble() : 1;
+
+        mat.textureMap.isUsed = true;
+    }
+
+    // ===============================
+    // BUMP MAP
+    // ===============================
+    if (matObj.contains("bumpMapFile")) {
+        if (!matObj["bumpMapFile"].isString()) {
+            std::cout << "material bumpMapFile must be a string\n";
+            return false;
+        }
+
+        std::filesystem::path rel(matObj["bumpMapFile"].toString().toStdString());
+        mat.bumpMap.filename = (std::filesystem::path(file_name).parent_path().parent_path() / rel).string();
+
+        mat.bumpMap.repeatU = matObj.contains("bumpMapU") && matObj["bumpMapU"].isDouble() ? matObj["bumpMapU"].toDouble() : 1;
+        mat.bumpMap.repeatV = matObj.contains("bumpMapV") && matObj["bumpMapV"].isDouble() ? matObj["bumpMapV"].toDouble() : 1;
+        mat.bumpMap.strength = matObj.contains("bumpMapStrength") && matObj["bumpMapStrength"].isDouble()
+                                   ? matObj["bumpMapStrength"].toDouble()
+                                   : 1.0;
+
+        mat.bumpMap.isUsed = true;
+    }
+
+    // ===============================
+    // NORMAL MAP
+    // ===============================
+    if (matObj.contains("normalMapFile")) {
+        if (!matObj["normalMapFile"].isString()) {
+            std::cout << "material normalMapFile must be a string\n";
+            return false;
+        }
+
+        std::filesystem::path rel(matObj["normalMapFile"].toString().toStdString());
+        mat.normalMap.filename = (std::filesystem::path(file_name).parent_path().parent_path() / rel).string();
+
+        mat.normalMap.repeatU = matObj.contains("normalMapU") && matObj["normalMapU"].isDouble() ? matObj["normalMapU"].toDouble() : 1;
+        mat.normalMap.repeatV = matObj.contains("normalMapV") && matObj["normalMapV"].isDouble() ? matObj["normalMapV"].toDouble() : 1;
+        mat.normalMap.strength = matObj.contains("normalMapStrength") && matObj["normalMapStrength"].isDouble()
+                                     ? matObj["normalMapStrength"].toDouble()
+                                     : 1.0;
+
+        mat.normalMap.isUsed = true;
+    }
+
     return true;
 }
+

@@ -71,7 +71,7 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     default:
         break;
     }
-    std::cout << "jhiiiii" << std::endl;
+    // std::cout << "jhiiiii" << std::endl;
 
 
     GLuint shapeVBO;
@@ -79,7 +79,7 @@ GLPrimitiveData ShapeRenderer::createPrimitiveGLData(PrimitiveType type){
     glGenBuffers(1, &shapeVBO);
 
     // Task 6: Bind the VBO you created here
-    std::cout << "buffer genned" << std::endl;
+    // std::cout << "buffer genned" << std::endl;
 
 
     glBindBuffer(GL_ARRAY_BUFFER, shapeVBO);

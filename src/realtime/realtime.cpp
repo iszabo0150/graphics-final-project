@@ -90,6 +90,8 @@ void Realtime::paintGL() {
     // render the scene from the light's perspective to get shadow map
     m_lightRenderer.render(m_renderData, m_screen_width, m_screen_height);
 
+    // return
+
     //render the scene based on render data !!
     m_sceneRenderer.render(m_renderData, *m_camera, m_shapeRenderer, m_lightRenderer.getShadow());
 

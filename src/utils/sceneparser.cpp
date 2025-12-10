@@ -97,39 +97,67 @@ void SceneParser::dfsGetRenderData(RenderData& renderData, SceneNode* currNode, 
 
     if (currNode->lsystem && currNode->lsystem->valid){
 
-        std::vector<LSymbol> symbols =
-        LSystem::expandLSystem(*currNode->lsystem);
+        std::vector<LSymbol> symbols = LSystem::expandLSystem(*currNode->lsystem);
 
-        std::vector<glm::mat4> stemCTMs;
+        std::vector<StemData> stems;
         std::vector<glm::mat4> leafCTMs;
 
-        LSystem::interpretLSystem(*currNode->lsystem, symbols, stemCTMs, leafCTMs);
+        LSystem::interpretLSystem(*currNode->lsystem, symbols, stems, leafCTMs);
 
 
-        for (const glm::mat4 &localM : stemCTMs) {
+        const float refThickness = 1.0f;  // Adjust based on your scene file's intended base size
+        const float refLength = 1.0f;
+
+        for (const StemData &stem : stems) {
             RenderShapeData r;
 
-            r.primitive = makePrimitive(currNode->lsystem->stemPrimitive, currNode->lsystem->stemMaterial);
-            r.material = currNode->lsystem->stemMaterial;
+            // Make a COPY of the material so we can modify it per-shape
+            SceneMaterial mat = currNode->lsystem->stemMaterial;
 
-            r.ctm = currCTM * localM;
+            // Scale texture repeats based on actual dimensions
+            // repeatU controls horizontal wrap (circumference) - scale by thickness ratio
+            // repeatV controls vertical wrap (length) - scale by length ratio
+            if (mat.textureMap.isUsed) {
+                mat.textureMap.repeatU *= (stem.thickness / refThickness);
+                mat.textureMap.repeatV *= (stem.length / refLength);
+            }
+            if (mat.bumpMap.isUsed) {
+                mat.bumpMap.repeatU *= (stem.thickness / refThickness);
+                mat.bumpMap.repeatV *= (stem.length / refLength);
+            }
+            if (mat.normalMap.isUsed) {
+                mat.normalMap.repeatU *= (stem.thickness / refThickness);
+                mat.normalMap.repeatV *= (stem.length / refLength);
+            }
+
+            r.primitive = makePrimitive(currNode->lsystem->stemPrimitive, mat);
+            r.material = mat;
+            r.ctm = currCTM * stem.ctm;
 
             renderData.shapes.push_back(r);
         }
+
+        // std::cout << renderData.shapes.size() << std::endl;
+
 
 
 
         for (const glm::mat4 &localM : leafCTMs) {
             RenderShapeData r;
 
-            r.primitive = makePrimitive(currNode->lsystem->leafPrimitive, currNode->lsystem->leafMaterial);
-            r.material = currNode->lsystem->leafMaterial;
+            // Randomly select a leaf material from the available options
+            const auto& leafMats = currNode->lsystem->leafMaterials;
+            int matIndex = rand() % leafMats.size();
+            const SceneMaterial& chosenMat = leafMats[matIndex];
+
+            r.primitive = makePrimitive(currNode->lsystem->leafPrimitive, chosenMat);
+            r.material = chosenMat;
 
             r.ctm = currCTM * localM;
 
             renderData.shapes.push_back(r);
         }
-        return;
+        // return;
     }
 
     if (!currNode->children.empty()){
