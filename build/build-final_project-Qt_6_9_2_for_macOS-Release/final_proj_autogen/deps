@@ -406,10 +406,43 @@ final_proj_autogen/timestamp: \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__numeric/transform_exclusive_scan.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__numeric/transform_inclusive_scan.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__numeric/transform_reduce.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/binomial_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/cauchy_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/chi_squared_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/clamp_to_integral.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/default_random_engine.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/discard_block_engine.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/discrete_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/exponential_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/extreme_value_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/fisher_f_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/gamma_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/generate_canonical.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/geometric_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/independent_bits_engine.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/is_seed_sequence.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/is_valid.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/knuth_b.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/linear_congruential_engine.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/log2.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/lognormal_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/mersenne_twister_engine.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/negative_binomial_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/normal_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/piecewise_constant_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/piecewise_linear_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/poisson_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/random_device.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/ranlux.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/seed_seq.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/shuffle_order_engine.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/subtract_with_carry_engine.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/uniform_int_distribution.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/uniform_random_bit_generator.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__ranges/access.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__ranges/concepts.h \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__ranges/dangling.h \
@@ -626,6 +659,7 @@ final_proj_autogen/timestamp: \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/new \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/numeric \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/optional \
+	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/random \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ratio \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/set \
 	/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/span \
@@ -844,6 +878,10 @@ final_proj_autogen/timestamp: \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/main.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/mainwindow.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/mainwindow.h \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/particlesystem.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/particlesystem.h \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/postprocess.cpp \
+	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/postprocess.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/realtime/realtime.cpp \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/realtime/realtime.h \
 	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/src/renderers/godrayrenderer.cpp \
@@ -1332,117 +1370,40 @@ final_proj_autogen/timestamp: \
 	/Users/aisosaidahosa/Qt/6.9.2/macos/lib/cmake/Qt6XmlPrivate/Qt6XmlPrivateDependencies.cmake \
 	/Users/aisosaidahosa/Qt/6.9.2/macos/lib/cmake/Qt6XmlPrivate/Qt6XmlPrivateTargets.cmake \
 	/Users/aisosaidahosa/Qt/6.9.2/macos/lib/cmake/Qt6XmlPrivate/Qt6XmlPrivateVersionlessAliasTargets.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCCompiler.cmake.in \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCCompilerABI.c \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCInformation.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCXXInformation.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeGenericSystem.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeNinjaFindMake.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystem.cmake.in \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CheckIncludeFile.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/CheckLibraryExists.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-C.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-CXX.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Clang.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/GNU.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/HP-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/LCC-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XL-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/FindOpenGL.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/FindPackageMessage.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/FindThreads.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/GNUInstallDirs.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/MacroAddFileDependencies.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-AppleClang-C.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-AppleClang-CXX.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang-C.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang-CXX.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Apple-Clang.cmake \
-	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Darwin-Determine-CXX.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Darwin-Initialize.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/Darwin.cmake \
 	/Users/aisosaidahosa/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.30/Modules/Platform/UnixPaths.cmake \

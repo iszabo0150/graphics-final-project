@@ -30,7 +30,7 @@
           "meshFile": "meshes/cliff/rock.obj",
           "textureFile": "textures/moss_tex.png",
           "blend": 1,
-          "normalMapFile": "cliff_Normal.png",
+          "normalMapFile": "textures/cliff_Normal.png",
           "normalMapStrength": 0.25,
           "ambient": [0.15, 0.25, 0.1],
           "diffuse": [0.3, 0.5, 0.2],

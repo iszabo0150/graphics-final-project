@@ -6,6 +6,13 @@
     <file alias="resources/shaders/depth.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/depth.vert</file>
     <file alias="resources/shaders/texture.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/texture.frag</file>
     <file alias="resources/shaders/texture.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/texture.vert</file>
+    <file alias="resources/shaders/fullscreen.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/fullscreen.vert</file>
+    <file alias="resources/shaders/post.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/post.frag</file>
+    <file alias="resources/shaders/bloom_bright.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/bloom_bright.frag</file>
+    <file alias="resources/shaders/bloom_blur.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/bloom_blur.frag</file>
+    <file alias="resources/shaders/bloom_combine.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/bloom_combine.frag</file>
+    <file alias="resources/shaders/particle.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/particle.vert</file>
+    <file alias="resources/shaders/particle.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/particle.frag</file>
     <file alias="resources/shaders/crepuscular.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/crepuscular.frag</file>
     <file alias="resources/shaders/crepuscular.vert">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/crepuscular.vert</file>
     <file alias="resources/shaders/occlusion.frag">/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/resources/shaders/occlusion.frag</file>

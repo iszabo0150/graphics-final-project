@@ -52,7 +52,11 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "onExtraCredit1",
         "onExtraCredit2",
         "onExtraCredit3",
-        "onExtraCredit4"
+        "onExtraCredit4",
+        "onParticlesWinter",
+        "onParticlesSpring",
+        "onParticlesSummer",
+        "onParticlesAutumn"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -92,6 +96,14 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onExtraCredit4'
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onParticlesWinter'
+        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onParticlesSpring'
+        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onParticlesSummer'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onParticlesAutumn'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -127,6 +139,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 9: _t->onExtraCredit2(); break;
         case 10: _t->onExtraCredit3(); break;
         case 11: _t->onExtraCredit4(); break;
+        case 12: _t->onParticlesWinter(); break;
+        case 13: _t->onParticlesSpring(); break;
+        case 14: _t->onParticlesSummer(); break;
+        case 15: _t->onParticlesAutumn(); break;
         default: ;
         }
     }
@@ -151,14 +167,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 16;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 16)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 16;
     }
     return _id;
 }
