@@ -16,35 +16,15 @@
       "lights": [
         {
           "type": "directional",
-          "color": [1.0, 1.0, 1.0],
-          "direction": [0.0, 0.3, 0.8]
-        }
-      ]
-    },
-    {
-      "translate": [9.0, -3.0, 1.0],
-      "lights": [
-        {
-          "type": "point",
-          "color": [0.5, 0.5, 0.5],
-          "attenuationCoeff": [1, 0, 0]
-        }
-      ]
-    },
-    {
-      "translate": [-9.0, -3.0, 1.0],
-      "lights": [
-        {
-          "type": "point",
-          "color": [0.5, 0.5, 0.5],
-          "attenuationCoeff": [1, 0, 0]
+          "color": [1.2, 1.2, 1.2],
+          "direction": [0.3, -1.0, 0.3]
         }
       ]
     },
 
     {
       "lsystem": {
-        "axiom": "F(1.5,5.5)F(3.5,5.0)F(2.5,4.5)F(3.0,3.0)A(4.5,3.0,40)",
+        "axiom": "F(10,3.0)A(4.5,3.0,40)",
         "iterations": 8,
         "angle": 35,
         "step": 1.0,

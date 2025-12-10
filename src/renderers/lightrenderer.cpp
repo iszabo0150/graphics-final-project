@@ -7,7 +7,7 @@
 #include <QOpenGLWidget>
 #include <glm/gtc/matrix_transform.hpp>
 
-void LightRenderer::initialize(ShapeRenderer renderer, GLuint texture_shader) {
+void LightRenderer::initialize(ShapeRenderer* renderer, GLuint texture_shader) {
     m_depth_shader = ShaderLoader::createShaderProgram(":/resources/shaders/depth.vert", ":/resources/shaders/depth.frag");
     m_texture_shader = texture_shader;
     m_default_fbo = 2; // was previously 2

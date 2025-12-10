@@ -35,6 +35,10 @@ private:
     GLuint m_skybox_texture;
     GLuint m_texture_shader;
 
+    GLint m_loc_cubeMap;
+    GLint m_loc_skyboxView;
+    GLint m_loc_skyboxProj;
+
     std::vector<float> m_skybox_vertices = {   -1.0f,  1.0f, -1.0f,
                                             -1.0f, -1.0f, -1.0f,
                                             1.0f, -1.0f, -1.0f,

@@ -101,12 +101,32 @@ void SceneParser::dfsGetRenderData(RenderData& renderData, SceneNode* currNode, 
 
         std::vector<StemData> stems;
         std::vector<glm::mat4> leafCTMs;
+        std::vector<glm::mat4> flowerCTMs;
+        LSystem::interpretLSystem(*currNode->lsystem, symbols, stems, leafCTMs, flowerCTMs);
 
-        LSystem::interpretLSystem(*currNode->lsystem, symbols, stems, leafCTMs);
 
-
-        const float refThickness = 1.0f;  // Adjust based on your scene file's intended base size
+        const float refThickness = 1.0f;  // adjust based on the scene file's intended base size
         const float refLength = 1.0f;
+
+        for (const glm::mat4 &localM : flowerCTMs) {
+            RenderShapeData r;
+
+            // randomly select a flower material from the available options
+            const auto& flowerMats = currNode->lsystem->flowerMaterials;
+            int matIndex = rand() % flowerMats.size();
+            const SceneMaterial& chosenMat = flowerMats[matIndex];
+
+            ScenePrimitive p;
+            p.type = PrimitiveType::PRIMITIVE_MESH;
+            p.meshfile = currNode->lsystem->flowerMeshFile;
+            p.material = chosenMat;
+
+            r.primitive = p;
+            r.material = chosenMat;
+            r.ctm = currCTM * localM;
+
+            renderData.shapes.push_back(r);
+        }
 
         for (const StemData &stem : stems) {
             RenderShapeData r;

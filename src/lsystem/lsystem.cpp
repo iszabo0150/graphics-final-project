@@ -321,7 +321,7 @@ std::string LSystem::applyRule(const LSymbol &symbol, const LSystemData &data) {
  * @param leafCTMs
  */
 void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbol> &symbols, std::vector<StemData> &stems,
-                               std::vector<glm::mat4> &leafCTMs){
+                               std::vector<glm::mat4> &leafCTMs, std::vector<glm::mat4> &flowerCTMs){
 
     TState turtle;
     turtle.pos = glm::vec3(0, 0, 0);
@@ -389,6 +389,23 @@ void LSystem::interpretLSystem(const LSystemData &data, const std::vector<LSymbo
             leaf = glm::scale(leaf, glm::vec3(0.5f * scaleVal, 0.12f * scaleVal, 0.3f * scaleVal));
 
             leafCTMs.push_back(leaf);
+        } else if (sym.name == "W") {  // W for wildflower/flower
+            float scaleVal = sym.params.empty() ? 0.15f : sym.params[0];
+
+            // Position flower at current turtle position
+            glm::vec3 flowerPos = turtle.pos;
+
+            // Build flower orientation from turtle state
+            glm::mat4 rot(1.0f);
+            rot[0] = glm::vec4(turtle.left,    0);
+            rot[1] = glm::vec4(turtle.heading, 0);  // Flower points along heading
+            rot[2] = glm::vec4(turtle.up,      0);
+
+            glm::mat4 flower = glm::translate(glm::mat4(1.0f), flowerPos);
+            flower *= rot;
+            flower = glm::scale(flower, glm::vec3(scaleVal));
+
+            flowerCTMs.push_back(flower);
         }
 
 
