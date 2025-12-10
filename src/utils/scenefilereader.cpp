@@ -1,6 +1,7 @@
 #include "scenefilereader.h"
 #include "scenedata.h"
 #include "lsystem/plantpresets.h"
+#include "settings.h"
 
 #include "glm/gtc/type_ptr.hpp"
 
@@ -1089,22 +1090,13 @@ bool ScenefileReader::parseLSystem(const QJsonObject &obj, SceneNode *node){
             return false;
         }
         
-        // Determine season (default to SUMMER if not specified)
+        // Always use season from settings (ignore JSON season field)
         Season season = Season::SUMMER;
-        if (obj.contains("season")) {
-            if (!obj["season"].isString()) {
-                std::cout << "lsystem season must be a string\n";
-                return false;
-            }
-            std::string seasonStr = obj["season"].toString().toLower().toStdString();
-            if (seasonStr == "spring") season = Season::SPRING;
-            else if (seasonStr == "summer") season = Season::SUMMER;
-            else if (seasonStr == "fall" || seasonStr == "autumn") season = Season::FALL;
-            else if (seasonStr == "winter") season = Season::WINTER;
-            else {
-                std::cout << "Unknown season: " << seasonStr << " (using summer)\n";
-            }
-        }
+        int seasonIdx = settings.getCurrentSeasonIndex();
+        if (seasonIdx == 0) season = Season::SPRING;
+        else if (seasonIdx == 1) season = Season::SUMMER;
+        else if (seasonIdx == 2) season = Season::FALL;
+        else season = Season::WINTER;
         
         // Create LSystemData from preset
         *ls = PlantPresets::createLSystemData(*preset, season, basepath.string());
@@ -1112,7 +1104,8 @@ bool ScenefileReader::parseLSystem(const QJsonObject &obj, SceneNode *node){
         std::cout << "Loaded plant preset '" << plantType << "' for season " 
                   << (season == Season::SPRING ? "SPRING" : 
                       season == Season::SUMMER ? "SUMMER" : 
-                      season == Season::FALL ? "FALL" : "WINTER") << std::endl;
+                      season == Season::FALL ? "FALL" : "WINTER") 
+                  << " (from settings)" << std::endl;
         
         return true;
     }

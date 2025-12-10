@@ -475,6 +475,11 @@ void Realtime::settingsChanged() {
         applyParticleEmitterFromSettings(true);
     }
 
+    // Reload scene if season changed (to update L-system trees)
+    if (seasonChanged) {
+        sceneChanged();
+    }
+
     wasParticles = nowParticles;
     lastSeason = curSeason;
 

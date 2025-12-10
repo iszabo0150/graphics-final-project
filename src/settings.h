@@ -21,6 +21,14 @@ struct Settings {
     bool particlesSpring = false;
     bool particlesSummer = false;
     bool particlesAutumn = false;
+
+    // Helper to get current season from particle settings
+    int getCurrentSeasonIndex() const {
+        if (particlesSpring) return 0; // SPRING
+        if (particlesSummer) return 1; // SUMMER
+        if (particlesAutumn) return 2; // FALL
+        return 3; // WINTER (default)
+    }
 };
 
 
