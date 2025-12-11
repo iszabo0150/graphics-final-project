@@ -1,11 +1,11 @@
 #pragma once
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QCheckBox>
-#include <QSlider>
-#include <QSpinBox>
-#include <QDoubleSpinBox>
 #include <QPushButton>
+#include <QRadioButton>
+#include <QButtonGroup>
+
 #include "realtime/realtime.h"
 #include "utils/aspectratiowidget/aspectratiowidget.hpp"
 
@@ -19,72 +19,37 @@ public:
 
 private:
     void connectUIElements();
-    void connectParam1();
-    void connectParam2();
-    void connectNear();
-    void connectFar();
-
-    // From old Project 6
-    // void connectPerPixelFilter();
-    // void connectKernelBasedFilter();
-
     void connectUploadFile();
     void connectSaveImage();
     void connectExtraCredit();
-
-    Realtime *realtime;
-    AspectRatioWidget *aspectRatioWidget;
-
-    // From old Project 6
-    // QCheckBox *filter1;
-    // QCheckBox *filter2;
-
-    QPushButton *uploadFile;
-    QPushButton *saveImage;
-    QSlider *p1Slider;
-    QSlider *p2Slider;
-    QSpinBox *p1Box;
-    QSpinBox *p2Box;
-    QSlider *nearSlider;
-    QSlider *farSlider;
-    QDoubleSpinBox *nearBox;
-    QDoubleSpinBox *farBox;
-
     void connectParticleSeasons();
 
-    QCheckBox *particlesWinter = nullptr;
-    QCheckBox *particlesSpring = nullptr;
-    QCheckBox *particlesSummer = nullptr;
-    QCheckBox *particlesAutumn = nullptr;
+    void applyFixedParams();
+    void applyPrettyStyle();
 
-    // Extra Credit:
-    QCheckBox *ec1;
-    QCheckBox *ec2;
-    QCheckBox *ec3;
-    QCheckBox *ec4;
+    Realtime *realtime = nullptr;
+    AspectRatioWidget *aspectRatioWidget = nullptr;
+
+    QPushButton *uploadFile = nullptr;
+    QPushButton *saveImage  = nullptr;
+
+    // Particles + seasons
+    QCheckBox *ec1 = nullptr; // particles master
+    QRadioButton *seasonWinter = nullptr;
+    QRadioButton *seasonSpring = nullptr;
+    QRadioButton *seasonSummer = nullptr;
+    QRadioButton *seasonAutumn = nullptr;
+    QButtonGroup *seasonGroup  = nullptr;
+
+    // Other toggles
+    QCheckBox *ec2 = nullptr;
 
 private slots:
-    // From old Project 6
-    // void onPerPixelFilter();
-    // void onKernelBasedFilter();
-
     void onUploadFile();
     void onSaveImage();
-    void onValChangeP1(int newValue);
-    void onValChangeP2(int newValue);
-    void onValChangeNearSlider(int newValue);
-    void onValChangeFarSlider(int newValue);
-    void onValChangeNearBox(double newValue);
-    void onValChangeFarBox(double newValue);
 
-    // Extra Credit:
     void onExtraCredit1();
     void onExtraCredit2();
-    void onExtraCredit3();
-    void onExtraCredit4();
 
-    void onParticlesWinter();
-    void onParticlesSpring();
-    void onParticlesSummer();
-    void onParticlesAutumn();
+    void onSeasonChanged();
 };
