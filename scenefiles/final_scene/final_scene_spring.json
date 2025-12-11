@@ -1,5 +1,5 @@
 {
-  "name": "preset_summer_tree",
+  "name": "preset_spring_tree",
   "globalData": {
     "ambientCoeff": 0.3,
     "diffuseCoeff": 0.7,
@@ -44,6 +44,297 @@
       "translate": [0, 15, 0],
       "lsystem": {
         "plantType": "oak_tree",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [-18, 9, 15],
+      "scale": [1.3, 1.3, 1.3],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-6, 13, 5],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-28, 4, 8],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-24, 5, 18],
+      "scale": [2.0, 2.0, 2.0],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-32, 2, 0],
+      "scale": [1.4, 1.4, 1.4],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-20, 7, 28],
+      "scale": [1.7, 1.7, 1.7],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [22, 7, 18],
+      "scale": [1.3, 1.3, 1.3],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [7, 13, 4],
+      "scale": [1.9, 1.9, 1.9],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [30, 3, 10],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [26, 5, 24],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [32, 1, 0],
+      "scale": [1.5, 1.5, 1.5],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [18, 8, 30],
+      "scale": [2.0, 2.0, 2.0],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [12, 9, -26],
+      "scale": [1.2, 1.2, 1.2],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [6, 10, -20],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-14, 8, -24],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-4, 13, -6],
+      "scale": [1.7, 1.7, 1.7],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [0, 8, -32],
+      "scale": [1.4, 1.4, 1.4],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [5, 13, -8],
+      "scale": [2.0, 2.0, 2.0],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [22, 6, -20],
+      "scale": [1.3, 1.3, 1.3],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [28, 4, -12],
+      "scale": [1.9, 1.9, 1.9],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [0, 9, 28],
+      "scale": [1.5, 1.5, 1.5],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-10, 8, 32],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [12, 7, 26],
+      "scale": [1.2, 1.2, 1.2],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [0, 14, 8],
+      "scale": [2.0, 2.0, 2.0],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [-30, 2, -10],
+      "scale": [1.6, 1.6, 1.6],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-8, 12, -4],
+      "scale": [1.9, 1.9, 1.9],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [30, 2, -6],
+      "scale": [1.4, 1.4, 1.4],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [24, 4, -28],
+      "scale": [1.7, 1.7, 1.7],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+
+    {
+      "translate": [-34, 0, 12],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [34, 0, 14],
+      "scale": [1.5, 1.5, 1.5],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [8, 12, 0],
+      "scale": [2.0, 2.0, 2.0],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [14, 7, -30],
+      "scale": [1.3, 1.3, 1.3],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-3, 13, -10],
+      "scale": [1.8, 1.8, 1.8],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-28, 3, 24],
+      "scale": [1.4, 1.4, 1.4],
+      "lsystem": {
+        "plantType": "bush",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [4, 13, 10],
+      "scale": [1.9, 1.9, 1.9],
+      "lsystem": {
+        "plantType": "flower_plant",
+        "season": "spring"
+      }
+    },
+    {
+      "translate": [-16, 6, -28],
+      "scale": [1.5, 1.5, 1.5],
+      "lsystem": {
+        "plantType": "bush",
         "season": "spring"
       }
     }

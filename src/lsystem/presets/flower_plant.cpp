@@ -59,39 +59,61 @@ PlantPreset createFlowerPlantPreset() {
     
     // materiallllssss
     
-    // summer - bright leaves, white flowers
+    // summer - bright leaves, white flowers with pink/lavender variations
     {
         SeasonalMaterials summer;
         summer.hasLeaves = true;
-        summer.leafMaterials.push_back(makeMaterial({0.2f, 0.55f, 0.15f}, {0.08f, 0.22f, 0.06f}, {0.15f, 0.15f, 0.15f}, 10.0f));
-        summer.leafMaterials.push_back(makeMaterial({0.18f, 0.5f, 0.12f}, {0.07f, 0.2f, 0.05f}, {0.15f, 0.15f, 0.15f}, 10.0f));
+
+        summer.leafMaterials.push_back(makeMaterial({0.557f, 0.678f, 0.224f}, {0.22f, 0.27f, 0.09f}, {0.2f, 0.2f, 0.2f}, 15.0f));
+        summer.leafMaterials.push_back(makeMaterial({0.522f, 0.620f, 0.247f}, {0.21f, 0.25f, 0.10f}, {0.2f, 0.2f, 0.2f}, 15.0f));
         summer.flowerMeshFile = "meshes/Lilly.obj";
+        // White
         summer.flowerMaterials.push_back(makeMaterial({0.95f, 0.95f, 0.9f}, {0.5f, 0.5f, 0.45f}, {0.4f, 0.4f, 0.4f}, 8.0f));
         summer.flowerMaterials.push_back(makeMaterial({1.0f, 0.98f, 0.92f}, {0.5f, 0.49f, 0.46f}, {0.4f, 0.4f, 0.4f}, 8.0f));
+        // Soft pink
+        summer.flowerMaterials.push_back(makeMaterial({1.0f, 0.85f, 0.88f}, {0.5f, 0.43f, 0.44f}, {0.4f, 0.4f, 0.4f}, 8.0f));
+        // Light lavender
+        summer.flowerMaterials.push_back(makeMaterial({0.9f, 0.85f, 1.0f}, {0.45f, 0.43f, 0.5f}, {0.4f, 0.4f, 0.4f}, 8.0f));
+        // Cream/ivory
+        summer.flowerMaterials.push_back(makeMaterial({1.0f, 0.97f, 0.85f}, {0.5f, 0.49f, 0.43f}, {0.4f, 0.4f, 0.4f}, 8.0f));
         preset.seasonalMaterials[Season::SUMMER] = summer;
     }
     
-    // spring - bright leaves, yellow flowers
+    // spring - bright leaves, yellow flowers with pink/coral/purple variations
     {
         SeasonalMaterials spring;
         spring.hasLeaves = true;
-        spring.leafMaterials.push_back(makeMaterial({0.22f, 0.58f, 0.16f}, {0.09f, 0.23f, 0.06f}, {0.15f, 0.15f, 0.15f}, 10.0f));
-        spring.leafMaterials.push_back(makeMaterial({0.2f, 0.52f, 0.14f}, {0.08f, 0.21f, 0.06f}, {0.15f, 0.15f, 0.15f}, 10.0f));
+        spring.leafMaterials.push_back(makeMaterial({0.557f, 0.678f, 0.224f}, {0.22f, 0.27f, 0.09f}, {0.2f, 0.2f, 0.2f}, 15.0f));
+        spring.leafMaterials.push_back(makeMaterial({0.522f, 0.620f, 0.247f}, {0.21f, 0.25f, 0.10f}, {0.2f, 0.2f, 0.2f}, 15.0f));
         spring.flowerMeshFile = "meshes/Lilly.obj";
+        // Yellow
         spring.flowerMaterials.push_back(makeMaterial({1.0f, 0.95f, 0.3f}, {0.5f, 0.48f, 0.15f}, {0.4f, 0.4f, 0.3f}, 8.0f));
         spring.flowerMaterials.push_back(makeMaterial({1.0f, 0.88f, 0.2f}, {0.5f, 0.44f, 0.1f}, {0.4f, 0.4f, 0.3f}, 8.0f));
+        // Bright pink
+        spring.flowerMaterials.push_back(makeMaterial({1.0f, 0.6f, 0.7f}, {0.5f, 0.3f, 0.35f}, {0.4f, 0.4f, 0.4f}, 8.0f));
+        // Light coral
+        spring.flowerMaterials.push_back(makeMaterial({1.0f, 0.7f, 0.55f}, {0.5f, 0.35f, 0.28f}, {0.4f, 0.4f, 0.4f}, 8.0f));
+        // Pale purple
+        spring.flowerMaterials.push_back(makeMaterial({0.85f, 0.7f, 0.95f}, {0.43f, 0.35f, 0.48f}, {0.4f, 0.4f, 0.4f}, 8.0f));
         preset.seasonalMaterials[Season::SPRING] = spring;
     }
     
-    // fall - muted leaves, orange flowers
+    // fall - muted leaves, orange flowers with red/gold/burgundy variations
     {
         SeasonalMaterials fall;
         fall.hasLeaves = true;
         fall.leafMaterials.push_back(makeMaterial({0.35f, 0.4f, 0.12f}, {0.14f, 0.16f, 0.05f}, {0.15f, 0.15f, 0.15f}, 10.0f));
         fall.leafMaterials.push_back(makeMaterial({0.4f, 0.38f, 0.1f}, {0.16f, 0.15f, 0.04f}, {0.15f, 0.15f, 0.15f}, 10.0f));
         fall.flowerMeshFile = "meshes/Lilly.obj";
+        // Orange
         fall.flowerMaterials.push_back(makeMaterial({1.0f, 0.55f, 0.15f}, {0.5f, 0.28f, 0.08f}, {0.4f, 0.35f, 0.3f}, 8.0f));
         fall.flowerMaterials.push_back(makeMaterial({0.95f, 0.45f, 0.1f}, {0.48f, 0.23f, 0.05f}, {0.4f, 0.35f, 0.3f}, 8.0f));
+        // Deep red
+        fall.flowerMaterials.push_back(makeMaterial({0.85f, 0.2f, 0.15f}, {0.43f, 0.1f, 0.08f}, {0.4f, 0.35f, 0.3f}, 8.0f));
+        // Golden yellow
+        fall.flowerMaterials.push_back(makeMaterial({1.0f, 0.75f, 0.1f}, {0.5f, 0.38f, 0.05f}, {0.4f, 0.4f, 0.3f}, 8.0f));
+        // Burgundy/maroon
+        fall.flowerMaterials.push_back(makeMaterial({0.6f, 0.15f, 0.2f}, {0.3f, 0.08f, 0.1f}, {0.3f, 0.3f, 0.3f}, 8.0f));
         preset.seasonalMaterials[Season::FALL] = fall;
     }
     
