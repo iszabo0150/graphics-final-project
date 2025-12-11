@@ -16,13 +16,13 @@
       "lights": [
         {
           "type": "directional",
-          "color": [1.2, 1.2, 1.2],
-          "direction": [0.3, -1.0, 0.3]
+          "color": [1.5, 0.9, 0.5],
+          "direction": [0.0, -0.3, 0.0]
         }
       ]
     },
     {
-      "translate": [0, -15, 0],
+      "translate": [-5, -15, 0],
       "scale": [0.7, 0.7, 0.7],
       "primitives": [
         {
@@ -41,7 +41,7 @@
     },
     
     {
-      "translate": [0, 15, 0],
+      "translate": [-5, 15, 0],
       "lsystem": {
         "plantType": "oak_tree",
         "season": "fall"

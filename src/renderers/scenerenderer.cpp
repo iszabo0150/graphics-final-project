@@ -114,6 +114,9 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
     paintTexture(camera);
     glEnable(GL_CULL_FACE);
 
+    // draw terrain as background (before foreground geometry)
+    paintTerrainInternal(camera);
+
     glm::vec3 cameraPos = camera.getPos();
 
     glUseProgram(m_shader);
@@ -339,15 +342,8 @@ void SceneRenderer::render(const RenderData& renderData, const Camera& camera, S
 
 }
 
-void SceneRenderer::paintTerrain(const Camera& camera) {
-
-    // save currently bound FBO to restore after terrain rendering
-    GLint prevFBO = 0;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
-
-    // bind scene FBO to render terrain into it
-    glBindFramebuffer(GL_FRAMEBUFFER, m_sceneFBO);
-    glViewport(0, 0, m_fboWidth, m_fboHeight);
+void SceneRenderer::paintTerrainInternal(const Camera& camera) {
+    // Renders terrain as background (does not save/restore FBO - assumes we're in scene FBO)
 
     glUseProgram(m_terrain_shader);
     glBindVertexArray(m_terrain_vao);
@@ -355,9 +351,20 @@ void SceneRenderer::paintTerrain(const Camera& camera) {
     GLuint locProj = glGetUniformLocation(m_terrain_shader, "projMatrix");
     glUniformMatrix4fv(locProj, 1, GL_FALSE, &camera.getProjMatrix()[0][0]);
 
-    GLuint locMV = glGetUniformLocation(m_terrain_shader, "mvMatrix");
-    glm::mat4 world =  glm::lookAt(glm::vec3(1,1,1), glm::vec3(0,1,1), glm::vec3(0,0,1));
+    // Position terrain far behind camera, scaled up to fill background
+    glm::mat4 world = glm::mat4(1.0f);
+    
+    // Scale terrain much larger to serve as background
+    world = glm::scale(world, glm::vec3(100.0f, 50.0f, 100.0f));
+    
+    // Position far behind camera (follow camera position)
+    glm::vec3 camPos = camera.getPos();
+    glm::vec3 camForward = -glm::normalize(glm::vec3(camera.getViewMatrix()[2]));
+    glm::vec3 terrainPos = camPos + camForward * 200.0f - glm::vec3(50.0f, 25.0f, 50.0f);
+    world = glm::translate(world, terrainPos);
+
     glm::mat4 cam = camera.getViewMatrix() * world;
+    GLuint locMV = glGetUniformLocation(m_terrain_shader, "mvMatrix");
     glUniformMatrix4fv(locMV, 1, GL_FALSE, &cam[0][0]);
 
     int res = m_terrain.getResolution();
@@ -365,8 +372,23 @@ void SceneRenderer::paintTerrain(const Camera& camera) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLES, 0, res * res * 6);
 
+    // Restore depth state
+    glDepthMask(GL_TRUE);
+    glDepthFunc(GL_LESS);
+
     glBindVertexArray(0);
     glUseProgram(0);
+}
+
+// Public wrapper that saves/restores FBO (for external calls)
+void SceneRenderer::paintTerrain(const Camera& camera) {
+    GLint prevFBO = 0;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, m_sceneFBO);
+    glViewport(0, 0, m_fboWidth, m_fboHeight);
+
+    paintTerrainInternal(camera);
 
     // restore previously bound FBO
     glBindFramebuffer(GL_FRAMEBUFFER, static_cast<GLuint>(prevFBO));
