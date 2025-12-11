@@ -71,3 +71,14 @@
 23	61	1765412172946690422	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
 61	889	1765412172985272169	CMakeFiles/final_proj.dir/src/camera/camera.cpp.o	11edb7c6b8df8f9
 889	1144	1765412173813531582	final_proj	613da0e0d9f26eff
+52	694	1765413156649501000	final_proj_autogen/timestamp	42bf38839bdcbfe9
+52	694	1765413156649501000	final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+52	694	1765413156649501000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/timestamp	42bf38839bdcbfe9
+52	694	1765413156649501000	/Users/aisosaidahosa/Desktop/graphics/graphics-final-project/build/build-final_project-Qt_6_9_2_for_macOS-Release/final_proj_autogen/mocs_compilation.cpp	42bf38839bdcbfe9
+696	3283	1765413156665881414	CMakeFiles/final_proj.dir/src/renderers/godrayrenderer.cpp.o	7668091a9293aead
+694	3553	1765413156664361330	CMakeFiles/final_proj.dir/final_proj_autogen/mocs_compilation.cpp.o	7d0459008a3589ae
+695	3647	1765413156664652497	CMakeFiles/final_proj.dir/src/main.cpp.o	7fa6242e0c144b82
+696	3861	1765413156665531330	CMakeFiles/final_proj.dir/src/renderers/lightrenderer.cpp.o	d99c8e9eaef6f953
+695	3937	1765413156665289789	CMakeFiles/final_proj.dir/src/mainwindow.cpp.o	8091fc44d130eff9
+695	4053	1765413156665026122	CMakeFiles/final_proj.dir/src/realtime/realtime.cpp.o	5628683885723d57
+4053	4333	1765413160022663413	final_proj	613da0e0d9f26eff
