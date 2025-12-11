@@ -56,6 +56,8 @@ private:
     void timerEvent(QTimerEvent *event) override;
     void fitEmitterToCamera(bool resetParticles);
     void applyParticleEmitterFromSettings(bool resetParticles);
+    std::string getSeasonScenePath(const std::string& basePath, int seasonIdx);
+    void applySeasonalGodRayParameters(int seasonIdx);
 
 
     GLPrimitiveData createPrimitiveGLData(PrimitiveType type);

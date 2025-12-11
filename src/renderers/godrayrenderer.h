@@ -15,6 +15,16 @@ class CrepuscularRenderer {
                         float weight, int samples);
         void cleanup();
         void setDefaultFBO(GLuint fbo) { m_defaultFBO = fbo; }
+        
+        // Update parameters without reinitializing
+        void setParameters(float exposure, float decay, float density,
+                          float weight, int samples) {
+            m_exposure = exposure;
+            m_decay = decay;
+            m_density = density;
+            m_weight = weight;
+            m_samples = samples;
+        }
 
         void renderOcclusion(const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix,
                              int width, int height, const RenderData& renderData,
