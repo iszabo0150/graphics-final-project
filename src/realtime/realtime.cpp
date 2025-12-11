@@ -441,6 +441,41 @@ void Realtime::sceneChanged() {
     update(); // asks for a PaintGL() call to occur
 }
 
+std::string Realtime::getSeasonScenePath(const std::string& basePath, int seasonIdx) {
+    // Check if this is a final_scene file that should have seasonal variants
+    if (basePath.find("final_scene") != std::string::npos) {
+        // Extract directory and base name
+        size_t lastSlash = basePath.find_last_of("/\\");
+        std::string dir = (lastSlash != std::string::npos) ? basePath.substr(0, lastSlash + 1) : "";
+        
+        // Map season index to scene file
+        std::string seasonName;
+        if (seasonIdx == 0) seasonName = "spring";
+        else if (seasonIdx == 1) seasonName = "summer";
+        else if (seasonIdx == 2) seasonName = "fall";
+        else seasonName = "winter";
+        
+        return dir + "final_scene_" + seasonName + ".json";
+    }
+    
+    // For non-final_scene files, return original path
+    return basePath;
+}
+
+void Realtime::applySeasonalGodRayParameters(int seasonIdx) {
+    // Seasonal god ray parameters: exposure, decay, density, weight, samples
+    
+    if (seasonIdx == 0) { // Spring - bright, crisp rays
+        m_crepuscularRenderer.setParameters(1.1f, 0.97f, 0.6f, 0.012f, 100);
+    } else if (seasonIdx == 1) { // Summer - intense, strong rays
+        m_crepuscularRenderer.setParameters(1.2f, 0.96f, 0.7f, 0.015f, 120);
+    } else if (seasonIdx == 2) { // Fall - warm, soft golden rays
+        m_crepuscularRenderer.setParameters(1.3f, 0.95f, 0.8f, 0.018f, 140);
+    } else { // Winter - subtle, diffuse rays
+        m_crepuscularRenderer.setParameters(0.9f, 0.98f, 0.5f, 0.008f, 80);
+    }
+}
+
 
 void Realtime::settingsChanged() {
     if (!m_isInitialized || !m_camera){
@@ -473,6 +508,18 @@ void Realtime::settingsChanged() {
 
     if (nowParticles && (turnedOn || seasonChanged)) {
         applyParticleEmitterFromSettings(true);
+    }
+
+    // Reload scene if season changed (to update L-system trees and lighting)
+    if (seasonChanged) {
+        // Switch to season-specific scene file if it exists
+        std::string newScenePath = getSeasonScenePath(settings.sceneFilePath, curSeason);
+        if (newScenePath != settings.sceneFilePath) {
+            settings.sceneFilePath = newScenePath;
+        }
+        // Apply seasonal god ray parameters
+        applySeasonalGodRayParameters(curSeason);
+        sceneChanged();
     }
 
     wasParticles = nowParticles;
