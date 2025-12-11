@@ -86,7 +86,12 @@ void Camera::translate(Direction dir, float deltaTime){
             break;
     }
 
-// std::cout << "Camera pos: (" << m_pos.x << ", " << m_pos.y << ", " << m_pos.z << ") " << std::endl;
+    std::cout << "=== CAMERA DEBUG ===" << std::endl;
+    std::cout << "  position: [" << m_pos.x << ", " << m_pos.y << ", " << m_pos.z << "]" << std::endl;
+    std::cout << "  look: [" << m_look.x << ", " << m_look.y << ", " << m_look.z << "]" << std::endl;
+    std::cout << "  up: [" << m_up.x << ", " << m_up.y << ", " << m_up.z << "]" << std::endl;
+    std::cout << std::endl;
+
     //update the view matrix :P
     createViewMatrices(m_pos, m_look, m_up);
 }
@@ -143,6 +148,12 @@ void Camera::rotate(float deltaX, float deltaY){
 
     // Update tilt angle
     m_tiltAngle = newVerticalAngle;
+
+    std::cout << "=== CAMERA DEBUG ===" << std::endl;
+    std::cout << "  position: [" << m_pos.x << ", " << m_pos.y << ", " << m_pos.z << "]" << std::endl;
+    std::cout << "  look: [" << m_look.x << ", " << m_look.y << ", " << m_look.z << "]" << std::endl;
+    std::cout << "  up: [" << m_up.x << ", " << m_up.y << ", " << m_up.z << "]" << std::endl;
+    std::cout << std::endl;
 
     // Update the view matrix
     createViewMatrices(m_pos, m_look, m_up);
